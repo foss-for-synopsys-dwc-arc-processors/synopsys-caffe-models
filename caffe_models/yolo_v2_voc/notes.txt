@@ -1,0 +1,10 @@
+
+Darknet output (with printf added to draw box):
+
+car: 83%
+    draw box 446 73 676 176 3
+dog: 91%
+    draw box 119 179 322 546 3
+bicycle: 51%
+    draw box 177 154 556 428 3
+

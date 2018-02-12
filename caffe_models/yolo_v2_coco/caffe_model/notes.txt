@@ -1,0 +1,20 @@
+
+Prototxt created with
+
+    py create_yolo_prototxt.py cfg/yolo.cfg yolo.prototxt
+
+after commenting out the region layer at the end.
+
+Then the prototxt was edited to rename the python layers.
+
+
+Weights converted with
+
+    py create_yolo_caffemodel.py -m yolo.weights -o yolo.caffemodel
+
+Weights were found at
+
+    https://pjreddie.com/media/files/yolo.weights
+
+Note that as darknet evolves this file can change and no longer be valid
+for this particular configuration.

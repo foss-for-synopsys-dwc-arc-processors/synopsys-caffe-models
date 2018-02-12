@@ -1,0 +1,7 @@
+--caffe caffe_model/face-deploytrain.prototxt 
+--weights caffe_model/face.caffemodel
+--images test_images
+--wof both --vof both
+--float_type float
+--ugraph
+--shift_round even

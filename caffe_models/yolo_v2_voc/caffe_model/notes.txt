@@ -1,0 +1,37 @@
+
+Files created with:
+    py create_yolo_prototxt.py yolo-voc.cfg yolo_voc.prototxt
+after the region layer at the end is commented out.
+
+The python scripts are in the /experiments/darknet directory.
+
+Modify these lines:
+
+    python_param {
+      module: "yolov2"	 # change to this
+      layer: "darknet_reorg"	 # change to this
+      }
+
+Then put caffe_models/yolo_v2_voc in your path to provide the python layers,
+and create model file:
+
+    py create_yolo_caffemodel.py -m yolo_voc.prototxt -w ../darknet_jul13/weights/yolo-voc.weights -o yolo_voc.caffemodel
+
+Next, modify yolo.cc Region_parms namespace to include the 
+anchors from the commented-out region layer in yol-voc.cfg:
+
+        Result anchors[] = { 1.3221, 1.73145, 3.19275, ... 
+
+Be sure to pass the yolo code the size of the image before network-size conversion.  
+The reason for this is so we can print out the box coordinates
+(upper-left, lower-right).
+It's used here in the code:
+
+    Image im = {img_h, img_w};
+
+----------------------------------------
+
+
+model-decomposed-v6.cfg/model-decomposed-v6-train_109000.weights is TomA's decomposed model.
+model-decomposed-v6.prototxt is the caffe prototxt converted from model-decomposed-v6.cfg.
+model-decomposed-v6-train_109000.caffemodel are caffe weights for said model converted from model-decomposed-v6-train_109000.weights.

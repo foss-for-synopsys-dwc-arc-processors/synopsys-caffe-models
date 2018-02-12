@@ -1,0 +1,2 @@
+test_images/reference-360x240-gray-from-denoiser.png: original reference image
+test_images/reference-360x240-fixed-noise.png: original reference image + noise

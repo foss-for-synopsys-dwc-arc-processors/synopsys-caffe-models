@@ -1,0 +1,10 @@
+--caffe caffe_model/VGG_ILSVRC_16_layers_deploy.prototxt
+--weights caffe_model/VGG16_Pruned_15X_Accuracy_88-39.caffemodel
+--images test_images
+--wof both --vof both
+--float_type float
+--shift_round even
+--lkrelu 7
+--lkrelu_accsize 15
+--use_minmax_cache
+--ugraph

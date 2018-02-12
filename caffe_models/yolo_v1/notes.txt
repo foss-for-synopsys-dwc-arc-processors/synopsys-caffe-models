@@ -1,0 +1,45 @@
+This is yolo v1 without the Local Layer (don't know what it does)
+and the layers that follow.
+
+I.e. when you run yolov1 you see:
+
+layer     filters    size              input                output
+    0 conv     64  7 x 7 / 2   448 x 448 x   3   ->   224 x 224 x  64
+    1 max          2 x 2 / 2   224 x 224 x  64   ->   112 x 112 x  64
+    2 conv    192  3 x 3 / 1   112 x 112 x  64   ->   112 x 112 x 192
+    3 max          2 x 2 / 2   112 x 112 x 192   ->    56 x  56 x 192
+    4 conv    128  1 x 1 / 1    56 x  56 x 192   ->    56 x  56 x 128
+    5 conv    256  3 x 3 / 1    56 x  56 x 128   ->    56 x  56 x 256
+    6 conv    256  1 x 1 / 1    56 x  56 x 256   ->    56 x  56 x 256
+    7 conv    512  3 x 3 / 1    56 x  56 x 256   ->    56 x  56 x 512
+    8 max          2 x 2 / 2    56 x  56 x 512   ->    28 x  28 x 512
+    9 conv    256  1 x 1 / 1    28 x  28 x 512   ->    28 x  28 x 256
+   10 conv    512  3 x 3 / 1    28 x  28 x 256   ->    28 x  28 x 512
+   11 conv    256  1 x 1 / 1    28 x  28 x 512   ->    28 x  28 x 256
+   12 conv    512  3 x 3 / 1    28 x  28 x 256   ->    28 x  28 x 512
+   13 conv    256  1 x 1 / 1    28 x  28 x 512   ->    28 x  28 x 256
+   14 conv    512  3 x 3 / 1    28 x  28 x 256   ->    28 x  28 x 512
+   15 conv    256  1 x 1 / 1    28 x  28 x 512   ->    28 x  28 x 256
+   16 conv    512  3 x 3 / 1    28 x  28 x 256   ->    28 x  28 x 512
+   17 conv    512  1 x 1 / 1    28 x  28 x 512   ->    28 x  28 x 512
+   18 conv   1024  3 x 3 / 1    28 x  28 x 512   ->    28 x  28 x1024
+   19 max          2 x 2 / 2    28 x  28 x1024   ->    14 x  14 x1024
+   20 conv    512  1 x 1 / 1    14 x  14 x1024   ->    14 x  14 x 512
+   21 conv   1024  3 x 3 / 1    14 x  14 x 512   ->    14 x  14 x1024
+   22 conv    512  1 x 1 / 1    14 x  14 x1024   ->    14 x  14 x 512
+   23 conv   1024  3 x 3 / 1    14 x  14 x 512   ->    14 x  14 x1024
+   24 conv   1024  3 x 3 / 1    14 x  14 x1024   ->    14 x  14 x1024
+   25 conv   1024  3 x 3 / 2    14 x  14 x1024   ->     7 x   7 x1024
+   26 conv   1024  3 x 3 / 1     7 x   7 x1024   ->     7 x   7 x1024
+   27 conv   1024  3 x 3 / 1     7 x   7 x1024   ->     7 x   7 x1024
+   28 Local Layer: 7 x 7 x 1024 image, 256 filters -> 7 x 7 x 256 image
+   29 dropout       p = 0.50               12544  ->  12544
+   30 connected                            12544  ->  1715
+   31 Detection Layer
+
+and the prototxt herein includes everything up to 27.
+
+The weights have not been converted due to the unknown Local layer.
+Thus the build script uses "no_weight_file" to have our tool
+generate dummy weights.  Having done this once you can rename
+the generated file to something else and use that as input.

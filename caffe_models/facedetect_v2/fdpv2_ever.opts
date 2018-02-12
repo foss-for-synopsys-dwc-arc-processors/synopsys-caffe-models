@@ -1,0 +1,6 @@
+--caffe caffe_model/deploy_trial_158.prototxt
+--weights caffe_model/face__iter_255000.caffemodel
+--images test_images
+--float_type float
+--ugraph
+--shift_round even

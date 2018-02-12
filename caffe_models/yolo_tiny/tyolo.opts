@@ -1,0 +1,13 @@
+--caffe caffe_model/yolo_tiny_deploy.prototxt
+--weights caffe_model/yolo_tiny.caffemodel
+--images test_image
+--wof both --vof both
+--float_type float
+--shift_round even
+--lkrelu 7
+--lkrelu_accsize 15
+--use_minmax_cache
+--ugraph
+--signed_blobs
+--color_order RGB
+--image_scale 1

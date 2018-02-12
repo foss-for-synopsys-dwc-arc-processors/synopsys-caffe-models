@@ -1,0 +1,7 @@
+decomposed-v1.prototxt/v1.caffemodel is TomA's decomposed model (only conv layers).
+decomposed-v1.prototxt is upgraded using upgrade_net_proto_text.bin
+decomposed-v1_iter_2000.caffemodel is the retrained version of decomposed-v1.caffemodel
+
+decomposed-v6.prototxt is TomA's decomposed model (conv + fc layers).
+decomposed-v6.prototxt is upgraded using upgrade_net_proto_text.bin
+decomposed-v6_iter_1900.caffemodel are the decomposed and retrained coefficients

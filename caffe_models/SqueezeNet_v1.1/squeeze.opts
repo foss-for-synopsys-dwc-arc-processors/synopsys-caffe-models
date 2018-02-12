@@ -1,0 +1,11 @@
+--caffe caffe_model/deploy.prototxt
+--weights caffe_model/squeezenet_v1.1.caffemodel
+--images test_images
+--wof both --vof both
+--float_type float
+--shift_round even
+--lkrelu 7
+--lkrelu_accsize 15
+--use_minmax_cache
+--ugraph
+--signed_blobs

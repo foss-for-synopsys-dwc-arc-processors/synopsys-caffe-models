@@ -1,0 +1,2 @@
+net-240x360-64-64-test.prototxt/net-200x200-64-64-test.prototxt decomposed model
+net-HxW-64-64_iter_970.caffemodel retrained decomposed model

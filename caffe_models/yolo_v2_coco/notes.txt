@@ -1,0 +1,75 @@
+608x608 is from darknet as of july 13.
+Previous versions used 416x416.
+
+On an already-prescaled image of 608x608:
+
+Darknet jul13 says:
+
+truck: 78%
+    draw box 366 86 550 176 3
+bicycle: 83%
+    draw box 62 121 441 492 3
+dog: 79%
+    draw box 107 227 255 567 3
+
+We predict (flt model):
+
+truck: 78%
+    draw box 365 86 551 177 3
+bicycle: 84%
+    draw box 63 120 440 493 3
+dog: 78%
+    draw box 107 227 255 567 3
+
+We predict (fixed model):
+
+motorbike: 24%
+    draw box 47 81 89 131 3
+truck: 80%
+    draw box 366 86 550 176 3
+bicycle: 85%
+    draw box 65 119 438 494 3
+dog: 79%
+    draw box 110 225 253 568 3
+
+Interestingly, there is in fact a motorbike at the top left.
+
+If the image isn't 608x608 the new darknet code preserves the aspect
+ratio and letterboxes the image.
+
+The new code is:
+    image im = load_image_color(input,0,0);
+    image sized = letterbox_image(im, net.w, net.h);
+
+Letterbox takes the larger size, resizes to the network dimension,
+and proportionally resizes the other dimension.
+That resized image is placed in a new images of network dimensions 
+with the smaller size having a letter box with value .5 (input is [0,.1]
+in darknet).
+
+For example, dog.jpg is 576 x 768 h x w.
+
+
+	      768
+	+---------------+
+	|		|
+	|		|
+576	|     DOG	|   => 
+	|		|
+	|		|
+	+---------------+
+				    608
+	     608	        +------------+	
+	+------------+		|************|
+	|iiiiiiiiiiii|		|iiiiiiiiiiii|
+456	|iiiiiiiiiiii|		|iiiiiiiiiiii|  608
+	|iiiiiiiiiiii|	   =>	|iiiiiiiiiiii|
+	|iiiiiiiiiiii|		|iiiiiiiiiiii|
+	+------------+		|************|
+	                   	+------------+	
+
+
+
+i = resized, aspect-maintained image.
+* = letterboxing.
+
