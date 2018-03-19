@@ -1,0 +1,16 @@
+--caffe caffe_model/deploy.prototxt
+--weights caffe_model/VGG_VOC0712_SSD_300x300_iter_60000.caffemodel
+--images test_images
+--wof both --vof both
+--fpsize 12 
+--float_type float
+--shift_round even
+--use_minmax_cache
+--ugraph
+--allow_unsupported_hardware
+--ignore_unsupported_layers
+--signed_blobs
+--discard_after_softmax
+--implement_softmax_layer
+
+
