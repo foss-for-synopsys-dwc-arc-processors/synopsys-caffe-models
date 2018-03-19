@@ -1,0 +1,20 @@
+convert.prototxt converted with TF2Caffe from mobilenet_v1_1.0_160 pb file from https://github.com/tensorflow/models/tree/master/research/slim#Pretrained
+
+convert.caffemodel converted from Tensorflow weights.
+This prototxt model requires the Caffe patches (Synopsys Caffe) for implementation.
+
+Requires tensorflow preprocessing:
+    # TensorFlow uses the r,g,b order
+    # while Caffe uses the b,g,r order
+    image_raw_data_jpg = tf.gfile.FastGFile(jpeg_image, 'r').read()
+    img_data_jpg = tf.image.decode_jpeg(image_raw_data_jpg,
+                                        channels=image_channels)
+    img_data_jpg = tf.image.convert_image_dtype(img_data_jpg, dtype=tf.float32)
+    image_n = tf.stack(img_data_jpg)
+    preprocessing_fn = get_preprocessing(cnn_model, is_training=False)
+    processed_image = preprocessing_fn(image_n, image_height, image_width)
+    processed_images = tf.expand_dims(processed_image, 0)
+
+Following options are required for the preprocessing for host fixed:
+  --color_order RGB
+  --image_scale 1

@@ -1,0 +1,5 @@
+Model and weights:
+    - MobileNet v1: deploy.prototxt and  mobilenet.caffemodel
+    - MobileNet v2: mobilenet_v2.caffemodel and mobilenet_v2_deploy.prototxt
+from:
+    https://github.com/shicai/MobileNet-Caffe
