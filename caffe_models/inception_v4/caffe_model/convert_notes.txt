@@ -1,0 +1,36 @@
+The convert.prototxt and convert.caffemodel are converted with TF2Caffe(myconverter2) from Inception_v4 from https://github.com/tensorflow/models/tree/master/research/slim#Pretrained
+The convert.caffemodel contains the weights converted directly from TensorFlow.
+
+To use it, Caffe patch of average pooling (using the AVE_TF instead of AVE) must be applied.
+
+Requires tensorflow preprocessing:
+  img = cv2.imread(filename)
+  b, g, r = cv2.split(img)
+  rgb_img = cv2.merge([r, g, b])
+  image_n = tf.stack(rgb_img)
+  input_width = 299
+  input_height = 299
+  processed_image = inception_preprocessing.preprocess_image(image_n, input_width, input_height, is_training=False)
+  processed_images = tf.expand_dims(processed_image, 0)
+
+Following options are required for the preprocessing for host fixed:
+  --color_order RGB
+  --image_scale 1
+
+
+For correct option you need support for the Bias layer, which feeds 
+into the final Softmax classification layer.
+Support was added on 2018-01-25.
+
+When running standalone host-fixed, use
+
+  -classify_delta 1
+
+because in the 1001 outputs of the InceptionV4__Logits__Logits__BiasAdd
+layer, slot 0 is reserved for "no class" and 1..1000 are the 1000 classes.
+
+Finally, as in most image-processing applications, use
+
+  --ibs 8
+
+for better accuracy of the input and thus better graph results overall.

@@ -1,0 +1,4391 @@
+name: "TensorFlowToCaffe"
+input: "data"
+input_dim: 1
+input_dim: 3
+input_dim: 299
+input_dim: 299
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_1a_3x3"
+  type: "Convolution"
+  bottom: "data"
+  top: "InceptionV3_InceptionV3_Conv2d_1a_3x3"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_1a_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Conv2d_1a_3x3"
+  top: "InceptionV3_InceptionV3_Conv2d_1a_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_1a_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Conv2d_1a_3x3_bn"
+  top: "InceptionV3_InceptionV3_Conv2d_1a_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_1a_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Conv2d_1a_3x3_scale"
+  top: "InceptionV3_InceptionV3_Conv2d_1a_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2a_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Conv2d_1a_3x3_r"
+  top: "InceptionV3_InceptionV3_Conv2d_2a_3x3"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2a_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2a_3x3"
+  top: "InceptionV3_InceptionV3_Conv2d_2a_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2a_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2a_3x3_bn"
+  top: "InceptionV3_InceptionV3_Conv2d_2a_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2a_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2a_3x3_scale"
+  top: "InceptionV3_InceptionV3_Conv2d_2a_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2a_3x3_r"
+  top: "InceptionV3_InceptionV3_Conv2d_2b_3x3"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2b_3x3"
+  top: "InceptionV3_InceptionV3_Conv2d_2b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Conv2d_2b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_2b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Conv2d_2b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_MaxPool_3a_3x3_MaxPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Conv2d_2b_3x3_r"
+  top: "InceptionV3_InceptionV3_MaxPool_3a_3x3_MaxPool"
+  pooling_param {
+    pool: MAX
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_h: 0
+    pad_w: 0
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_3b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_MaxPool_3a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Conv2d_3b_1x1"
+  convolution_param {
+    num_output: 80
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_3b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Conv2d_3b_1x1"
+  top: "InceptionV3_InceptionV3_Conv2d_3b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_3b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Conv2d_3b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Conv2d_3b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_3b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Conv2d_3b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Conv2d_3b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_4a_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Conv2d_3b_1x1_r"
+  top: "InceptionV3_InceptionV3_Conv2d_4a_3x3"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_4a_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Conv2d_4a_3x3"
+  top: "InceptionV3_InceptionV3_Conv2d_4a_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_4a_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Conv2d_4a_3x3_bn"
+  top: "InceptionV3_InceptionV3_Conv2d_4a_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Conv2d_4a_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Conv2d_4a_3x3_scale"
+  top: "InceptionV3_InceptionV3_Conv2d_4a_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_MaxPool_5a_3x3_MaxPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Conv2d_4a_3x3_r"
+  top: "InceptionV3_InceptionV3_MaxPool_5a_3x3_MaxPool"
+  pooling_param {
+    pool: MAX
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_h: 0
+    pad_w: 0
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_MaxPool_5a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_MaxPool_5a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 48
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 2
+    pad_w: 2
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_MaxPool_5a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_MaxPool_5a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5b_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_1_Conv2d_0b_5x5_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_2_Conv2d_0c_3x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5b_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 48
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 2
+    pad_w: 2
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_5b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5c_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_1_Conv_1_0c_5x5_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_2_Conv2d_0c_3x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5c_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 48
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 2
+    pad_w: 2
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_5c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_5d_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_1_Conv2d_0b_5x5_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_2_Conv2d_0c_3x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_5d_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_Branch_2_MaxPool_1a_3x3_MaxPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_5d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6a_Branch_2_MaxPool_1a_3x3_MaxPool"
+  pooling_param {
+    pool: MAX
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_h: 0
+    pad_w: 0
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6a_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_0_Conv2d_1a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_1_Conv2d_1a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_Branch_2_MaxPool_1a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Mixed_6a_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7"
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0b_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1"
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0b_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7"
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0c_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1"
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0d_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_6a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6b_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_1_Conv2d_0c_7x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_2_Conv2d_0e_1x7_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6b_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0b_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0b_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0c_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0d_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_6b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6c_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_1_Conv2d_0c_7x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_2_Conv2d_0e_1x7_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6c_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0b_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0b_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0c_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0d_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_6c_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6d_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_1_Conv2d_0c_7x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_2_Conv2d_0e_1x7_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6d_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0b_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0b_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0c_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0d_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_6d_concat"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_6e_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_1_Conv2d_0c_7x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_2_Conv2d_0e_1x7_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_6e_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3"
+  convolution_param {
+    num_output: 320
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 3
+    kernel_h: 1
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0b_1x7_r"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 3
+    pad_w: 0
+    kernel_h: 7
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_0c_7x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_Branch_2_MaxPool_1a_3x3_MaxPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_6e_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7a_Branch_2_MaxPool_1a_3x3_MaxPool"
+  pooling_param {
+    pool: MAX
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_h: 0
+    pad_w: 0
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7a_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_0_Conv2d_1a_3x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_1_Conv2d_1a_3x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_Branch_2_MaxPool_1a_3x3_MaxPool"
+  top: "InceptionV3_InceptionV3_Mixed_7a_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 320
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 1
+    kernel_h: 1
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 1
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_r"
+}
+#layer {
+#  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_concat"
+#  type: "Concat"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_r"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_r"
+#  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_concat"
+#  concat_param {
+#    axis: 1
+#  }
+#}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 448
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 1
+    kernel_h: 1
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 1
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_r"
+}
+#layer {
+#  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_concat"
+#  type: "Concat"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_r"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_r"
+#  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_concat"
+#  concat_param {
+#    axis: 1
+#  }
+#}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_7a_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7b_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_1x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_1_Conv2d_0b_3x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0c_1x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_2_Conv2d_0d_3x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7b_concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 320
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 1
+    kernel_h: 1
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 1
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_r"
+}
+#layer {
+#  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_concat"
+#  type: "Concat"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_r"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_r"
+#  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_concat"
+#  concat_param {
+#    axis: 1
+#  }
+#}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1"
+  convolution_param {
+    num_output: 448
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0a_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 1
+    kernel_h: 1
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0b_3x3_r"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 1
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_r"
+}
+#layer {
+#  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_concat"
+#  type: "Concat"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_r"
+#  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_r"
+#  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_concat"
+#  concat_param {
+#    axis: 1
+#  }
+#}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_7b_concat"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 1
+    pad_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_AvgPool_0a_3x3_AvgPool"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_bn"
+  type: "BatchNorm"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_bn"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_scale"
+  type: "Scale"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_bn"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_r"
+  type: "ReLU"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_scale"
+  top: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_r"
+}
+layer {
+  name: "InceptionV3_InceptionV3_Mixed_7c_concat"
+  type: "Concat"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_0_Conv2d_0a_1x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0b_1x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_1_Conv2d_0c_3x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0c_1x3_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_2_Conv2d_0d_3x1_r"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_Branch_3_Conv2d_0b_1x1_r"
+  top: "InceptionV3_InceptionV3_Mixed_7c_concat"
+  concat_param {
+    axis: 1
+  }
+}
+#layer {
+#  name: "InceptionV3_AuxLogits_AvgPool_1a_5x5_AvgPool"
+#  type: "Pooling"
+#  bottom: "InceptionV3_InceptionV3_Mixed_6e_concat"
+#  top: "InceptionV3_AuxLogits_AvgPool_1a_5x5_AvgPool"
+#  pooling_param {
+#    pool: AVE_TF
+#    kernel_h: 5
+#    kernel_w: 5
+#    stride_h: 3
+#    stride_w: 3
+#    pad_h: 0
+#    pad_w: 0
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_1b_1x1"
+#  type: "Convolution"
+#  bottom: "InceptionV3_AuxLogits_AvgPool_1a_5x5_AvgPool"
+#  top: "InceptionV3_AuxLogits_Conv2d_1b_1x1"
+#  convolution_param {
+#    num_output: 128
+#    bias_term: false
+#    pad_h: 0
+#    pad_w: 0
+#    kernel_h: 1
+#    kernel_w: 1
+#    stride_h: 1
+#    stride_w: 1
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_1b_1x1_bn"
+#  type: "BatchNorm"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_1b_1x1"
+#  top: "InceptionV3_AuxLogits_Conv2d_1b_1x1_bn"
+#  batch_norm_param {
+#    use_global_stats: true
+#    eps: 0.0010000000475
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_1b_1x1_scale"
+#  type: "Scale"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_1b_1x1_bn"
+#  top: "InceptionV3_AuxLogits_Conv2d_1b_1x1_scale"
+#  scale_param {
+#    bias_term: true
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_1b_1x1_r"
+#  type: "ReLU"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_1b_1x1_scale"
+#  top: "InceptionV3_AuxLogits_Conv2d_1b_1x1_r"
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_2a_5x5"
+#  type: "Convolution"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_1b_1x1_r"
+#  top: "InceptionV3_AuxLogits_Conv2d_2a_5x5"
+#  convolution_param {
+#    num_output: 768
+#    bias_term: false
+#    pad_h: 0
+#    pad_w: 0
+#    kernel_h: 5
+#    kernel_w: 5
+#    stride_h: 1
+#    stride_w: 1
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_2a_5x5_bn"
+#  type: "BatchNorm"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_2a_5x5"
+#  top: "InceptionV3_AuxLogits_Conv2d_2a_5x5_bn"
+#  batch_norm_param {
+#    use_global_stats: true
+#    eps: 0.0010000000475
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_2a_5x5_scale"
+#  type: "Scale"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_2a_5x5_bn"
+#  top: "InceptionV3_AuxLogits_Conv2d_2a_5x5_scale"
+#  scale_param {
+#    bias_term: true
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_2a_5x5_r"
+#  type: "ReLU"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_2a_5x5_scale"
+#  top: "InceptionV3_AuxLogits_Conv2d_2a_5x5_r"
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits_Conv2d_2b_1x1"
+#  type: "Convolution"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_2a_5x5_r"
+#  top: "InceptionV3_AuxLogits_Conv2d_2b_1x1"
+#  convolution_param {
+#    num_output: 1001
+#    bias_term: true
+#    pad_h: 0
+#    pad_w: 0
+#    kernel_h: 1
+#    kernel_w: 1
+#    stride_h: 1
+#    stride_w: 1
+#  }
+#}
+#layer {
+#  name: "InceptionV3_AuxLogits"
+#  type: "Flatten"
+#  bottom: "InceptionV3_AuxLogits_Conv2d_2b_1x1"
+#  top: "InceptionV3_AuxLogits"
+#}
+layer {
+  name: "InceptionV3_Logits_AvgPool_1a_8x8_AvgPool"
+  type: "Pooling"
+  bottom: "InceptionV3_InceptionV3_Mixed_7c_concat"
+  top: "InceptionV3_Logits_AvgPool_1a_8x8_AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 8
+    kernel_w: 8
+    stride_h: 2
+    stride_w: 2
+    pad_h: 0
+    pad_w: 0
+  }
+}
+layer {
+  name: "InceptionV3_Logits_Conv2d_1c_1x1"
+  type: "Convolution"
+  bottom: "InceptionV3_Logits_AvgPool_1a_8x8_AvgPool"
+  top: "InceptionV3_Logits_Conv2d_1c_1x1"
+  convolution_param {
+    num_output: 1001
+    bias_term: true
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+  }
+}
+layer {
+  name: "InceptionV3_Logits"
+  type: "Flatten"
+  bottom: "InceptionV3_Logits_Conv2d_1c_1x1"
+  top: "InceptionV3_Logits"
+}
+layer {
+  name: "InceptionV3_Predictions_Softmax"
+  type: "Softmax"
+  bottom: "InceptionV3_Logits"
+  top: "InceptionV3_Predictions_Softmax"
+}
