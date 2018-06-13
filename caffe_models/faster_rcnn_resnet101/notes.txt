@@ -1,0 +1,2 @@
+VGG16 model taken from https://github.com/rbgirshick/py-faster-rcnn
+ResNet101 model taken from https://github.com/Eniac-Xie/faster-rcnn-resnet

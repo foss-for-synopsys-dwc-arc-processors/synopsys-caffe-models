@@ -1,0 +1,9 @@
+The prototxt was taken from
+
+    models/pascal_voc/ResNet101_BN_SCALE_Merged/faster_rcnn_end2end/test.prototxt
+and modified to allow reasonable generation of dummy weights.
+
+The repository from which this was taken is:
+
+    https://github.com/Eniac-Xie/faster-rcnn-resnet
+~

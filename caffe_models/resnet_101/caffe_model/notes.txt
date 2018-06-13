@@ -1,0 +1,18 @@
+ResNet-101-deploy-v2-tensorflow.prototxt converted with TF2Caffe from ResNet_v2_101 from https://github.com/tensorflow/models/tree/master/research/slim#Pretrained
+
+ResNet-101-model-v2-tensorflow.caffemodel converted from Tensorflow weights.
+This prototxt model contains the pad_type parameter and must use the asymmetric padding Caffe patch for implementation.
+
+Requires tensorflow preprocessing:
+  img = cv2.imread(filename)
+  b, g, r = cv2.split(img)
+  rgb_img = cv2.merge([r, g, b])
+  image_n = tf.stack(rgb_img)
+  input_width = 299
+  input_height = 299
+  processed_image = inception_preprocessing.preprocess_image(image_n, input_width, input_height, is_training=False)
+  processed_images = tf.expand_dims(processed_image, 0)
+
+Following options are required for the preprocessing for host fixed:
+  --color_order RGB
+  --image_scale 1
