@@ -1,0 +1,45 @@
+ResNet-50-deploy.prototxt and ResNet-50-model.caffemodel from https://github.com/KaimingHe/deep-residual-networks
+
+ResNet-50-deploy-v2-tensorflow.prototxt converted with TF2Caffe from ResNet_v2_50 from https://github.com/tensorflow/models/tree/master/research/slim#Pretrained
+
+ResNet-50-model-v2-tensorflow.caffemodel converted from Tensorflow weights.
+This prototxt model contains the pad_type parameter and must use the asymmetric padding Caffe patch for implementation.
+
+Requires tensorflow preprocessing:
+  img = cv2.imread(filename)
+  b, g, r = cv2.split(img)
+  rgb_img = cv2.merge([r, g, b])
+  image_n = tf.stack(rgb_img)
+  input_width = 299
+  input_height = 299
+  processed_image = inception_preprocessing.preprocess_image(image_n, input_width, input_height, is_training=False)
+  processed_images = tf.expand_dims(processed_image, 0)
+
+Following options are required for the preprocessing for host fixed:
+  --color_order RGB
+  --image_scale 1
+
+
+Compressed models:
+- ResNet-50-deploy-compressed-1.32.prototxt and ResNet-50-model-compressed-1.32.caffemodel: compression factor 1.32
+- ResNet-50-deploy-compressed-1.61.prototxt and ResNet-50-model-compressed-1.61.caffemodel: compression factor 1.61
+
+Compressed + pruned models:
+- ResNet-50-deploy-compressed-1.61.prototxt and ResNet-50-model-compressed-1.61-pruned-1.72.caffemodel: compression factor 1.61, pruning factor 1.72
+- ResNet-50-deploy-compressed-1.32.prototxt and ResNet-50-model-compressed-1.32-pruned-1.48.caffemodel: compression factor 1.32, pruning factor 1.48
+
+ResNet-50 Accuracy:
+- Use bvlc_caffe/data/ilsvrc12/imagenet_mean.binaryproto, md5sum is 6df445471f4fa8a98fc19932d21bef77, accuracy is list as follows:
+I0615 05:35:44.048615 73678 caffe.cpp:309] Loss: 1.13787
+I0615 05:35:44.048672 73678 caffe.cpp:321] accuracy@1 = 0.729239
+I0615 05:35:44.048684 73678 caffe.cpp:321] accuracy@5 = 0.911875
+I0615 05:35:44.048696 73678 caffe.cpp:321] prob = 1.13787 (* 1 = 1.13787 loss)
+- Use ResNet_mean.binaryproto, md5sum is b8feee57921224a11e6345c12efb4378, not able to run accuracy using this
+- Use fixed mean values, the accuracy is list as follows:
+    mean_value: 103.939002991
+    mean_value: 116.778999329
+    mean_value: 123.680000305
+I0615 05:52:03.093302  2898 caffe.cpp:309] Loss: 1.13973
+I0615 05:52:03.093330  2898 caffe.cpp:321] accuracy@1 = 0.72884
+I0615 05:52:03.093349  2898 caffe.cpp:321] accuracy@5 = 0.911615
+I0615 05:52:03.093365  2898 caffe.cpp:321] prob = 1.13973 (* 1 = 1.13973 loss)
