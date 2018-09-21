@@ -1,3 +1,5 @@
+VGG_ILSVRC_16_layers.caffemodel and VGG_ILSVRC_16_layers_deploy.prototxt from http://www.robots.ox.ac.uk/~vgg/research/very_deep/
+
 decomposed-v1.prototxt/v1.caffemodel is TomA's decomposed model (only conv layers).
 decomposed-v1.prototxt is upgraded using upgrade_net_proto_text.bin
 decomposed-v1_iter_2000.caffemodel is the retrained version of decomposed-v1.caffemodel
@@ -5,3 +7,14 @@ decomposed-v1_iter_2000.caffemodel is the retrained version of decomposed-v1.caf
 decomposed-v6.prototxt is TomA's decomposed model (conv + fc layers).
 decomposed-v6.prototxt is upgraded using upgrade_net_proto_text.bin
 decomposed-v6_iter_1900.caffemodel are the decomposed and retrained coefficients
+
+Compressed graphs:
+1. compressed-24p.prototxt / compressed-24p.caffemodel
+- 24% of original MACs (factor 4.12)
+
+2. compressed-19p.prototxt / compressed-19p.caffemodel
+- 19% of original MACs (factor 5.27)
+
+3. compressed-16p.prototxt / compressed-16p.caffemodel
+- 16% of original MACs (factor 6.32)
+
