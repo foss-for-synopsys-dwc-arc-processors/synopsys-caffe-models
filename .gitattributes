@@ -6,7 +6,8 @@
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
-
+*.pgm filter=lfs diff=lfs merge=lfs -text
+*.ppm filter=lfs diff=lfs merge=lfs -text
 # Tensorflow models
 *.tfmodel filter=lfs diff=lfs merge=lfs -text
 
@@ -14,3 +15,9 @@
 # When a Windows user checks out the repo they will get Windows style line endings for all text based files, 
 # likewise when a Linux user checks out the repo they will get Unix style line endings.
 * text=auto
+imagenet_test_images filter=lfs diff=lfs merge=lfs -text
+*.ckpt filter=lfs diff=lfs merge=lfs -text
+*.ckpt.meta filter=lfs diff=lfs merge=lfs -text
+*.ckpt.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
+*.pb filter=lfs diff=lfs merge=lfs -text
+*.npy filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,7 @@
+*~
+*.pyc
+.settings
+.idea
+.sc.project
+*.log
+*log.txt
