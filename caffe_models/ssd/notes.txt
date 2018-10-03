@@ -1,1 +1,0 @@
-Note: must run with SSD branch of caffe, which implements a number of new layers.

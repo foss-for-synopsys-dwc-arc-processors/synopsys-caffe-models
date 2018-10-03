@@ -1,0 +1,13 @@
+
+SSD model from https://github.com/weiliu89/caffe/tree/ssd
+1. 300x300: VGG_VOC0712_SSD_300x300_iter_120000.prototxt / VGG_VOC0712_SSD_300x300_iter_120000.caffemodel
+2. 512x512: VGG_VOC0712_SSD_512x512_iter_120000.prototxt / VGG_VOC0712_SSD_512x512_iter_120000.caffemodel
+
+Other (source?): From old commit https://github.com/weiliu89/caffe/commit/e2d50ccead4470ae8683c4e51b27da982d9017e3
+1. deploy.prototxt / VGG_VOC0712_SSD_300x300_iter_60000.caffemodel
+
+prototxt for caffe accuracy testing using map_calculation script
+1. deploy_acc.prototxt
+2. VGG_VOC0712_SSD_300x300_iter_120000_acc.prototxt
+3. VGG_VOC0712_SSD_512x512_iter_120000_acc.prototxt
+

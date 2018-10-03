@@ -1,0 +1,37 @@
+# How to run
+## Create symoblic link for VOCdevkit
+## Create symoblic link for synopsys-caffe
+## Make sure SSD lmdb is generated correctly, my generation located in /DATA/hqfang/datasets/VOCdevkit/VOC0712/ssd_lmdb
+## caffe.bin train -solver eval_solver.prototxt -weights VGG_VOC0712_SSD_300x300_iter_60000.caffemodel -gpu 0
+train_net: "train.prototxt"
+test_net: "test.prototxt"
+test_iter: 619
+test_interval: 10000
+base_lr: 0.001
+display: 10
+max_iter: 0
+lr_policy: "multistep"
+gamma: 0.1
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 80000
+snapshot_prefix: "VGG_VOC0712_SSD_300x300"
+solver_mode: GPU
+device_id: 0
+debug_info: false
+snapshot_after_train: true
+test_initialization: true
+average_loss: 10
+stepvalue: 80000
+stepvalue: 100000
+stepvalue: 120000
+iter_size: 1
+type: "SGD"
+eval_type: "detection"
+# Change the ap_version for different eval type
+## ap_version: different ways of computing Average Precision.
+## Check https://sanchom.wordpress.com/tag/average-precision/ for details.
+## 11point: the 11-point interpolated average precision. Used in VOC2007.
+## MaxIntegral: maximally interpolated AP. Used in VOC2012/ILSVRC.
+## Integral: the natural integral of the precision-recall curve.
+ap_version: "Integral"
