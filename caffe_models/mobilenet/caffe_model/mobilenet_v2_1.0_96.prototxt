@@ -1,0 +1,1940 @@
+name: "TensorFlowToCaffe"
+input: "data"
+input_dim: 1
+input_dim: 3
+input_dim: 96
+input_dim: 96
+layer {
+  name: "MobilenetV2__Conv__Conv2D"
+  type: "Convolution"
+  bottom: "data"
+  top: "MobilenetV2__Conv__Conv2D"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__Conv__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__Conv__Conv2D"
+  top: "MobilenetV2__Conv__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__Conv__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__Conv__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__Conv__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__Conv__Relu6"
+  top: "MobilenetV2__expanded_conv__depthwise__depthwise"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    group: 32
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv__project__Conv2D"
+  convolution_param {
+    num_output: 16
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv__project__Conv2D"
+  top: "MobilenetV2__expanded_conv__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_1__expand__Conv2D"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_1__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_1__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_1__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_1__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_1__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_1__depthwise__depthwise"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    group: 96
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_1__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_1__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_1__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_1__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_1__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_1__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_1__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_1__project__Conv2D"
+  convolution_param {
+    num_output: 24
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_1__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_1__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_1__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_1__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_2__expand__Conv2D"
+  convolution_param {
+    num_output: 144
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_2__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_2__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_2__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_2__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_2__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_2__depthwise__depthwise"
+  convolution_param {
+    num_output: 144
+    bias_term: false
+    group: 144
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_2__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_2__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_2__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_2__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_2__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_2__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_2__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_2__project__Conv2D"
+  convolution_param {
+    num_output: 24
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_2__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_2__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_2__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_2__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_1__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_2__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_2__add"
+  top: "MobilenetV2__expanded_conv_3__expand__Conv2D"
+  convolution_param {
+    num_output: 144
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_3__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_3__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_3__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_3__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_3__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_3__depthwise__depthwise"
+  convolution_param {
+    num_output: 144
+    bias_term: false
+    group: 144
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_3__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_3__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_3__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_3__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_3__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_3__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_3__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_3__project__Conv2D"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_3__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_3__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_3__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_3__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_4__expand__Conv2D"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_4__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_4__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_4__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_4__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_4__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_4__depthwise__depthwise"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    group: 192
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_4__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_4__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_4__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_4__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_4__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_4__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_4__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_4__project__Conv2D"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_4__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_4__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_4__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_4__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_3__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_4__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_4__add"
+  top: "MobilenetV2__expanded_conv_5__expand__Conv2D"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_5__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_5__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_5__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_5__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_5__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_5__depthwise__depthwise"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    group: 192
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_5__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_5__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_5__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_5__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_5__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_5__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_5__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_5__project__Conv2D"
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_5__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_5__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_5__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_5__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_4__add"
+  top: "MobilenetV2__expanded_conv_5__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_5__add"
+  top: "MobilenetV2__expanded_conv_6__expand__Conv2D"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_6__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_6__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_6__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_6__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_6__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_6__depthwise__depthwise"
+  convolution_param {
+    num_output: 192
+    bias_term: false
+    group: 192
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_6__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_6__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_6__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_6__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_6__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_6__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_6__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_6__project__Conv2D"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_6__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_6__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_6__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_6__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_7__expand__Conv2D"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_7__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_7__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_7__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_7__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_7__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_7__depthwise__depthwise"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    group: 384
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_7__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_7__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_7__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_7__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_7__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_7__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_7__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_7__project__Conv2D"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_7__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_7__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_7__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_7__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_6__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_7__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_7__add"
+  top: "MobilenetV2__expanded_conv_8__expand__Conv2D"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_8__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_8__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_8__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_8__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_8__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_8__depthwise__depthwise"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    group: 384
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_8__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_8__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_8__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_8__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_8__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_8__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_8__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_8__project__Conv2D"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_8__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_8__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_8__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_8__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_7__add"
+  top: "MobilenetV2__expanded_conv_8__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_8__add"
+  top: "MobilenetV2__expanded_conv_9__expand__Conv2D"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_9__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_9__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_9__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_9__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_9__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_9__depthwise__depthwise"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    group: 384
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_9__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_9__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_9__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_9__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_9__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_9__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_9__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_9__project__Conv2D"
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_9__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_9__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_9__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_9__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_8__add"
+  top: "MobilenetV2__expanded_conv_9__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_9__add"
+  top: "MobilenetV2__expanded_conv_10__expand__Conv2D"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_10__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_10__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_10__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_10__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_10__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_10__depthwise__depthwise"
+  convolution_param {
+    num_output: 384
+    bias_term: false
+    group: 384
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_10__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_10__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_10__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_10__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_10__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_10__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_10__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_10__project__Conv2D"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_10__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_10__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_10__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_10__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_11__expand__Conv2D"
+  convolution_param {
+    num_output: 576
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_11__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_11__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_11__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_11__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_11__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_11__depthwise__depthwise"
+  convolution_param {
+    num_output: 576
+    bias_term: false
+    group: 576
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_11__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_11__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_11__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_11__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_11__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_11__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_11__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_11__project__Conv2D"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_11__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_11__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_11__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_11__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_10__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_11__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_11__add"
+  top: "MobilenetV2__expanded_conv_12__expand__Conv2D"
+  convolution_param {
+    num_output: 576
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_12__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_12__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_12__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_12__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_12__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_12__depthwise__depthwise"
+  convolution_param {
+    num_output: 576
+    bias_term: false
+    group: 576
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_12__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_12__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_12__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_12__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_12__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_12__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_12__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_12__project__Conv2D"
+  convolution_param {
+    num_output: 96
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_12__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_12__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_12__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_12__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_11__add"
+  top: "MobilenetV2__expanded_conv_12__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_12__add"
+  top: "MobilenetV2__expanded_conv_13__expand__Conv2D"
+  convolution_param {
+    num_output: 576
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_13__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_13__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_13__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_13__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_13__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_13__depthwise__depthwise"
+  convolution_param {
+    num_output: 576
+    bias_term: false
+    group: 576
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_13__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_13__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_13__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_13__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_13__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_13__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_13__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_13__project__Conv2D"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_13__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_13__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_13__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_13__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_14__expand__Conv2D"
+  convolution_param {
+    num_output: 960
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_14__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_14__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_14__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_14__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_14__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_14__depthwise__depthwise"
+  convolution_param {
+    num_output: 960
+    bias_term: false
+    group: 960
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_14__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_14__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_14__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_14__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_14__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_14__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_14__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_14__project__Conv2D"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_14__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_14__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_14__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_14__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_13__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_14__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_14__add"
+  top: "MobilenetV2__expanded_conv_15__expand__Conv2D"
+  convolution_param {
+    num_output: 960
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_15__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_15__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_15__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_15__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_15__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_15__depthwise__depthwise"
+  convolution_param {
+    num_output: 960
+    bias_term: false
+    group: 960
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_15__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_15__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_15__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_15__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_15__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_15__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_15__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_15__project__Conv2D"
+  convolution_param {
+    num_output: 160
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_15__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_15__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_15__add"
+  type: "Eltwise"
+  bottom: "MobilenetV2__expanded_conv_15__project__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV2__expanded_conv_14__add"
+  top: "MobilenetV2__expanded_conv_15__add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__expand__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_15__add"
+  top: "MobilenetV2__expanded_conv_16__expand__Conv2D"
+  convolution_param {
+    num_output: 960
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__expand__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_16__expand__Conv2D"
+  top: "MobilenetV2__expanded_conv_16__expand__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__expand__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_16__expand__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_16__expand__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__depthwise__depthwise"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_16__expand__Relu6"
+  top: "MobilenetV2__expanded_conv_16__depthwise__depthwise"
+  convolution_param {
+    num_output: 960
+    bias_term: false
+    group: 960
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__depthwise__BatchNorm__FusedBatchNorm"
+  type: "BatchNorm"
+  bottom: "MobilenetV2__expanded_conv_16__depthwise__depthwise"
+  top: "MobilenetV2__expanded_conv_16__depthwise__BatchNorm__FusedBatchNorm"
+  batch_norm_param {
+    use_global_stats: true
+    eps: 0.0010000000475
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__depthwise__BatchNorm__FusedBatchNorm__scale"
+  type: "Scale"
+  bottom: "MobilenetV2__expanded_conv_16__depthwise__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__expanded_conv_16__depthwise__BatchNorm__FusedBatchNorm__scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__depthwise__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__expanded_conv_16__depthwise__BatchNorm__FusedBatchNorm__scale"
+  top: "MobilenetV2__expanded_conv_16__depthwise__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__project__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_16__depthwise__Relu6"
+  top: "MobilenetV2__expanded_conv_16__project__Conv2D"
+  convolution_param {
+    num_output: 320
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__expanded_conv_16__project__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__expanded_conv_16__project__Conv2D"
+  top: "MobilenetV2__expanded_conv_16__project__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__Conv_1__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__expanded_conv_16__project__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__Conv_1__Conv2D"
+  convolution_param {
+    num_output: 1280
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__Conv_1__BatchNorm__FusedBatchNorm"
+  type: "Bias"
+  bottom: "MobilenetV2__Conv_1__Conv2D"
+  top: "MobilenetV2__Conv_1__BatchNorm__FusedBatchNorm"
+}
+layer {
+  name: "MobilenetV2__Conv_1__Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV2__Conv_1__BatchNorm__FusedBatchNorm"
+  top: "MobilenetV2__Conv_1__Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV2__Logits__AvgPool"
+  type: "Pooling"
+  bottom: "MobilenetV2__Conv_1__Relu6"
+  top: "MobilenetV2__Logits__AvgPool"
+  pooling_param {
+    pool: AVE_TF
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    pad_h: 0
+    pad_w: 0
+    ceil_mode: false
+  }
+}
+layer {
+  name: "MobilenetV2__Logits__Conv2d_1c_1x1__Conv2D"
+  type: "Convolution"
+  bottom: "MobilenetV2__Logits__AvgPool"
+  top: "MobilenetV2__Logits__Conv2d_1c_1x1__Conv2D"
+  convolution_param {
+    num_output: 1001
+    bias_term: false
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    pad_type: 1
+  }
+}
+layer {
+  name: "MobilenetV2__Logits__Conv2d_1c_1x1__BiasAdd"
+  type: "Bias"
+  bottom: "MobilenetV2__Logits__Conv2d_1c_1x1__Conv2D"
+  top: "MobilenetV2__Logits__Conv2d_1c_1x1__BiasAdd"
+}
+layer {
+  name: "MobilenetV2__Logits__Squeeze"
+  type: "Flatten"
+  bottom: "MobilenetV2__Logits__Conv2d_1c_1x1__BiasAdd"
+  top: "MobilenetV2__Logits__Squeeze"
+}
+layer {
+  name: "MobilenetV2__Predictions__Reshape"
+  type: "Reshape"
+  bottom: "MobilenetV2__Logits__Squeeze"
+  top: "MobilenetV2__Predictions__Reshape"
+  reshape_param {
+    shape {
+      dim: -1
+      dim: 1001
+    }
+  }
+}
+layer {
+  name: "MobilenetV2__Predictions__Shape"
+  type: "Python"
+  bottom: "MobilenetV2__Logits__Squeeze"
+  top: "MobilenetV2__Predictions__Shape"
+  python_param {
+    module: "shape"
+    layer: "TensorShape"
+  }
+}
+layer {
+  name: "MobilenetV2__Predictions__Softmax"
+  type: "Softmax"
+  bottom: "MobilenetV2__Predictions__Reshape"
+  top: "MobilenetV2__Predictions__Softmax"
+}
+layer {
+  name: "MobilenetV2__Predictions__Reshape_1"
+  type: "Reshape"
+  bottom: "MobilenetV2__Predictions__Softmax"
+  top: "MobilenetV2__Predictions__Reshape_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 1001
+    }
+  }
+}
