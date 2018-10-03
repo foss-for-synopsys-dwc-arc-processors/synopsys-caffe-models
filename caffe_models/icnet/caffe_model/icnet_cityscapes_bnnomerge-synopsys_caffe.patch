@@ -1,0 +1,508 @@
+diff --git a/caffe_models/icnet/caffe_model/icnet_cityscapes_bnnomerge.prototxt b/caffe_models/icnet/caffe_model/icnet_cityscapes_bnnomerge.prototxt
+index 19d6b68..fae7617 100755
+--- a/caffe_models/icnet/caffe_model/icnet_cityscapes_bnnomerge.prototxt
++++ b/caffe_models/icnet/caffe_model/icnet_cityscapes_bnnomerge.prototxt
+@@ -76,6 +76,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -136,6 +137,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -196,6 +198,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -268,6 +271,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -328,6 +332,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -388,6 +393,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -442,6 +448,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -512,6 +519,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -572,6 +580,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -632,6 +641,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -702,6 +712,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -762,6 +773,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -822,6 +834,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -892,6 +905,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -952,6 +966,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1012,6 +1027,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1066,6 +1082,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1146,6 +1163,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1206,6 +1224,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1266,6 +1285,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1336,6 +1356,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1396,6 +1417,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1456,6 +1478,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1526,6 +1549,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1586,6 +1610,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1646,6 +1671,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1716,6 +1742,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1777,6 +1804,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1837,6 +1865,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1891,6 +1920,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -1961,6 +1991,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2022,6 +2053,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2082,6 +2114,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2152,6 +2185,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2213,6 +2247,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2273,6 +2308,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2343,6 +2379,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2404,6 +2441,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2464,6 +2502,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2534,6 +2573,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2595,6 +2635,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2655,6 +2696,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2725,6 +2767,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2786,6 +2829,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2846,6 +2890,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2916,6 +2961,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -2977,6 +3023,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3037,6 +3084,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3091,6 +3139,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3161,6 +3210,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3222,6 +3272,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3282,6 +3333,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3352,6 +3404,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3413,6 +3466,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3473,6 +3527,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3645,6 +3700,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3715,6 +3771,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ 
+@@ -3771,6 +3828,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3848,6 +3906,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ 
+@@ -3904,6 +3963,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -3964,6 +4024,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -4024,6 +4085,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ layer {
+@@ -4084,6 +4146,7 @@ layer {
+     }
+     frozen: true
+     momentum: 0.95
++    icnet: true
+   }
+ }
+ 

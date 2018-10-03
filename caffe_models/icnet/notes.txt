@@ -1,0 +1,7 @@
+icnet should use the following pixel mean:
+
+    --pixel_mean 103.939,123.68,116.779
+
+This may be seen at
+
+    https://github.com/hszhao/ICNet/blob/master/evaluation/eval_all.m#L27-L29
