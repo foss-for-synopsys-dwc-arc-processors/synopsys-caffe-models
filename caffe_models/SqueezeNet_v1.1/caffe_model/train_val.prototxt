@@ -20,8 +20,8 @@ layer {
     mean_value: 123
   }
   data_param {
-    source: "examples/imagenet/ilsvrc12_train_lmdb"
-    batch_size: 32
+    source: "bvlc_caffe/examples/imagenet/ilsvrc12_train_lmdb"
+    batch_size: 128
     backend: LMDB
   }
 }
@@ -40,7 +40,7 @@ layer {
     mean_value: 123
   }
   data_param {
-    source: "examples/imagenet/ilsvrc12_val_lmdb"
+    source: "bvlc_caffe/examples/imagenet/ilsvrc12_val_lmdb"
     batch_size: 25 #not *iter_size
     backend: LMDB
   }

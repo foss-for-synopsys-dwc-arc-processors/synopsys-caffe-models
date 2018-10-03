@@ -100,6 +100,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -140,6 +141,7 @@ layer {
     stride_w: 2
     pad_h: 0
     pad_w: 0
+    ceil_mode: false
   }
 }
 layer {
@@ -207,6 +209,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -223,6 +226,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -305,6 +309,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -371,6 +376,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -478,6 +484,7 @@ layer {
     stride_w: 2
     pad_h: 0
     pad_w: 0
+    ceil_mode: false
   }
 }
 layer {
@@ -529,6 +536,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -545,6 +553,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -561,6 +570,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -576,6 +586,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -649,6 +660,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -702,6 +714,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -718,6 +731,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -790,6 +804,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -843,6 +858,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -859,6 +875,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -875,6 +892,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -890,6 +908,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -963,6 +982,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1016,6 +1036,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1032,6 +1053,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1104,6 +1126,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1157,6 +1180,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1173,6 +1197,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1189,6 +1214,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1204,6 +1230,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1277,6 +1304,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1330,6 +1358,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1346,6 +1375,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1418,6 +1448,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1471,6 +1502,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1487,6 +1519,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1503,6 +1536,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1518,6 +1552,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1591,6 +1626,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1644,6 +1680,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1660,6 +1697,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1732,6 +1770,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1801,6 +1840,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1816,6 +1856,7 @@ layer {
     stride_w: 2
     pad_h: 0
     pad_w: 0
+    ceil_mode: false
   }
 }
 layer {
@@ -1882,6 +1923,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1975,6 +2017,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -1991,6 +2034,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2007,6 +2051,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2022,6 +2067,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2095,6 +2141,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2148,6 +2195,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2164,6 +2212,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2236,6 +2285,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2252,6 +2302,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2318,6 +2369,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2359,6 +2411,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2412,6 +2465,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2428,6 +2482,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2444,6 +2499,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2459,6 +2515,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2532,6 +2589,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2585,6 +2643,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2601,6 +2660,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2673,6 +2733,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2689,6 +2750,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2755,6 +2817,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2796,6 +2859,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2849,6 +2913,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2865,6 +2930,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2881,6 +2947,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2896,6 +2963,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -2969,6 +3037,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3022,6 +3091,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3038,6 +3108,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3110,6 +3181,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3126,6 +3198,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3192,6 +3265,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3233,6 +3307,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3286,6 +3361,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3302,6 +3378,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3318,6 +3395,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3333,6 +3411,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3406,6 +3485,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3459,6 +3539,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3475,6 +3556,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3547,6 +3629,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3563,6 +3646,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3629,6 +3713,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3670,6 +3755,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3723,6 +3809,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3739,6 +3826,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3755,6 +3843,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3770,6 +3859,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3843,6 +3933,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3896,6 +3987,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3912,6 +4004,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -3984,6 +4077,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4000,6 +4094,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4066,6 +4161,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4107,6 +4203,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4160,6 +4257,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4176,6 +4274,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4192,6 +4291,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4207,6 +4307,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4280,6 +4381,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4333,6 +4435,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4349,6 +4452,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4421,6 +4525,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4437,6 +4542,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4503,6 +4609,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4544,6 +4651,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4597,6 +4705,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4613,6 +4722,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4629,6 +4739,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4644,6 +4755,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4717,6 +4829,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4770,6 +4883,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4786,6 +4900,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4858,6 +4973,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4874,6 +4990,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4940,6 +5057,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -4981,6 +5099,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5034,6 +5153,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5050,6 +5170,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5065,6 +5186,7 @@ layer {
     stride_w: 2
     pad_h: 0
     pad_w: 0
+    ceil_mode: false
   }
 }
 layer {
@@ -5080,6 +5202,7 @@ layer {
     stride_w: 3
     pad_h: 0
     pad_w: 0
+    ceil_mode: false
   }
 }
 layer {
@@ -5134,6 +5257,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5197,6 +5321,7 @@ layer {
     kernel_w: 7
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5304,6 +5429,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5332,9 +5458,21 @@ layer {
   }
 }
 layer {
+  name: "InceptionV4__AuxLogits__Flatten__flatten__Reshape_tmp"
+  type: "Permute"
+  bottom: "InceptionV4__AuxLogits__Conv2d_2a__Relu"
+  top: "InceptionV4__AuxLogits__Flatten__flatten__Reshape_tmp"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
   name: "InceptionV4__AuxLogits__Flatten__flatten__Reshape"
   type: "Reshape"
-  bottom: "InceptionV4__AuxLogits__Conv2d_2a__Relu"
+  bottom: "InceptionV4__AuxLogits__Flatten__flatten__Reshape_tmp"
   top: "InceptionV4__AuxLogits__Flatten__flatten__Reshape"
   reshape_param {
     shape {
@@ -5431,6 +5569,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5447,6 +5586,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5463,6 +5603,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5478,6 +5619,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5551,6 +5693,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5604,6 +5747,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5620,6 +5764,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5636,6 +5781,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5743,6 +5889,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5784,6 +5931,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5800,6 +5948,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5888,6 +6037,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5904,6 +6054,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5920,6 +6071,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -5935,6 +6087,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6008,6 +6161,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6061,6 +6215,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6077,6 +6232,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6093,6 +6249,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6200,6 +6357,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6241,6 +6399,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6257,6 +6416,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6345,6 +6505,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6361,6 +6522,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6377,6 +6539,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6392,6 +6555,7 @@ layer {
     stride_w: 1
     pad_h: 1
     pad_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6465,6 +6629,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6518,6 +6683,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6534,6 +6700,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6550,6 +6717,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6657,6 +6825,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6698,6 +6867,7 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6714,6 +6884,7 @@ layer {
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_type: 1
   }
 }
 layer {
@@ -6801,12 +6972,25 @@ layer {
     stride_w: 1
     pad_h: 0
     pad_w: 0
+    ceil_mode: false
+  }
+}
+layer {
+  name: "InceptionV4__Logits__PreLogitsFlatten__flatten__Reshape_tmp"
+  type: "Permute"
+  bottom: "InceptionV4__Logits__AvgPool_1a__AvgPool"
+  top: "InceptionV4__Logits__PreLogitsFlatten__flatten__Reshape_tmp"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
   }
 }
 layer {
   name: "InceptionV4__Logits__PreLogitsFlatten__flatten__Reshape"
   type: "Reshape"
-  bottom: "InceptionV4__Logits__AvgPool_1a__AvgPool"
+  bottom: "InceptionV4__Logits__PreLogitsFlatten__flatten__Reshape_tmp"
   top: "InceptionV4__Logits__PreLogitsFlatten__flatten__Reshape"
   reshape_param {
     shape {

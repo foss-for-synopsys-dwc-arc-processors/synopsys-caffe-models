@@ -32,6 +32,20 @@ It's used here in the code:
 ----------------------------------------
 
 
-model-decomposed-v6.cfg/model-decomposed-v6-train_109000.weights is TomA's decomposed model.
-model-decomposed-v6.prototxt is the caffe prototxt converted from model-decomposed-v6.cfg.
-model-decomposed-v6-train_109000.caffemodel are caffe weights for said model converted from model-decomposed-v6-train_109000.weights.
+Compressed graphs:
+1.model-decomposed-v6.cfg/model-decomposed-v6-train_109000.weights is TomA's decomposed model.
+- model-decomposed-v6.prototxt is the caffe prototxt converted from model-decomposed-v6.cfg.
+- model-decomposed-v6-train_109000.caffemodel are caffe weights for said model converted from model-decomposed-v6-train_109000.weights.
+
+Resized graphs:
+1. 640x480: yolo_voc-640x480.prototxt / (all caffemodels that work with original)
+2. 640x480: model-decomposed-v6-640x480.prototxt / (all caffemodels that work with compressed)
+
+Pruned graphs:
+1. yolo_voc.prototxt / yolo_voc-random-pruned.caffemodel
+- random pruned (60% conv, 85% fc)
+
+Compressed + Pruned graphs:
+1. model-decomposed-v6.prototxt / model-decomposed-v6-random-pruned.caffemodel
+- 38% of original MACS (factor 2.6)
+- random pruned (60% conv, 85% fc)

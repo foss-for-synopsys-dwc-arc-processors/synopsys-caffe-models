@@ -14,7 +14,7 @@
 
 #ifndef DEFINE_TEST_IMAGE_5
 #define DEFINE_TEST_IMAGE_5
-static uint16_t test_image_5[LENET_Y_DIM][LENET_X_DIM] = {
+static uint8_t test_image_5[LENET_Y_DIM][LENET_X_DIM] = {
   0,   0,   1,   1,   3,   5,   3,   0,   0,   0,   0,   1,   1,   0,   0,   1,   0,   0,   4,   8,   0,  17,   0,   0,   0,   0,   0,   0, 
   0,   2,   2,   0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   3,   0,   0,   1,   0,   0,   0,   9,   5,   0,   0,   0,   0, 
   1,   2,   3,   0,   0,   0,   0,   2,   6,   5,   3,   1,   0,   0,   0,   0,   7,   2,   6,  10,  17,   0,   1,   0,   0,   0,   0,   0, 

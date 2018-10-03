@@ -26,3 +26,15 @@ Compressed + pruned graphs:
 2. compressed-24p.prototxt / compressed-24p-pruned-42p.caffemodel
 - 24% of original MACs (factor 4.12)
 - 42% non-zero coefficients (factor 2.4)
+
+3. compressed-19p.prototxt / vgg_compressed-19p_pruned_1-41x_88-61.caffemodel
+- 19% of original MACs (factor 5.27)
+- xfactor 1.41
+
+4. compressed-19p.prototxt / vgg_compressed-19p_pruned_1-5x_88-46.caffemodel
+- 19% of original MACs (factor 5.27)
+- xfactor 1.5
+
+5. compressed-19p.prototxt / vgg_compressed-19p_pruned_2x_88-03.caffemodel
+- 19% of original MACs (factor 5.27)
+- xfactor 2

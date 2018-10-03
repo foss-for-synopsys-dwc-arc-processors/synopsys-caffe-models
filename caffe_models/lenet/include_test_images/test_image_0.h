@@ -18,7 +18,7 @@
 /**
  * The digit "0" from the lenet test set
  */
-static uint16_t test_image_0[LENET_Y_DIM][LENET_X_DIM] = {
+static uint8_t test_image_0[LENET_Y_DIM][LENET_X_DIM] = {
   0,   0,   0,   0,   0,   0,   0,   0,   0,  10,   1,   0,   4,   0,   0,   8,   0,   4,   8,   1,   0,  11,   1,   0,   0,   0,   0,   0, 
   0,   0,   0,   0,   0,   0,   0,   0,  12,   0,   0,  18,   0,   0,  20,   0,  11,   0,   0,   2,   9,   0,   0,   9,   0,   0,   0,   0, 
   0,   0,   0,   0,   0,   0,   0,   0,   0,   5,   0,   0,   4,   0,   0,   6,   0,  12,   5,   0,   7,   4,   1,   3,   0,   0,   0,   0, 

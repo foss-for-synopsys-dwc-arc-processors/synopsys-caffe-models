@@ -125,7 +125,7 @@ layer {
   bottom: "res2a_branch2a"
   top: "res2a_branch2b-a"
   convolution_param {
-    num_output: 48
+    num_output: 32
     pad: 0
     kernel_size: 1
   }
@@ -136,7 +136,7 @@ layer {
   bottom: "res2a_branch2b-a"
   top: "res2a_branch2b-b"
   convolution_param {
-    num_output: 52
+    num_output: 36
     pad: 1
     kernel_size: 3
     stride: 1
@@ -265,7 +265,7 @@ layer {
   bottom: "res2b_branch2a"
   top: "res2b_branch2b-a"
   convolution_param {
-    num_output: 32
+    num_output: 24
     pad: 0
     kernel_size: 1
   }
@@ -276,7 +276,7 @@ layer {
   bottom: "res2b_branch2b-a"
   top: "res2b_branch2b-b"
   convolution_param {
-    num_output: 36
+    num_output: 24
     pad: 1
     kernel_size: 3
     stride: 1
@@ -405,7 +405,7 @@ layer {
   bottom: "res2c_branch2a"
   top: "res2c_branch2b-a"
   convolution_param {
-    num_output: 36
+    num_output: 24
     pad: 0
     kernel_size: 1
   }
@@ -416,7 +416,7 @@ layer {
   bottom: "res2c_branch2b-a"
   top: "res2c_branch2b-b"
   convolution_param {
-    num_output: 20
+    num_output: 16
     pad: 1
     kernel_size: 3
     stride: 1
@@ -576,7 +576,7 @@ layer {
   bottom: "res3a_branch2a"
   top: "res3a_branch2b-a"
   convolution_param {
-    num_output: 92
+    num_output: 56
     pad: 0
     kernel_size: 1
   }
@@ -587,7 +587,7 @@ layer {
   bottom: "res3a_branch2b-a"
   top: "res3a_branch2b-b"
   convolution_param {
-    num_output: 84
+    num_output: 52
     pad: 1
     kernel_size: 3
     stride: 1
@@ -716,7 +716,7 @@ layer {
   bottom: "res3b_branch2a"
   top: "res3b_branch2b-a"
   convolution_param {
-    num_output: 64
+    num_output: 40
     pad: 0
     kernel_size: 1
   }
@@ -727,7 +727,7 @@ layer {
   bottom: "res3b_branch2b-a"
   top: "res3b_branch2b-b"
   convolution_param {
-    num_output: 68
+    num_output: 44
     pad: 1
     kernel_size: 3
     stride: 1
@@ -856,7 +856,7 @@ layer {
   bottom: "res3c_branch2a"
   top: "res3c_branch2b-a"
   convolution_param {
-    num_output: 88
+    num_output: 52
     pad: 0
     kernel_size: 1
   }
@@ -867,7 +867,7 @@ layer {
   bottom: "res3c_branch2b-a"
   top: "res3c_branch2b-b"
   convolution_param {
-    num_output: 80
+    num_output: 48
     pad: 1
     kernel_size: 3
     stride: 1
@@ -996,7 +996,7 @@ layer {
   bottom: "res3d_branch2a"
   top: "res3d_branch2b-a"
   convolution_param {
-    num_output: 84
+    num_output: 52
     pad: 0
     kernel_size: 1
   }
@@ -1007,7 +1007,7 @@ layer {
   bottom: "res3d_branch2b-a"
   top: "res3d_branch2b-b"
   convolution_param {
-    num_output: 84
+    num_output: 52
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1167,7 +1167,7 @@ layer {
   bottom: "res4a_branch2a"
   top: "res4a_branch2b-a"
   convolution_param {
-    num_output: 176
+    num_output: 100
     pad: 0
     kernel_size: 1
   }
@@ -1178,7 +1178,7 @@ layer {
   bottom: "res4a_branch2b-a"
   top: "res4a_branch2b-b"
   convolution_param {
-    num_output: 172
+    num_output: 96
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1307,7 +1307,7 @@ layer {
   bottom: "res4b_branch2a"
   top: "res4b_branch2b-a"
   convolution_param {
-    num_output: 156
+    num_output: 92
     pad: 0
     kernel_size: 1
   }
@@ -1318,7 +1318,7 @@ layer {
   bottom: "res4b_branch2b-a"
   top: "res4b_branch2b-b"
   convolution_param {
-    num_output: 144
+    num_output: 84
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1447,7 +1447,7 @@ layer {
   bottom: "res4c_branch2a"
   top: "res4c_branch2b-a"
   convolution_param {
-    num_output: 140
+    num_output: 80
     pad: 0
     kernel_size: 1
   }
@@ -1458,7 +1458,7 @@ layer {
   bottom: "res4c_branch2b-a"
   top: "res4c_branch2b-b"
   convolution_param {
-    num_output: 116
+    num_output: 68
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1587,7 +1587,7 @@ layer {
   bottom: "res4d_branch2a"
   top: "res4d_branch2b-a"
   convolution_param {
-    num_output: 132
+    num_output: 80
     pad: 0
     kernel_size: 1
   }
@@ -1598,7 +1598,7 @@ layer {
   bottom: "res4d_branch2b-a"
   top: "res4d_branch2b-b"
   convolution_param {
-    num_output: 116
+    num_output: 72
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1727,7 +1727,7 @@ layer {
   bottom: "res4e_branch2a"
   top: "res4e_branch2b-a"
   convolution_param {
-    num_output: 152
+    num_output: 88
     pad: 0
     kernel_size: 1
   }
@@ -1738,7 +1738,7 @@ layer {
   bottom: "res4e_branch2b-a"
   top: "res4e_branch2b-b"
   convolution_param {
-    num_output: 128
+    num_output: 76
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1867,7 +1867,7 @@ layer {
   bottom: "res4f_branch2a"
   top: "res4f_branch2b-a"
   convolution_param {
-    num_output: 172
+    num_output: 100
     pad: 0
     kernel_size: 1
   }
@@ -1878,7 +1878,7 @@ layer {
   bottom: "res4f_branch2b-a"
   top: "res4f_branch2b-b"
   convolution_param {
-    num_output: 156
+    num_output: 92
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2038,7 +2038,7 @@ layer {
   bottom: "res5a_branch2a"
   top: "res5a_branch2b-a"
   convolution_param {
-    num_output: 300
+    num_output: 160
     pad: 0
     kernel_size: 1
   }
@@ -2049,7 +2049,7 @@ layer {
   bottom: "res5a_branch2b-a"
   top: "res5a_branch2b-b"
   convolution_param {
-    num_output: 264
+    num_output: 144
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2178,7 +2178,7 @@ layer {
   bottom: "res5b_branch2a"
   top: "res5b_branch2b-a"
   convolution_param {
-    num_output: 292
+    num_output: 156
     pad: 0
     kernel_size: 1
   }
@@ -2189,7 +2189,7 @@ layer {
   bottom: "res5b_branch2b-a"
   top: "res5b_branch2b-b"
   convolution_param {
-    num_output: 232
+    num_output: 128
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2318,7 +2318,7 @@ layer {
   bottom: "res5c_branch2a"
   top: "res5c_branch2b-a"
   convolution_param {
-    num_output: 396
+    num_output: 204
     pad: 0
     kernel_size: 1
   }
@@ -2329,7 +2329,7 @@ layer {
   bottom: "res5c_branch2b-a"
   top: "res5c_branch2b-b"
   convolution_param {
-    num_output: 392
+    num_output: 204
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2432,7 +2432,7 @@ layer {
   bottom: "pool5"
   top: "fc1000-a"
   inner_product_param {
-    num_output: 220
+    num_output: 60
   }
 }
 layer {
