@@ -1,0 +1,8 @@
+Compressed graphs:
+1. compressed-54p.prototxt / compressed-54p.caffemodel
+- 54% of original MACs (factor 1.84)
+
+Compressed + Pruned graphs:
+1. compressed-54p.prototxt / compressed_54p_random_pruned.caffemodel
+- 54% of original MACs (factor 1.84)
+- random pruned (60% conv, 85% fc)
