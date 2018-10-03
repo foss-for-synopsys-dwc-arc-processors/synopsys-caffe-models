@@ -1,0 +1,14 @@
+net: "compressed1.32-trainval.prototxt"
+test_iter: 2000
+test_interval: 500000
+base_lr: 0.00003
+lr_policy: "step"
+gamma: 0.5
+stepsize: 10000
+display: 100
+max_iter: 60000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 60000
+snapshot_prefix: "ResNet"
+solver_mode: GPU
