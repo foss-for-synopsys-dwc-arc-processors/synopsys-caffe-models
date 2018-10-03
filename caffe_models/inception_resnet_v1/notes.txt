@@ -1,0 +1,5 @@
+This graph requires the parameters
+    --color_order RGB 
+    --image_scale 1 
+For more information on the semantics of these, see
+https://wwwin.synopsys.com/~tpennell/cnn_papers/23_darknet_image_vs_caffe.htm
