@@ -1,4 +1,4 @@
-echo on
+echo off
 if "%~1"=="" goto :help
 if "%~1"=="help" goto :help
 if "%~1"=="-h" goto :help
@@ -10,7 +10,8 @@ goto :main
 echo.
 echo Usage:
 echo   -h, help, /? - print this help
-echo   The script requires a list of model folders as them named in GitHub repo
+echo   The script uses git to download common part + required models
+echo   It requires a list of model folders as them named in GitHub repo
 echo   At least one folder has to be added
 echo.
 echo   Example:
@@ -21,7 +22,6 @@ echo.
 exit /B
 
 :main
-echo "Main"
 
 :: Prepare sparse-checkout list
 echo caffe_models/image* > sparse-checkout
@@ -42,5 +42,6 @@ git remote add -t master origin https://github.com/foss-for-synopsys-dwc-arc-pro
 git config core.sparseCheckout true
 move ..\sparse-checkout .git\info
 git fetch --depth 1
-:: git checkout master # checkout power_scripts of $GIT_BRANCH branch
+:: checkout part of repo
+git checkout master 
 
