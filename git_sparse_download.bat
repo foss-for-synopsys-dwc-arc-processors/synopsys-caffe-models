@@ -28,7 +28,6 @@ echo caffe_models/image* > sparse-checkout
 
 :loop
 if not "%1"=="" (
-    echo Param=%1
 	echo caffe_models/%1 >> sparse-checkout
     shift
     goto :loop
@@ -42,6 +41,5 @@ git remote add -t master origin https://github.com/foss-for-synopsys-dwc-arc-pro
 git config core.sparseCheckout true
 move ..\sparse-checkout .git\info
 git fetch --depth 1
-:: checkout part of repo
 git checkout master 
 
