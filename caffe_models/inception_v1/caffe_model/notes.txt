@@ -21,10 +21,10 @@ Inception_v1-no_asym_padding.prototxt patched prototxt that does not require asy
 - functionally not correct because of wrong padding of the first layer (pad_left=3,pad_right=3 instead of pad_left=2,pad_right=3)
 
 Compressed graphs:
-1. compressed-51p.prototxt / compressed-51p.caffemodel
+1. compressed_51p.prototxt / compressed_51p.caffemodel / compress_config-51p.py
 - 51% of original MACs (factor 1.98)
 - Latest one saved in compressed/1.98
 
-2. compressed-45p.prototxt / compressed-45p.caffemodel
+2. compressed_45p.prototxt / compressed_45p.caffemodel / compress_config-45p.py
 - 45% of original MACs (factor 2.2)
 - Latest one saved in compressed/2.2
