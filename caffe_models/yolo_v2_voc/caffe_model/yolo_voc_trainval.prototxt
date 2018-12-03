@@ -28,7 +28,7 @@ layer {
     batch_size: 16
     backend: LMDB
     side: 13
-    prefetch: 3
+    #prefetch: 2
   }
 }
 layer {
@@ -83,7 +83,7 @@ layer {
   bottom: "conv1" 
   top: "bn1"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -139,7 +139,7 @@ layer {
   bottom: "conv2" 
   top: "bn2"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -195,7 +195,7 @@ layer {
   bottom: "conv3" 
   top: "bn3"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -238,7 +238,7 @@ layer {
   bottom: "conv4" 
   top: "bn4"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -282,7 +282,7 @@ layer {
   bottom: "conv5" 
   top: "bn5"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -338,7 +338,7 @@ layer {
   bottom: "conv6" 
   top: "bn6"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -381,7 +381,7 @@ layer {
   bottom: "conv7" 
   top: "bn7"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -425,7 +425,7 @@ layer {
   bottom: "conv8" 
   top: "bn8"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -481,7 +481,7 @@ layer {
   bottom: "conv9" 
   top: "bn9"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -524,7 +524,7 @@ layer {
   bottom: "conv10" 
   top: "bn10"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -568,7 +568,7 @@ layer {
   bottom: "conv11" 
   top: "bn11"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -611,7 +611,7 @@ layer {
   bottom: "conv12" 
   top: "bn12"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -655,7 +655,7 @@ layer {
   bottom: "conv13" 
   top: "bn13"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -711,7 +711,7 @@ layer {
   bottom: "conv14" 
   top: "bn14"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -754,7 +754,7 @@ layer {
   bottom: "conv15" 
   top: "bn15"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -798,7 +798,7 @@ layer {
   bottom: "conv16" 
   top: "bn16"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -841,7 +841,7 @@ layer {
   bottom: "conv17" 
   top: "bn17"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -885,7 +885,7 @@ layer {
   bottom: "conv18" 
   top: "bn18"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -929,7 +929,7 @@ layer {
   bottom: "conv19" 
   top: "bn19"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -973,7 +973,7 @@ layer {
   bottom: "conv20" 
   top: "bn20"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -1023,7 +1023,7 @@ layer {
   bottom: "conv22" 
   top: "bn22"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
@@ -1084,7 +1084,7 @@ layer {
   bottom: "conv25" 
   top: "bn25"
   batch_norm_param {
-    use_global_stats: false
+    #use_global_stats: false
     }
   }
 layer {
