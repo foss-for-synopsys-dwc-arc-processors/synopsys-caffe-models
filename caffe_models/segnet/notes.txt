@@ -1,0 +1,1 @@
+Note: must run with SegNet branch of caffe.

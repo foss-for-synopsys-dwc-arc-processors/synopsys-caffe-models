@@ -1,0 +1,6 @@
+SegNet caffe model and weights downloaded from https://github.com/alexgkendall/SegNet-Tutorial/blob/master/Example_Models/segnet_model_zoo.md#camvid
+
+Dummy graphs (prototxts based on VGG16 for profiling):
+1. segnet-profile-480x360.prototxt / VGG_ILSVRC_16_layers.caffemodel (from VGG16 dir)
+2. compressed-segnet-profile-480x360.prototxt / compressed-19p-pruned-40p.caffemodel (from VGG16 dir)
+
