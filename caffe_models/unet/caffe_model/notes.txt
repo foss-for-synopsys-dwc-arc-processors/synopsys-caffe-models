@@ -1,0 +1,13 @@
+Downloaded Models:
+1. tmp-test.prototxt and phseg_v5.caffemodel from https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-release-2015-10-02.tar.gz
+2. deploy.prototxt (no caffemodel) from https://github.com/jolibrain/deepdetect/blob/master/templates/caffe/unet/deploy.prototxt
+
+Models:
+1. tmp-test-patched.prototxt / phseg_v5.caffemodel
+2. deploy-patched.prototxt / deploy-default.caffemodel (default initialized)
+
+Pruned Models:
+1. tmp-test-patched.prototxt / phseg_v5_random_pruned.caffemodel
+- random pruned (conf: 60%, fc: 85%)
+2. deploy-patched.prototxt / deploy-default_random_pruned.caffemodel (default initialized and random pruned)
+- random pruned (conf: 60%, fc: 85%)

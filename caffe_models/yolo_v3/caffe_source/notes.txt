@@ -1,0 +1,20 @@
+
+1. In src/caffe/proto/caffe.proto, development branch:
+
+CHANGE THESE LINES:
+  optional DepthToSpaceParameter depth_to_space_param = 208;
+}
+
+TO:
+  optional DepthToSpaceParameter depth_to_space_param = 208;
+  optional UpsampleDarknetParameter upsample_darknet_param = 209;   // Darknet layer used in yolov3
+
+message UpsampleDarknetParameter {
+  optional int32 stride = 1 [default = 1];	// darknet calls it "stride".
+}
+
+
+2. Add the include file and src file in the respective directories.
+
+3. Rebuild.  cmake is set up to compile all the *.cpp files so the new src
+   file doesn't need to be mentioned anywhere.

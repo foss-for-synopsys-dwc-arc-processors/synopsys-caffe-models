@@ -1,0 +1,31 @@
+First cut at dexian's yolov3.
+
+caffe_source/
+    Caffe source code changes.
+
+using yolov3-voc.cfg & yolov3.weights
+we begin to diverge seriously at
+
+Darknet:
+    scut layer 46 output 512 x 26 x 26:
+      [ 0] =  -0.5609
+      [ 1] =   1.1902
+      [ 2] =  -0.5741
+caffe float:
+    Blob layer47_shortcut 512 x 26 x 26:
+      [ 0]= -0.5608
+      [ 1]=  1.2004
+      [ 2]= -0.5629
+
+Not sure why yet.
+
+Graphs:
+1. Yolo v3: yolov3.caffemodel / yolov3.prototxt
+2. Tiny Yolo v3: yolov3-tiny.caffemodel / yolov3-tiny.prototxt
+- Converted from Darknet to Caffe, cfr https://wwwin.synopsys.com/~tpennell/cnn_papers/58_yolov3.htm
+
+Pruned Graphs:
+1. Yolo v3: yolov3_random_pruned.caffemodel / yolov3.prototxt
+- random pruned (conv: 60%, fc: 85%)
+2. Tiny Yolo v3: yolov3-tiny_random_pruned.caffemodel / yolov3-tiny.prototxt
+- random pruned (conv: 60%, fc: 85%)
