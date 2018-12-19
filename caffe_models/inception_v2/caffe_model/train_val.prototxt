@@ -53,13 +53,14 @@ layer {
     num_output: 24
     bias_term: false
     group: 3
-    pad_h: 2
-    pad_w: 2
     kernel_h: 7
     kernel_w: 7
     stride_h: 2
     stride_w: 2
-    pad_type: 1
+    pad_l: 2
+    pad_r: 3
+    pad_t: 2
+    pad_b: 3
   }
 }
 layer {
@@ -70,12 +71,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -101,9 +104,11 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_h: 0
-    pad_w: 0
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -114,13 +119,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -156,13 +162,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -201,9 +208,11 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_h: 0
-    pad_w: 0
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -214,13 +223,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -231,13 +241,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -248,13 +259,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -263,14 +275,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__MaxPool_3a_3x3__MaxPool"
   top: "InceptionV2__InceptionV2__Mixed_3b__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -338,13 +352,14 @@ layer {
   convolution_param {
     num_output: 32
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -392,13 +407,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -409,13 +425,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -482,13 +499,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -536,13 +554,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -553,13 +572,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -570,13 +590,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -585,14 +606,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_3b__concat"
   top: "InceptionV2__InceptionV2__Mixed_3c__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -660,13 +683,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -714,13 +738,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -731,13 +756,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -804,13 +830,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -858,13 +885,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -875,13 +903,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -895,9 +924,11 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_h: 0
-    pad_w: 0
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -958,13 +989,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 3
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_type: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -975,13 +1007,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1042,13 +1075,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 3
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_type: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -1095,13 +1129,14 @@ layer {
   convolution_param {
     num_output: 224
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1112,13 +1147,14 @@ layer {
   convolution_param {
     num_output: 64
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1129,13 +1165,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1144,14 +1181,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_4a__concat"
   top: "InceptionV2__InceptionV2__Mixed_4b__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1219,13 +1258,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1273,13 +1313,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1290,13 +1331,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1363,13 +1405,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1417,13 +1460,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1434,13 +1478,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1451,13 +1496,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1466,14 +1512,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_4b__concat"
   top: "InceptionV2__InceptionV2__Mixed_4c__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1541,13 +1589,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1595,13 +1644,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1612,13 +1662,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1685,13 +1736,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1739,13 +1791,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1756,13 +1809,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1773,13 +1827,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1788,14 +1843,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_4c__concat"
   top: "InceptionV2__InceptionV2__Mixed_4d__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1863,13 +1920,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -1917,13 +1975,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -1934,13 +1993,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2007,13 +2067,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2061,13 +2122,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2078,13 +2140,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2095,13 +2158,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2110,14 +2174,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_4d__concat"
   top: "InceptionV2__InceptionV2__Mixed_4e__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2185,13 +2251,14 @@ layer {
   convolution_param {
     num_output: 96
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2239,13 +2306,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2256,13 +2324,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2329,13 +2398,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2383,13 +2453,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2400,13 +2471,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2420,9 +2492,11 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_h: 0
-    pad_w: 0
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -2483,13 +2557,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 3
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_type: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -2500,13 +2575,14 @@ layer {
   convolution_param {
     num_output: 256
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2567,13 +2643,14 @@ layer {
   convolution_param {
     num_output: 256
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 3
     kernel_w: 3
     stride_h: 2
     stride_w: 2
-    pad_type: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
   }
 }
 layer {
@@ -2620,13 +2697,14 @@ layer {
   convolution_param {
     num_output: 352
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2637,13 +2715,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2654,13 +2733,14 @@ layer {
   convolution_param {
     num_output: 160
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2669,14 +2749,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_5a__concat"
   top: "InceptionV2__InceptionV2__Mixed_5b__Branch_3__AvgPool_0a_3x3__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2744,13 +2826,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2798,13 +2881,14 @@ layer {
   convolution_param {
     num_output: 320
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2815,13 +2899,14 @@ layer {
   convolution_param {
     num_output: 224
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2888,13 +2973,14 @@ layer {
   convolution_param {
     num_output: 224
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -2942,13 +3028,14 @@ layer {
   convolution_param {
     num_output: 352
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2959,13 +3046,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2976,13 +3064,14 @@ layer {
   convolution_param {
     num_output: 192
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -2996,9 +3085,11 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_h: 1
-    pad_w: 1
-    pad_type: 1
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -3066,13 +3157,14 @@ layer {
   convolution_param {
     num_output: 128
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -3120,13 +3212,14 @@ layer {
   convolution_param {
     num_output: 320
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -3137,13 +3230,14 @@ layer {
   convolution_param {
     num_output: 224
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -3210,13 +3304,14 @@ layer {
   convolution_param {
     num_output: 224
     bias_term: false
-    pad_h: 1
-    pad_w: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -3262,14 +3357,16 @@ layer {
   bottom: "InceptionV2__InceptionV2__Mixed_5c__concat"
   top: "InceptionV2__Logits__AvgPool_1a_7x7__AvgPool"
   pooling_param {
-    pool: AVE_TF
+    pool: AVE_EXC_PAD
     kernel_h: 7
     kernel_w: 7
     stride_h: 2
     stride_w: 2
-    pad_h: 0
-    pad_w: 0
     ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -3280,13 +3377,14 @@ layer {
   convolution_param {
     num_output: 1001
     bias_term: false
-    pad_h: 0
-    pad_w: 0
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
-    pad_type: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
   }
 }
 layer {
@@ -3338,12 +3436,6 @@ layer {
   bottom: "InceptionV2__Predictions__Reshape"
   bottom: "label"
   top: "loss"
-  #propagate_down: 1
-  #propagate_down: 0
-  #loss_weight: 1
-  #loss_param {
-  #    ignore_label: 0
-  #}
 }
 layer {
   name: "accuracy@1"
@@ -3354,9 +3446,6 @@ layer {
   include {
     phase: TEST
   }
-  #accuracy_param {
-  #  ignore_label: 0
-  #}
 }
 layer {
   name: "accuracy@5"

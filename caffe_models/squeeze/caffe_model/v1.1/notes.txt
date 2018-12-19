@@ -1,0 +1,4 @@
+
+Pruned graphs:
+1. deploy.prototxt / squeezenet_v1.1_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc)

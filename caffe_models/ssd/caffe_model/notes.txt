@@ -11,3 +11,8 @@ prototxt for caffe accuracy testing using map_calculation script
 2. VGG_VOC0712_SSD_300x300_iter_120000_acc.prototxt
 3. VGG_VOC0712_SSD_512x512_iter_120000_acc.prototxt
 
+Pruned Graphs:
+1. deploy.prototxt / VGG_VOC0712_SSD_300x300_iter_60000_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
+2. VGG_VOC0712_SSD_512x512_iter_120000.prototxt / VGG_VOC0712_SSD_512x512_iter_120000_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)

@@ -16,3 +16,7 @@ Requires tensorflow preprocessing:
 Following options are required for the preprocessing for host fixed:
   --color_order RGB
   --image_scale 1
+
+Pruned Graphs:
+1. ResNet-152-deploy.prototxt / ResNet-152-model_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)

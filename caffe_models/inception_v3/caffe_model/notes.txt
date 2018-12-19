@@ -16,3 +16,14 @@ Requires tensorflow preprocessing:
 Following options are required for the preprocessing for host fixed:
   --color_order RGB
   --image_scale 1
+
+Compressed Graphs:
+1. compressed_1.49x.prototxt / snapshotv2_iter_67000.caffemodel (factor 1.49x)
+
+Pruned graphs:
+1. inception_v3_convert.prototxt / Inception_V3_accuracy_drop_zero_1-66x_93-77.caffemodel (factor 1.66x)
+2. inception_v3_convert.prototxt / Inception_V3_2x_93-44.caffemodel (factor 2x)
+3. inception_v3_convert.prototxt / Inception_V3_accuracy_drop_0-01_2-13x_93-08.caffemodel (factor 2.13x)
+4. inception_v3_convert.prototxt / Inception_v3_random_pruned.caffemodel (conv: 60%, fc: 85%)
+5. compressed_1.49x.prototxt / snapshotv2_iter_67000_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)

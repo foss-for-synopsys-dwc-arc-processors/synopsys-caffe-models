@@ -5,7 +5,17 @@ from:
     https://github.com/shicai/MobileNet-Caffe
 
 Pruned graphs:
+A. MobileNet v1
 1. deploy.prototxt / mobilenet_v1_random_pruned.caffemodel
 - random pruned (60% conv, 85% fc)
-2. mobilenet_v2_deploy.prototxt / mobilenet_v2_random_pruned.caffemodel
+2. deploy.prototxt / MobileNet_V1_2x_89-00.caffemodel
+- factor 2.0 (from MCW)
+3. deploy.prototxt / MobileNet_V1_accuracy_drop_zero_1-76x_89-38.caffemodel
+- factor 1.76 (from MCW)
+
+B.
+1. mobilenet_v2_deploy.prototxt / mobilenet_v2_random_pruned.caffemodel
 - random pruned (60% conv, 85% fc)
+
+Converted from tensorflow, mobilenet uses -classify_delta 1 when
+running in standalone, because the last layer has an entry for "no category".

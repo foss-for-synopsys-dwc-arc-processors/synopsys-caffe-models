@@ -20,6 +20,10 @@ Following options are required for the preprocessing for host fixed:
   --image_scale 1
 
 
+Pruned Models:
+- ResNet-50-deploy.prototxt and ResNet-50_accuracy_drop_zero_2-4x_91-14.caffemodel (factor 2.6)
+- ResNet-50-deploy.prototxt and ResNet-50_3x_90-40.caffemodel (factor 3)
+
 Compressed models:
 - ResNet-50-deploy-compressed-1.32.prototxt and ResNet-50-model-compressed-1.32.caffemodel: compression factor 1.32
 - ResNet-50-deploy-compressed-1.61.prototxt and ResNet-50-model-compressed-1.61.caffemodel: compression factor 1.61

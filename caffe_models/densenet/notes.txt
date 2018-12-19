@@ -7,3 +7,6 @@ Due to compatibility reasons, several modifications have been made:
     ceil_mode: false is used in the first pooling layers ('pool1')
 
 
+Pruned Graphs
+1. DenseNet_*.prototxt / DenseNet_*_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)

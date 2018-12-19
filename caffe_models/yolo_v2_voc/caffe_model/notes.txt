@@ -36,6 +36,7 @@ Compressed graphs:
 1.model-decomposed-v6.cfg/model-decomposed-v6-train_109000.weights is TomA's decomposed model.
 - model-decomposed-v6.prototxt is the caffe prototxt converted from model-decomposed-v6.cfg.
 - model-decomposed-v6-train_109000.caffemodel are caffe weights for said model converted from model-decomposed-v6-train_109000.weights.
+2. compressed_deploy_2x.prototxt / compressed_yolo_model_mAP_76.69.caffemodel (from MCW)
 
 Resized graphs:
 1. 640x480: yolo_voc-640x480.prototxt / (all caffemodels that work with original)
@@ -48,4 +49,6 @@ Pruned graphs:
 Compressed + Pruned graphs:
 1. model-decomposed-v6.prototxt / model-decomposed-v6-random-pruned.caffemodel
 - 38% of original MACS (factor 2.6)
+- random pruned (60% conv, 85% fc)
+2. compressed_deploy_2x.prototxt / compressed_yolo_model_mAP_76.69_random_pruned.caffemodel
 - random pruned (60% conv, 85% fc)

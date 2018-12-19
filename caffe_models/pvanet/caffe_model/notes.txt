@@ -4,3 +4,6 @@ Model from https://github.com/sanghoon/pva-faster-rcnn.git:
 - PVA9.1_ImgNet_COCO_VOC0712.caffemodel
 - PVA9.1_ImgNet_COCO_VOC0712plus.caffemodel
 
+Pruned Graphs:
+1. test.prototxt / PVA9.1_ImgNet_COCO_VOC0712plus_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)

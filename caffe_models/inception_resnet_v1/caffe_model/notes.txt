@@ -14,3 +14,15 @@ Requires tensorflow preprocessing:
 Following options are required for the preprocessing for host fixed:
   --color_order RGB
   --image_scale 1
+
+Resized graph:
+1. inception_resnet_v1_20170512_new_convert_299x299.prototxt / inception_resnet_v1_20170512_convert_299x299-default.caffemodel
+- 299x299x3 input -> 1000 outputs
+- default initialized weights
+
+Pruned graphs:
+1. inception_resnet_v1_20170512_new_convert.prototxt / inception_resnet_v1_20170512_convert_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc)
+2. inception_resnet_v1_20170512_new_convert_299x299.prototxt / inception_resnet_v1_20170512_convert_299x299-default_random_pruned.caffemodel
+- default initialized weights
+- random pruned (60% conv, 85% fc)

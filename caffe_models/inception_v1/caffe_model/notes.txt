@@ -28,3 +28,10 @@ Compressed graphs:
 2. compressed_45p.prototxt / compressed_45p.caffemodel / compress_config-45p.py
 - 45% of original MACs (factor 2.2)
 - Latest one saved in compressed/2.2
+
+
+Pruned Graphs
+1. inception_v1_convert.prototxt / Inception_V1_drop_zero_1-73x_89.72.caffemodel (factor 1.73x)
+2. inception_v1_convert.prototxt / Inception_V1_accuracy_drop_0-005_2-59x_89-30.caffemodel (factor 2.59x)
+3. inception_v1_convert.prototxt / Inception_V1_2x_89-19.caffemodel (factor 2x)
+4. compressed_51p.prototxt / compressed_51p_random_pruned.caffemodel (conv: 60%, fc: 85%)
