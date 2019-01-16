@@ -1,0 +1,1 @@
+input image: in NCHW data format and in RGB color order
