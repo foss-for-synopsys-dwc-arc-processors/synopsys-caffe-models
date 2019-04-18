@@ -5,3 +5,7 @@ icnet should use the following pixel mean:
 This may be seen at
 
     https://github.com/hszhao/ICNet/blob/master/evaluation/eval_all.m#L27-L29
+
+Pruned Graphs:
+1. icnet_cityscapes.prototxt / icnet_cityscapes_train_30k_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
