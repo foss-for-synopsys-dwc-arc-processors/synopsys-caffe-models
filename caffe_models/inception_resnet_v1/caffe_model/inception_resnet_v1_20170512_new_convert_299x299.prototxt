@@ -21,7 +21,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -67,7 +67,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -113,7 +113,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -177,7 +177,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -223,7 +223,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -269,7 +269,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -315,7 +315,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -336,7 +336,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -357,7 +357,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -453,7 +453,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -474,7 +474,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -545,7 +545,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -602,7 +602,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -654,7 +654,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -675,7 +675,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -696,7 +696,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -792,7 +792,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -813,7 +813,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -884,7 +884,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -941,7 +941,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -993,7 +993,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1014,7 +1014,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1035,7 +1035,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1131,7 +1131,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1152,7 +1152,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1223,7 +1223,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1280,7 +1280,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1332,7 +1332,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1353,7 +1353,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1374,7 +1374,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1470,7 +1470,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1491,7 +1491,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1562,7 +1562,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1619,7 +1619,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1671,7 +1671,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1692,7 +1692,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1713,7 +1713,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1809,7 +1809,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1830,7 +1830,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1901,7 +1901,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -1958,7 +1958,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2028,7 +2028,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2049,7 +2049,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2120,7 +2120,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2166,7 +2166,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2223,7 +2223,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2244,7 +2244,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2315,7 +2315,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2361,7 +2361,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2417,7 +2417,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2469,7 +2469,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2490,7 +2490,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2561,7 +2561,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2607,7 +2607,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2663,7 +2663,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2715,7 +2715,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2736,7 +2736,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2807,7 +2807,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2853,7 +2853,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2909,7 +2909,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2961,7 +2961,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -2982,7 +2982,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3053,7 +3053,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3099,7 +3099,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3155,7 +3155,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3207,7 +3207,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3228,7 +3228,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3299,7 +3299,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3345,7 +3345,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3401,7 +3401,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3453,7 +3453,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3474,7 +3474,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3545,7 +3545,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3591,7 +3591,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3647,7 +3647,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3699,7 +3699,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3720,7 +3720,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3791,7 +3791,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3837,7 +3837,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3893,7 +3893,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3945,7 +3945,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -3966,7 +3966,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4037,7 +4037,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4083,7 +4083,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4139,7 +4139,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4191,7 +4191,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4212,7 +4212,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4283,7 +4283,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4329,7 +4329,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4385,7 +4385,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4437,7 +4437,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4458,7 +4458,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4529,7 +4529,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4575,7 +4575,7 @@ layer {
     pad_t: 3
     pad_b: 3
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4631,7 +4631,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4701,7 +4701,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4722,7 +4722,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4743,7 +4743,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4839,7 +4839,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4860,7 +4860,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4881,7 +4881,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -4977,7 +4977,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5035,7 +5035,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5056,7 +5056,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5127,7 +5127,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5173,7 +5173,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5229,7 +5229,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5281,7 +5281,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5302,7 +5302,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5373,7 +5373,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5419,7 +5419,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5475,7 +5475,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5527,7 +5527,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5548,7 +5548,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5619,7 +5619,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5665,7 +5665,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5721,7 +5721,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5773,7 +5773,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5794,7 +5794,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5865,7 +5865,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5911,7 +5911,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -5967,7 +5967,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6019,7 +6019,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6040,7 +6040,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6111,7 +6111,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6157,7 +6157,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6213,7 +6213,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6265,7 +6265,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6286,7 +6286,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6357,7 +6357,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6403,7 +6403,7 @@ layer {
     pad_t: 1
     pad_b: 1
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6459,7 +6459,7 @@ layer {
     pad_t: 0
     pad_b: 0
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
@@ -6526,7 +6526,7 @@ layer {
   reshape_param {
     shape {
       dim: -1
-      dim: 1792
+      dim: 64512
     }
   }
 }
@@ -6539,7 +6539,7 @@ layer {
     num_output: 1000
     bias_term: false
     weight_filler {
-        type: "msra"
+        type: "xavier"
     }
   }
 }
