@@ -1120,24 +1120,9 @@ layer {
     }
   }
 layer {
-  name: "reg_reshape"
-  type: "Reshape"
-  bottom: "conv26"
-  top: "regression"
-  reshape_param {
-    axis: 1
-    shape {
-      dim: 21125 # conv_reg.num_output * side * side
-    }
-  }
-  include {
-    phase: TRAIN
-  }
-}
-layer {
   name: "YoloV2Loss"
   type: "YoloV2Loss"
-  bottom: "regression"
+  bottom: "conv26"
   bottom: "label"
   top: "det_loss"
   loss_weight: 1
