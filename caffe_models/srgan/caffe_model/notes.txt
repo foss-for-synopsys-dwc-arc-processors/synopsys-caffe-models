@@ -1,0 +1,12 @@
+srres_sb_deploy.prototxt, SRResNet-MSE_74s_sb_iter_180000.caffemodel and SRResNet-MSE_74s_sb_iter_285000.caffemodel:
+- downloaded from https://github.com/ShenghaiRong/caffe_srgan
+
+srres_sb_deploy-256x256.prototxt:
+- patched version of srres_sb_deploy.prototxt with input dimensions 256x256x3
+
+srres_sb_deploy-128x128.prototxt:
+- patched version of srres_sb_deploy.prototxt with input dimensions 128x128x3
+
+Pruned Graphs:
+1. srres_sb_deploy-128x128.prototxt / SRResNet-MSE_74s_sb_iter_285000_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
