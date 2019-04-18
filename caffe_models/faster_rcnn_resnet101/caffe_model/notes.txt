@@ -6,4 +6,14 @@ and modified to allow reasonable generation of dummy weights.
 The repository from which this was taken is:
 
     https://github.com/Eniac-Xie/faster-rcnn-resnet
+
+Pruned Graphs:
+1. resnet101_faster_rcnn.pt / resnet101_faster_rcnn_bn_scale_merged_end2end_iter_70000_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc)
+2. resnet101_faster_rcnn.pt / resnet101_faster_rcnn_bn_scale_merged_end2end_iter_70000_pruned_1.43x.caffemodel
+3. resnet101_faster_rcnn.pt / resnet101_faster_rcnn_bn_scale_merged_end2end_iter_70000_pruned_1.8x.caffemodel
+4. resnet101_faster_rcnn.pt / resnet101_faster_rcnn_bn_scale_merged_end2end_iter_70000_pruned_2x.caffemodel
+5. resnet101_faster_rcnn.pt / resnet101_faster_rcnn_bn_scale_merged_end2end_iter_70000_pruned_1.378x.caffemodel
+6. vgg16_faster_rcnn.pt / VGG16_faster_rcnn_final_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc)
 ~
