@@ -4,3 +4,8 @@ Dummy graphs (prototxts based on VGG16 for profiling):
 1. segnet-profile-480x360.prototxt / VGG_ILSVRC_16_layers.caffemodel (from VGG16 dir)
 2. compressed-segnet-profile-480x360.prototxt / compressed-19p-pruned-40p.caffemodel (from VGG16 dir)
 
+Pruned graphs
+1. segnet_model_driving_webdemo.prototxt / segnet_weights_driving_webdemo_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
+2. segnet_model_driving_webdemo.prototxt / segnet_iter_30000_timo_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
