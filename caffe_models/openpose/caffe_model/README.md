@@ -5,3 +5,6 @@
   + **pose_deploy_linevec.caffemodel**: random generated weights
   + **pose_iter_440000.caffemodel**: weights file sent by M.Tomono, maybe download by this script https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/models/getModels.sh
 
+* Pruned Graphs
+1. pose\_deploy\_linevec.prototxt / pose\_iter\_440000\_random\_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
