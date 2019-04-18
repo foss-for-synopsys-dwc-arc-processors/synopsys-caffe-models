@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
 
 // This code compiles for tiny yolo
 // unless you -DFULL_YOLO.
@@ -470,6 +471,24 @@ static const char *coco_names[] = {
     "toaster", "sink", "refrigerator", "book", "clock",
     "vase", "scissors", "teddy bear", "hair drier", "toothbrush", };
 
+static const int num_coco_classes = sizeof(coco_names)/sizeof(*coco_names);
+
+static short int coco_categories[num_coco_classes] = {
+    // The coco annotations file uses numbers different from 0..79 to
+    // denote the categories,  They range from 1 to 90.
+    // We set the translation here.
+    // This info was obtained by reading instances_val2017.json and looking
+    // at the 'categories' property. 
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 27, 28, 31, 32, 33, 34,
+    35, 36, 37, 38, 39, 40, 41, 42, 43, 44,
+    46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+    56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+    67, 70, 72, 73, 74, 75, 76, 77, 78, 79,
+    80, 81, 82, 84, 85, 86, 87, 88, 89, 90,
+    };
+
 struct Image {
     int h,w;
     };
@@ -485,48 +504,90 @@ float get_color(int c, int x, int max) {
     return r;
     }
 
-void draw_box_width(
-        Image a, int x1, int y1, int x2, int y2, int w, float r, float g, float b) {
-    printf("    draw box %d %d %d %d %d\n", x1, y1, x2, y2, w);
-    }
+// Collect results in json for ease of post-processing in javascript or python.
+//
+
+struct Results {
+    // coco annotations are in flt but darknet's drawing code used truncated ints.
+    // We might change this later to support the flt pt box.
+    typedef int Coord;
+    void record_box(
+	const char *name, int klass, float prob, int x1, int y1, int x2, int y2) {
+	// coco annotations are x1 y1 w h, not x2 y2.
+	Result R = {klass,prob,x1,y1,x2,y2};
+	R.name = name;
+	R.print();
+	if (next >= results.size()) {
+	    results.resize(5+2*results.size());
+	    }
+	results[next++] = R;
+	}
+    struct Result {
+        //--------- These entered positionally.
+	int klass; float prob;
+        Coord x1,y1,x2,y2;
+	//----------
+	const char *name;
+	void print() {
+	    printf("    draw box %d %d %d %d %d %d (= x1 y1 x2 y2 w h)\n", 
+		x1, y1, x2, y2, x2-x1, y2-y1);
+	    }
+	void json(std::string &S) {
+	    // The python json parser is buggy; it doesn't allow trailing commas.
+	    // So we have to prevent generating them here.
+	    char Q = '"';
+	    char buf[256];
+	    const char *bbox = "\"bbox\"";	// coco bbox: x y and size.
+	    S += "{";
+	    sprintf(buf,"%s : [ %d, %d, %d, %d ]",bbox,x1,y1,x2-x1,y2-y1);
+	    S += buf;
+
+	    const char *dncat = "\"darknet_category\"";
+	    sprintf(buf,", %s : %d",dncat,klass);
+	    S += buf;
+
+	    const char *ccat = "\"category_id\"";	// It's what coco calls it.
+	    sprintf(buf,", %s : %d",ccat,coco_categories[klass]);
+	    S += buf;
+
+	    const char *name = "\"name\"";
+	    sprintf(buf,", %s : %c%s%c",name,Q,this->name,Q);
+	    S += buf;
+	    
+	    const char *prob = "\"prob\"";
+	    sprintf(buf,", %s : %.4f",prob,this->prob);
+	    S += buf;
+	    
+	    S += "}";
+	    }
+        };
+    int next;
+    Results() { next = 0; }
+    std::vector<Result> results;
+    std::string json() {
+        std::string S;
+	// Array of results
+	S += "[\n";
+	for (int i = 0; i < next; i++) {
+	    results[i].json(S);
+	    if (i != next-1) S += ',';
+	    S += "\n";
+	    }
+	S += "]\n";
+	return S;
+        }
+    } results;
+
 
 void draw_detections(Image im, Detection *dets, int num, 
         float thresh, const char **names, Image **alphabet, int classes) {
-    int i,j;
     trace && printf("!draw detections for im.h %d im.w %d\n",im.h,im.w);
 
-    for (i = 0; i < num; ++i){
+    for (int i = 0; i < num; ++i){
         char labelstr[4096] = {0};
-        int klass = -1;
-        for (j = 0; j < classes; ++j){
-            if (dets[i].prob[j] > thresh){
-                if (klass < 0) {
-                    strcat(labelstr, names[j]);
-                    klass = j;
-                    } 
-                else {
-                    strcat(labelstr, ", ");
-                    strcat(labelstr, names[j]);
-                    }
-                printf("%s: %.0f%%\n", names[j], dets[i].prob[j]*100);
-                }
-            }
-        if (klass >= 0){
-            int width = im.h * .006;
-
-            //printf("%d %s: %.0f%%\n", i, names[klass], prob*100);
-            int offset = klass*123457 % classes;
-            float red = get_color(2,offset,classes);
-            float green = get_color(1,offset,classes);
-            float blue = get_color(0,offset,classes);
-            float rgb[3];
-
-            //width = prob*20+2;
-
-            rgb[0] = red;
-            rgb[1] = green;
-            rgb[2] = blue;
-            Box b = dets[i].bbox;
+        int klass = -1, prob;
+	// A box can belong to more than one klass.
+	auto record_result = [] (Image im, Box &b, int klass, const char *name, float prob) {
             // pbox(&b);
             //printf("%f %f %f %f\n", b.x, b.y, b.w, b.h);
 
@@ -540,26 +601,29 @@ void draw_detections(Image im, Detection *dets, int num,
             if (top < 0) top = 0;
             if (bot > im.h-1) bot = im.h-1;
 
-            draw_box_width(im, left, top, right, bot, width, red, green, blue);
-            #if 0
-            if (alphabet) {
-                image label = get_label(alphabet, labelstr, (im.h*.03));
-                draw_label(im, top + width, left, label, rgb);
-                free_image(label);
+            results.record_box(name, klass, prob, left, top, right, bot);
+	    };
+        for (int cix = 0; cix < classes; ++cix) {
+            if (dets[i].prob[cix] > thresh){
+                if (klass < 0) {
+                    strcat(labelstr, names[cix]);
+                    klass = cix;
+                    } 
+                else {
+                    strcat(labelstr, ", ");
+                    strcat(labelstr, names[cix]);
+                    }
+		// Darknet's code prints all the class names & probabilities
+		// ahead of a single box.
+                printf("%s: %.2f%%\n", names[cix], dets[i].prob[cix]*100);
+		// Different from darknet, the box is drawn once for
+		// each category it is in.
+		record_result(im, dets[i].bbox, cix, names[cix], dets[i].prob[cix]);
                 }
-            if (dets[i].mask){
-                image mask = float_to_image(14, 14, 1, dets[i].mask);
-                image resized_mask = resize_image(mask, b.w*im.w, b.h*im.h);
-                image tmask = threshold_image(resized_mask, .5);
-                embed_image(tmask, im, left, top);
-                free_image(mask);
-                free_image(resized_mask);
-                free_image(tmask);
-                }
-            #endif
             }
         }
     }
+
 void free_detections(Detection *dets, int n) {
     int i;
     for (i = 0; i < n; ++i){
@@ -573,7 +637,7 @@ namespace Yolo_parms {
     // Not specified in the prototxt, but hard-coded.  See src/detector.c from darknet.
     // (darknet version as of 18Nov04).
     static const float nms = 0.45;	// examples/detector.c darknet.
-    static const int classes = 80;
+    static const int classes = num_coco_classes;
 #if FULL_YOLO
     static const int num = 9;	// num.  Terrible name for a constant.
     // This matches the network size in yolov3.cfg.
@@ -606,11 +670,14 @@ void test_yolo(Network *net, Image &im) {
     Image **alphabet = 0;
     draw_detections(im, dets, nboxes, thresh, coco_names, alphabet, l.classes);
     free_detections(dets, nboxes);
+    #if JSON
+    // json result is used for post-processing to compute precision.
+    printf("<JSON>\n%s</JSON\>\n",results.json().c_str());
+    #endif
     }
 
 #define IN_SIZE int noutputs, int data_ch, int data_y, int data_x
 
-// For yolo, the result dimensions are 1470 x 1 x 1 (1470 "channels").
 template <typename data_type>
      struct Blob_and_size {
         const char *name;       // blob name
@@ -744,6 +811,7 @@ extern void yolo_double(void*_outputs, IN_SIZE) {
 
 extern void yolo_fixed(void *_outputs, IN_SIZE) {
     Blob_and_size<short> *outputs = (Blob_and_size<short> *)_outputs;
+    0 && printf("ch %d y %d x %d\n",data_ch,data_y,data_x);
     run_tiny_yolo<short>(outputs,noutputs,data_ch,data_y,data_x,true);
     }
 

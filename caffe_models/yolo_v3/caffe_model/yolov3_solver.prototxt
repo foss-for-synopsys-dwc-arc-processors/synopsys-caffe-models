@@ -1,0 +1,14 @@
+net: "train_val.prototxt"
+test_initialization: false
+display: 20
+average_loss: 100
+lr_policy: "step"
+base_lr: 0.000001
+gamma: 0.1
+stepsize: 5000
+max_iter: 20000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 20000
+snapshot_prefix: "coco_model"
+iter_size: 2
