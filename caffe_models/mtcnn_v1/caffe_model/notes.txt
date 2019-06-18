@@ -1,0 +1,78 @@
+
+From 
+
+https://github.com/kpzhang93/MTCNN_face_detection_alignment/tree/master/code/codes/MTCNNv1/model
+
+MTCNN requires:
+- axes order: NxCxWxH (instead of the default NxCxHxW)
+- color order: RGB (instead of the default BGR)
+- image should be scaled to [-1,1] (ie img = (img - 127.5) / 128)
+
+Patched (-patched) version converted from original versions with convert.py:
+- replaced PReLU with ReLU
+- merged last sibling layers
+- commented Softmax layer
+
+Relu (-relu) version converted from original versions with convert-relu.py:
+- replaced PReLU with ReLU
+
+mtcnn-relu version converted from original versions with convert-mtcnn-relu.py:
+- replaced PReLU with ReLU
+- merged 3 graphs
+
+realtek-mtcnn-relu version converted from original versions with convert-realtek-mtcnn.py -relu:
+- replaced PReLU with ReLU
+- merged last sibling layers
+- commented Softmax layer
+- merged graphs:
+-- pnet1: 320x240
+-- pnet2: 227x170
+-- pnet3: 160x120
+-- pnet4: 114x85
+-- pnet5: 80x60
+-- pnet6: 57x43
+-- pnet7: 40x30
+-- pnet8: 29x22
+-- pnet9: 20x15
+-- rnet
+-- onet
+
+realtek-mtcnn-relu-transp version converted from original versions with convert-realtek-mtcnn.py -relu -transp:
+- realtek-mtcnn-relu version with conv coefficients transposed
+- axis order: NxCxHxW (iso NxCxWxH like for other versions)
+
+realtek-mtcnn-transp version converted from original versions with convert-realtek-mtcnn.py -transp:
+- inplace PRelu replaced by non-inplace
+- merged last sibling layers
+- commented Softmax layer
+- merged graphs:
+-- pnet1: 320x240
+-- pnet2: 227x170
+-- pnet3: 160x120
+-- pnet4: 114x85
+-- pnet5: 80x60
+-- pnet6: 57x43
+-- pnet7: 40x30
+-- pnet8: 29x22
+-- pnet9: 20x15
+-- rnet
+-- onet
+- conv coefficients transposed
+- axis order: NxCxHxW (iso NxCxWxH like for other versions)
+
+realtek-mtcnn version converted from original versions with convert-realtek-mtcnn.py:
+- inplace PRelu replaced by non-inplace
+- merged last sibling layers
+- commented Softmax layer
+- merged graphs:
+-- pnet1: 320x240
+-- pnet2: 227x170
+-- pnet3: 160x120
+-- pnet4: 114x85
+-- pnet5: 80x60
+-- pnet6: 57x43
+-- pnet7: 40x30
+-- pnet8: 29x22
+-- pnet9: 20x15
+-- rnet
+-- onet
