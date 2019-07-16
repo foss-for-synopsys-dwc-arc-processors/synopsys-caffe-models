@@ -7,7 +7,8 @@ name: "AlexNet"
 #}
 input : "data" 
     input_shape { 
-    dim: 10 
+    # dim: 10 	# No need for batch=10 in deployment
+    dim: 1
     dim: 3 
     dim: 227 
     dim: 227 

@@ -1,6 +1,6 @@
 name: "face-mcw-110"
 input: "data"
-input_dim: 128
+input_dim: 1
 input_dim: 1
 input_dim: 96
 input_dim: 96
