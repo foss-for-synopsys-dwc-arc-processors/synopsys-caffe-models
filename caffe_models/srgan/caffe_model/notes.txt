@@ -7,6 +7,14 @@ srres_sb_deploy-256x256.prototxt:
 srres_sb_deploy-128x128.prototxt:
 - patched version of srres_sb_deploy.prototxt with input dimensions 128x128x3
 
+srgan_no_pixshuf.prototxt:
+- another variant of SRGAN graph. caffemodel is randomly generated
+- input dim: 144x144x3
+
+handwriting_deploy.prototxt:
+- another variant of SRGAN graph, caffemodel is randomly generated
+- input dim: 256x256x1
+
 Pruned Graphs:
 1. srres_sb_deploy-128x128.prototxt / SRResNet-MSE_74s_sb_iter_285000_random_pruned.caffemodel
 - random pruned (conv: 60%, fc: 85%)
