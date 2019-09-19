@@ -719,7 +719,7 @@ Layer make_yolo_layer(Blob_and_size<data_type> &B, int mask[]) {
 
 template <typename data_type>
 void run_tiny_yolo(
-        Blob_and_size<data_type> *outputs, IN_SIZE, bool fixed = false) {
+        Blob_and_size<data_type> **outputs, IN_SIZE, bool fixed = false) {
     typedef Blob_and_size<data_type> BS;
     // Create a yolo layer for the two outputs.
     // From examples/detector.c
@@ -741,8 +741,8 @@ void run_tiny_yolo(
     
     // We happen to know that the output list from the tool is backwards; last 
     // yolo layer appers first in the list.
-    BS &B0 = outputs[1];
-    BS &B1 = outputs[0];
+    BS &B0 = *outputs[1];
+    BS &B1 = *outputs[0];
     BS *ptrs[]= {&B0,&B1};
 
     /*
@@ -763,9 +763,9 @@ void run_tiny_yolo(
 
 #else
     // Entries in this array are in a weird order.
-    BS &B0 = outputs[0];	// layer82
-    BS &B1 = outputs[2];	// layer94
-    BS &B2 = outputs[1];	// layer106
+    BS &B0 = *outputs[0];	// layer82
+    BS &B1 = *outputs[2];	// layer94
+    BS &B2 = *outputs[1];	// layer106
     BS *ptrs[] = {&B0,&B1,&B2};
 
     int M0[] = {6,7,8}, M1[] = {3,4,5}, M2[] = {0,1,2}; 
@@ -783,7 +783,7 @@ void run_tiny_yolo(
         // Convert double or int to float.
         int max = 0;
         for (int i = 0; i < noutputs; i++) { 
-            int s = outputs[i].num_pixels();
+            int s = outputs[i]->num_pixels();
             if (s > max) max = s;
             }
         0 && printf("!malloc %d floats\n",max);
@@ -800,17 +800,17 @@ void run_tiny_yolo(
     }
 
 extern void yolo_float(void *_outputs,  IN_SIZE) {
-    Blob_and_size<float>*outputs = (Blob_and_size<float>*)_outputs;
+    Blob_and_size<float>**outputs = (Blob_and_size<float>**)_outputs;
     run_tiny_yolo<float>(outputs,noutputs,data_ch,data_y,data_x);
     }
 
 extern void yolo_double(void*_outputs, IN_SIZE) {
-    Blob_and_size<double>*outputs = (Blob_and_size<double>*)_outputs;
+    Blob_and_size<double>**outputs = (Blob_and_size<double>**)_outputs;
     run_tiny_yolo<double>(outputs,noutputs,data_ch,data_y,data_x);
     }
 
 extern void yolo_fixed(void *_outputs, IN_SIZE) {
-    Blob_and_size<short> *outputs = (Blob_and_size<short> *)_outputs;
+    Blob_and_size<short> **outputs = (Blob_and_size<short> **)_outputs;
     0 && printf("ch %d y %d x %d\n",data_ch,data_y,data_x);
     run_tiny_yolo<short>(outputs,noutputs,data_ch,data_y,data_x,true);
     }
