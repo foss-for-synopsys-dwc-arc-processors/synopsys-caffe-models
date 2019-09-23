@@ -1,0 +1,5 @@
+SRCNN model from: https://github.com/Tonyfy/SRCNN
+
+Pruned Graphs
+1. SRCNN_deploynet.prototxt / SRCNN_iter_15000000_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc) 
