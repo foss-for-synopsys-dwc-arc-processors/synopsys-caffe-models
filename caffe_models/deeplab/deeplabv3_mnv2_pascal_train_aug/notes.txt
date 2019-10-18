@@ -1,0 +1,4 @@
+
+Pruned graphs:
+1. deeplabv3_mnv2_pascal_train_aug.prototxt / deeplabv3_mnv2_pascal_train_aug_random_pruned.caffemodel
+- random pruned (conv: 60%, fc: 85%)
