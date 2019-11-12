@@ -1,0 +1,17 @@
+shufflenet_1x_g3_deploy.prototxt / shufflenet_1x_g3.caffemodel
+Model is originally from: https://github.com/msnqqer/ShuffleNet
+
+With following modifications for EV mapping:
+
+1. Change AVE pooling to AVE_EXC_PAD
+2. Move ReLU following concat layers up to follow scale layers
+
+Pruned Graphs:
+1. shufflenet_1x_g3_deploy.prototxt / shufflenet_1x_g3_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc)
+
+===
+
+model_zoo_convert.prototxt / model_zoo_convert.caffemodel converted from ONNX
+ONNX model downloaded from: https://github.com/onnx/models/tree/master/vision/classification/shufflenet
+

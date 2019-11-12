@@ -1,0 +1,3169 @@
+name: "onnx2ev"
+layer {
+  name: "layer_gpu_0_002f_data_0"
+  type: "Input"
+  top: "layer_gpu_0_002f_data_0"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 224
+      dim: 224
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_conv3_0_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_data_0"
+  top: "layer_gpu_0_002f_conv3_0_1"
+  convolution_param {
+    num_output: 24
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_conv3_0_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_conv3_0_1"
+  top: "layer_gpu_0_002f_conv3_0_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_conv3_0_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_conv3_0_bn_1"
+  top: "layer_gpu_0_002f_conv3_0_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_conv3_0_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_conv3_0_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_conv3_0_bn_2"
+}
+layer {
+  name: "layer_gpu_0_002f_pool_0_1"
+  type: "Pooling"
+  bottom: "layer_gpu_0_002f_conv3_0_bn_2"
+  top: "layer_gpu_0_002f_pool_0_1"
+  pooling_param {
+    pool: MAX
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_0_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_pool_0_1"
+  top: "layer_gpu_0_002f_gconv1_0_1"
+  convolution_param {
+    num_output: 112
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_0_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_0_1"
+  top: "layer_gpu_0_002f_gconv1_0_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_0_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_0_bn_1"
+  top: "layer_gpu_0_002f_gconv1_0_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_0_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_0_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_0_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_0"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_0_bn_2"
+  top: "layer_OC2_DUMMY_0"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 28
+      dim: 56
+      dim: 56
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_2"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_0"
+  top: "layer_OC2_DUMMY_2"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_0_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_2"
+  top: "layer_gpu_0_002f_shuffle_0_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 112
+      dim: 56
+      dim: 56
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_0_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_0_1"
+  top: "layer_gpu_0_002f_gconv3_0_1"
+  convolution_param {
+    num_output: 112
+    bias_term: false
+    group: 112
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_0_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_0_1"
+  top: "layer_gpu_0_002f_gconv3_0_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_0_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_0_bn_1"
+  top: "layer_gpu_0_002f_gconv3_0_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_1_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_0_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_1_1"
+  convolution_param {
+    num_output: 112
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_1_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_1_1"
+  top: "layer_gpu_0_002f_gconv1_1_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_1_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_1_bn_1"
+  top: "layer_gpu_0_002f_gconv1_1_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_pool_1_1"
+  type: "Pooling"
+  bottom: "layer_gpu_0_002f_pool_0_1"
+  top: "layer_gpu_0_002f_pool_1_1"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block0_1"
+  type: "Concat"
+  bottom: "layer_gpu_0_002f_gconv1_1_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_pool_1_1"
+  top: "layer_gpu_0_002f_block0_1"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block0_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block0_1"
+  top: "layer_gpu_0_002f_block0_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_2_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block0_2"
+  top: "layer_gpu_0_002f_gconv1_2_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_2_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_2_1"
+  top: "layer_gpu_0_002f_gconv1_2_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_2_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_2_bn_1"
+  top: "layer_gpu_0_002f_gconv1_2_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_2_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_2_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_2_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_4"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_2_bn_2"
+  top: "layer_OC2_DUMMY_4"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 34
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_6"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_4"
+  top: "layer_OC2_DUMMY_6"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_1_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_6"
+  top: "layer_gpu_0_002f_shuffle_1_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 136
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_1_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_1_1"
+  top: "layer_gpu_0_002f_gconv3_1_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 136
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_1_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_1_1"
+  top: "layer_gpu_0_002f_gconv3_1_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_1_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_1_bn_1"
+  top: "layer_gpu_0_002f_gconv3_1_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_3_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_1_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_3_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_3_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_3_1"
+  top: "layer_gpu_0_002f_gconv1_3_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_3_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_3_bn_1"
+  top: "layer_gpu_0_002f_gconv1_3_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block1_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_3_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block0_2"
+  top: "layer_gpu_0_002f_block1_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block1_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block1_1"
+  top: "layer_gpu_0_002f_block1_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_4_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block1_2"
+  top: "layer_gpu_0_002f_gconv1_4_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_4_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_4_1"
+  top: "layer_gpu_0_002f_gconv1_4_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_4_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_4_bn_1"
+  top: "layer_gpu_0_002f_gconv1_4_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_4_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_4_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_4_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_8"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_4_bn_2"
+  top: "layer_OC2_DUMMY_8"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 34
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_10"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_8"
+  top: "layer_OC2_DUMMY_10"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_2_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_10"
+  top: "layer_gpu_0_002f_shuffle_2_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 136
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_2_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_2_1"
+  top: "layer_gpu_0_002f_gconv3_2_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 136
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_2_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_2_1"
+  top: "layer_gpu_0_002f_gconv3_2_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_2_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_2_bn_1"
+  top: "layer_gpu_0_002f_gconv3_2_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_5_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_2_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_5_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_5_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_5_1"
+  top: "layer_gpu_0_002f_gconv1_5_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_5_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_5_bn_1"
+  top: "layer_gpu_0_002f_gconv1_5_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block2_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_5_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block1_2"
+  top: "layer_gpu_0_002f_block2_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block2_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block2_1"
+  top: "layer_gpu_0_002f_block2_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_6_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block2_2"
+  top: "layer_gpu_0_002f_gconv1_6_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_6_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_6_1"
+  top: "layer_gpu_0_002f_gconv1_6_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_6_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_6_bn_1"
+  top: "layer_gpu_0_002f_gconv1_6_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_6_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_6_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_6_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_12"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_6_bn_2"
+  top: "layer_OC2_DUMMY_12"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 34
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_14"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_12"
+  top: "layer_OC2_DUMMY_14"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_3_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_14"
+  top: "layer_gpu_0_002f_shuffle_3_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 136
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_3_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_3_1"
+  top: "layer_gpu_0_002f_gconv3_3_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 136
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_3_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_3_1"
+  top: "layer_gpu_0_002f_gconv3_3_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_3_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_3_bn_1"
+  top: "layer_gpu_0_002f_gconv3_3_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_7_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_3_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_7_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_7_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_7_1"
+  top: "layer_gpu_0_002f_gconv1_7_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_7_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_7_bn_1"
+  top: "layer_gpu_0_002f_gconv1_7_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block3_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_7_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block2_2"
+  top: "layer_gpu_0_002f_block3_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block3_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block3_1"
+  top: "layer_gpu_0_002f_block3_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_8_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block3_2"
+  top: "layer_gpu_0_002f_gconv1_8_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_8_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_8_1"
+  top: "layer_gpu_0_002f_gconv1_8_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_8_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_8_bn_1"
+  top: "layer_gpu_0_002f_gconv1_8_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_8_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_8_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_8_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_16"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_8_bn_2"
+  top: "layer_OC2_DUMMY_16"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 34
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_18"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_16"
+  top: "layer_OC2_DUMMY_18"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_4_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_18"
+  top: "layer_gpu_0_002f_shuffle_4_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 136
+      dim: 28
+      dim: 28
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_4_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_4_1"
+  top: "layer_gpu_0_002f_gconv3_4_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 136
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_4_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_4_1"
+  top: "layer_gpu_0_002f_gconv3_4_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_4_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_4_bn_1"
+  top: "layer_gpu_0_002f_gconv3_4_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_9_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_4_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_9_1"
+  convolution_param {
+    num_output: 136
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_9_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_9_1"
+  top: "layer_gpu_0_002f_gconv1_9_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_9_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_9_bn_1"
+  top: "layer_gpu_0_002f_gconv1_9_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_pool_2_1"
+  type: "Pooling"
+  bottom: "layer_gpu_0_002f_block3_2"
+  top: "layer_gpu_0_002f_pool_2_1"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block4_1"
+  type: "Concat"
+  bottom: "layer_gpu_0_002f_gconv1_9_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_pool_2_1"
+  top: "layer_gpu_0_002f_block4_1"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block4_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block4_1"
+  top: "layer_gpu_0_002f_block4_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_10_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block4_2"
+  top: "layer_gpu_0_002f_gconv1_10_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_10_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_10_1"
+  top: "layer_gpu_0_002f_gconv1_10_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_10_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_10_bn_1"
+  top: "layer_gpu_0_002f_gconv1_10_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_10_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_10_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_10_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_20"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_10_bn_2"
+  top: "layer_OC2_DUMMY_20"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_22"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_20"
+  top: "layer_OC2_DUMMY_22"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_5_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_22"
+  top: "layer_gpu_0_002f_shuffle_5_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_5_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_5_1"
+  top: "layer_gpu_0_002f_gconv3_5_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_5_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_5_1"
+  top: "layer_gpu_0_002f_gconv3_5_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_5_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_5_bn_1"
+  top: "layer_gpu_0_002f_gconv3_5_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_11_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_5_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_11_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_11_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_11_1"
+  top: "layer_gpu_0_002f_gconv1_11_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_11_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_11_bn_1"
+  top: "layer_gpu_0_002f_gconv1_11_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block5_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_11_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block4_2"
+  top: "layer_gpu_0_002f_block5_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block5_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block5_1"
+  top: "layer_gpu_0_002f_block5_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_12_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block5_2"
+  top: "layer_gpu_0_002f_gconv1_12_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_12_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_12_1"
+  top: "layer_gpu_0_002f_gconv1_12_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_12_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_12_bn_1"
+  top: "layer_gpu_0_002f_gconv1_12_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_12_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_12_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_12_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_24"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_12_bn_2"
+  top: "layer_OC2_DUMMY_24"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_26"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_24"
+  top: "layer_OC2_DUMMY_26"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_6_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_26"
+  top: "layer_gpu_0_002f_shuffle_6_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_6_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_6_1"
+  top: "layer_gpu_0_002f_gconv3_6_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_6_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_6_1"
+  top: "layer_gpu_0_002f_gconv3_6_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_6_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_6_bn_1"
+  top: "layer_gpu_0_002f_gconv3_6_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_13_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_6_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_13_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_13_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_13_1"
+  top: "layer_gpu_0_002f_gconv1_13_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_13_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_13_bn_1"
+  top: "layer_gpu_0_002f_gconv1_13_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block6_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_13_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block5_2"
+  top: "layer_gpu_0_002f_block6_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block6_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block6_1"
+  top: "layer_gpu_0_002f_block6_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_14_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block6_2"
+  top: "layer_gpu_0_002f_gconv1_14_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_14_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_14_1"
+  top: "layer_gpu_0_002f_gconv1_14_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_14_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_14_bn_1"
+  top: "layer_gpu_0_002f_gconv1_14_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_14_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_14_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_14_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_28"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_14_bn_2"
+  top: "layer_OC2_DUMMY_28"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_30"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_28"
+  top: "layer_OC2_DUMMY_30"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_7_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_30"
+  top: "layer_gpu_0_002f_shuffle_7_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_7_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_7_1"
+  top: "layer_gpu_0_002f_gconv3_7_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_7_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_7_1"
+  top: "layer_gpu_0_002f_gconv3_7_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_7_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_7_bn_1"
+  top: "layer_gpu_0_002f_gconv3_7_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_15_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_7_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_15_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_15_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_15_1"
+  top: "layer_gpu_0_002f_gconv1_15_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_15_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_15_bn_1"
+  top: "layer_gpu_0_002f_gconv1_15_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block7_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_15_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block6_2"
+  top: "layer_gpu_0_002f_block7_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block7_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block7_1"
+  top: "layer_gpu_0_002f_block7_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_16_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block7_2"
+  top: "layer_gpu_0_002f_gconv1_16_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_16_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_16_1"
+  top: "layer_gpu_0_002f_gconv1_16_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_16_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_16_bn_1"
+  top: "layer_gpu_0_002f_gconv1_16_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_16_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_16_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_16_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_32"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_16_bn_2"
+  top: "layer_OC2_DUMMY_32"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_34"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_32"
+  top: "layer_OC2_DUMMY_34"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_8_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_34"
+  top: "layer_gpu_0_002f_shuffle_8_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_8_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_8_1"
+  top: "layer_gpu_0_002f_gconv3_8_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_8_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_8_1"
+  top: "layer_gpu_0_002f_gconv3_8_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_8_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_8_bn_1"
+  top: "layer_gpu_0_002f_gconv3_8_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_17_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_8_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_17_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_17_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_17_1"
+  top: "layer_gpu_0_002f_gconv1_17_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_17_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_17_bn_1"
+  top: "layer_gpu_0_002f_gconv1_17_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block8_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_17_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block7_2"
+  top: "layer_gpu_0_002f_block8_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block8_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block8_1"
+  top: "layer_gpu_0_002f_block8_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_18_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block8_2"
+  top: "layer_gpu_0_002f_gconv1_18_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_18_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_18_1"
+  top: "layer_gpu_0_002f_gconv1_18_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_18_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_18_bn_1"
+  top: "layer_gpu_0_002f_gconv1_18_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_18_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_18_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_18_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_36"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_18_bn_2"
+  top: "layer_OC2_DUMMY_36"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_38"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_36"
+  top: "layer_OC2_DUMMY_38"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_9_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_38"
+  top: "layer_gpu_0_002f_shuffle_9_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_9_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_9_1"
+  top: "layer_gpu_0_002f_gconv3_9_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_9_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_9_1"
+  top: "layer_gpu_0_002f_gconv3_9_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_9_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_9_bn_1"
+  top: "layer_gpu_0_002f_gconv3_9_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_19_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_9_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_19_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_19_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_19_1"
+  top: "layer_gpu_0_002f_gconv1_19_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_19_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_19_bn_1"
+  top: "layer_gpu_0_002f_gconv1_19_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block9_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_19_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block8_2"
+  top: "layer_gpu_0_002f_block9_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block9_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block9_1"
+  top: "layer_gpu_0_002f_block9_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_20_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block9_2"
+  top: "layer_gpu_0_002f_gconv1_20_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_20_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_20_1"
+  top: "layer_gpu_0_002f_gconv1_20_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_20_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_20_bn_1"
+  top: "layer_gpu_0_002f_gconv1_20_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_20_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_20_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_20_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_40"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_20_bn_2"
+  top: "layer_OC2_DUMMY_40"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_42"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_40"
+  top: "layer_OC2_DUMMY_42"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_10_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_42"
+  top: "layer_gpu_0_002f_shuffle_10_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_10_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_10_1"
+  top: "layer_gpu_0_002f_gconv3_10_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_10_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_10_1"
+  top: "layer_gpu_0_002f_gconv3_10_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_10_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_10_bn_1"
+  top: "layer_gpu_0_002f_gconv3_10_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_21_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_10_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_21_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_21_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_21_1"
+  top: "layer_gpu_0_002f_gconv1_21_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_21_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_21_bn_1"
+  top: "layer_gpu_0_002f_gconv1_21_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block10_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_21_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block9_2"
+  top: "layer_gpu_0_002f_block10_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block10_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block10_1"
+  top: "layer_gpu_0_002f_block10_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_22_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block10_2"
+  top: "layer_gpu_0_002f_gconv1_22_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_22_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_22_1"
+  top: "layer_gpu_0_002f_gconv1_22_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_22_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_22_bn_1"
+  top: "layer_gpu_0_002f_gconv1_22_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_22_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_22_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_22_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_44"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_22_bn_2"
+  top: "layer_OC2_DUMMY_44"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_46"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_44"
+  top: "layer_OC2_DUMMY_46"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_11_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_46"
+  top: "layer_gpu_0_002f_shuffle_11_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_11_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_11_1"
+  top: "layer_gpu_0_002f_gconv3_11_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_11_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_11_1"
+  top: "layer_gpu_0_002f_gconv3_11_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_11_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_11_bn_1"
+  top: "layer_gpu_0_002f_gconv3_11_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_23_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_11_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_23_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_23_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_23_1"
+  top: "layer_gpu_0_002f_gconv1_23_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_23_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_23_bn_1"
+  top: "layer_gpu_0_002f_gconv1_23_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block11_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_23_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block10_2"
+  top: "layer_gpu_0_002f_block11_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block11_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block11_1"
+  top: "layer_gpu_0_002f_block11_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_24_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block11_2"
+  top: "layer_gpu_0_002f_gconv1_24_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_24_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_24_1"
+  top: "layer_gpu_0_002f_gconv1_24_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_24_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_24_bn_1"
+  top: "layer_gpu_0_002f_gconv1_24_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_24_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_24_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_24_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_48"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_24_bn_2"
+  top: "layer_OC2_DUMMY_48"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 68
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_50"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_48"
+  top: "layer_OC2_DUMMY_50"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_12_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_50"
+  top: "layer_gpu_0_002f_shuffle_12_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 272
+      dim: 14
+      dim: 14
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_12_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_12_1"
+  top: "layer_gpu_0_002f_gconv3_12_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 272
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_12_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_12_1"
+  top: "layer_gpu_0_002f_gconv3_12_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_12_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_12_bn_1"
+  top: "layer_gpu_0_002f_gconv3_12_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_25_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_12_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_25_1"
+  convolution_param {
+    num_output: 272
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_25_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_25_1"
+  top: "layer_gpu_0_002f_gconv1_25_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_25_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_25_bn_1"
+  top: "layer_gpu_0_002f_gconv1_25_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_pool_3_1"
+  type: "Pooling"
+  bottom: "layer_gpu_0_002f_block11_2"
+  top: "layer_gpu_0_002f_pool_3_1"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    ceil_mode: false
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block12_1"
+  type: "Concat"
+  bottom: "layer_gpu_0_002f_gconv1_25_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_pool_3_1"
+  top: "layer_gpu_0_002f_block12_1"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block12_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block12_1"
+  top: "layer_gpu_0_002f_block12_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_26_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block12_2"
+  top: "layer_gpu_0_002f_gconv1_26_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_26_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_26_1"
+  top: "layer_gpu_0_002f_gconv1_26_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_26_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_26_bn_1"
+  top: "layer_gpu_0_002f_gconv1_26_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_26_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_26_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_26_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_52"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_26_bn_2"
+  top: "layer_OC2_DUMMY_52"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 136
+      dim: 7
+      dim: 7
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_54"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_52"
+  top: "layer_OC2_DUMMY_54"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_13_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_54"
+  top: "layer_gpu_0_002f_shuffle_13_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 544
+      dim: 7
+      dim: 7
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_13_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_13_1"
+  top: "layer_gpu_0_002f_gconv3_13_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 544
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_13_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_13_1"
+  top: "layer_gpu_0_002f_gconv3_13_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_13_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_13_bn_1"
+  top: "layer_gpu_0_002f_gconv3_13_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_27_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_13_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_27_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_27_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_27_1"
+  top: "layer_gpu_0_002f_gconv1_27_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_27_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_27_bn_1"
+  top: "layer_gpu_0_002f_gconv1_27_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block13_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_27_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block12_2"
+  top: "layer_gpu_0_002f_block13_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block13_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block13_1"
+  top: "layer_gpu_0_002f_block13_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_28_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block13_2"
+  top: "layer_gpu_0_002f_gconv1_28_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_28_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_28_1"
+  top: "layer_gpu_0_002f_gconv1_28_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_28_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_28_bn_1"
+  top: "layer_gpu_0_002f_gconv1_28_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_28_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_28_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_28_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_56"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_28_bn_2"
+  top: "layer_OC2_DUMMY_56"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 136
+      dim: 7
+      dim: 7
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_58"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_56"
+  top: "layer_OC2_DUMMY_58"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_14_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_58"
+  top: "layer_gpu_0_002f_shuffle_14_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 544
+      dim: 7
+      dim: 7
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_14_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_14_1"
+  top: "layer_gpu_0_002f_gconv3_14_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 544
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_14_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_14_1"
+  top: "layer_gpu_0_002f_gconv3_14_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_14_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_14_bn_1"
+  top: "layer_gpu_0_002f_gconv3_14_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_29_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_14_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_29_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_29_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_29_1"
+  top: "layer_gpu_0_002f_gconv1_29_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_29_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_29_bn_1"
+  top: "layer_gpu_0_002f_gconv1_29_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block14_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_29_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block13_2"
+  top: "layer_gpu_0_002f_block14_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block14_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block14_1"
+  top: "layer_gpu_0_002f_block14_2"
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_30_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_block14_2"
+  top: "layer_gpu_0_002f_gconv1_30_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_30_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_30_1"
+  top: "layer_gpu_0_002f_gconv1_30_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_30_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_30_bn_1"
+  top: "layer_gpu_0_002f_gconv1_30_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_30_bn_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_gconv1_30_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_30_bn_2"
+}
+layer {
+  name: "layer_OC2_DUMMY_60"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_gconv1_30_bn_2"
+  top: "layer_OC2_DUMMY_60"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 4
+      dim: 136
+      dim: 7
+      dim: 7
+    }
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_62"
+  type: "Permute"
+  bottom: "layer_OC2_DUMMY_60"
+  top: "layer_OC2_DUMMY_62"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+    order: 4
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_shuffle_15_1"
+  type: "Reshape"
+  bottom: "layer_OC2_DUMMY_62"
+  top: "layer_gpu_0_002f_shuffle_15_1"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 544
+      dim: 7
+      dim: 7
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_15_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_shuffle_15_1"
+  top: "layer_gpu_0_002f_gconv3_15_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 544
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_15_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv3_15_1"
+  top: "layer_gpu_0_002f_gconv3_15_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv3_15_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv3_15_bn_1"
+  top: "layer_gpu_0_002f_gconv3_15_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_31_1"
+  type: "Convolution"
+  bottom: "layer_gpu_0_002f_gconv3_15_bn_1_002f_scale"
+  top: "layer_gpu_0_002f_gconv1_31_1"
+  convolution_param {
+    num_output: 544
+    bias_term: false
+    group: 4
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_31_bn_1"
+  type: "BatchNorm"
+  bottom: "layer_gpu_0_002f_gconv1_31_1"
+  top: "layer_gpu_0_002f_gconv1_31_bn_1"
+  batch_norm_param {
+    use_global_stats: true
+    moving_average_fraction: 0.899999976158
+    eps: 9.99999974738e-06
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_gconv1_31_bn_1_002f_scale"
+  type: "Scale"
+  bottom: "layer_gpu_0_002f_gconv1_31_bn_1"
+  top: "layer_gpu_0_002f_gconv1_31_bn_1_002f_scale"
+  scale_param {
+    bias_term: true
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block15_1"
+  type: "Eltwise"
+  bottom: "layer_gpu_0_002f_gconv1_31_bn_1_002f_scale"
+  bottom: "layer_gpu_0_002f_block14_2"
+  top: "layer_gpu_0_002f_block15_1"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_block15_2"
+  type: "ReLU"
+  bottom: "layer_gpu_0_002f_block15_1"
+  top: "layer_gpu_0_002f_block15_2"
+}
+layer {
+  name: "layer_gpu_0_002f_final_avg_1"
+  type: "Pooling"
+  bottom: "layer_gpu_0_002f_block15_2"
+  top: "layer_gpu_0_002f_final_avg_1"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 7
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "layer_OC2_DUMMY_64"
+  type: "Reshape"
+  bottom: "layer_gpu_0_002f_final_avg_1"
+  top: "layer_OC2_DUMMY_64"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 544
+    }
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_pred_1"
+  type: "InnerProduct"
+  bottom: "layer_OC2_DUMMY_64"
+  top: "layer_gpu_0_002f_pred_1"
+  inner_product_param {
+    num_output: 1000
+  }
+}
+layer {
+  name: "layer_gpu_0_002f_softmax_1"
+  type: "Softmax"
+  bottom: "layer_gpu_0_002f_pred_1"
+  top: "layer_gpu_0_002f_softmax_1"
+}
