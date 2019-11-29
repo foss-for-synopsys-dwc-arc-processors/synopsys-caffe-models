@@ -12,9 +12,52 @@ layer {
   }
 }
 layer {
+  name: "data/bn"
+  type: "BatchNorm"
+  bottom: "data"
+  top: "data_bn"
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+}
+layer {
+  name: "data/bn/scale"
+  type: "Scale"
+  bottom: "data_bn"
+  top: "data_scale"
+  param {
+    lr_mult: 1.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 1.0
+    decay_mult: 0.0
+  }
+  scale_param {
+    filler {
+      type: "constant"
+      value: 1.0
+    }
+    bias_term: true
+    bias_filler {
+      type: "constant"
+      value: 0.0
+    }
+  }
+}
+layer {
   name: "stage1/conv"
   type: "Convolution"
-  bottom: "data"
+  bottom: "data_scale"
   top: "stage1/conv"
   param {
     lr_mult: 1.0
