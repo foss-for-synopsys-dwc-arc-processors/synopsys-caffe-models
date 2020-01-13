@@ -1,21 +1,31 @@
-name: "TensorFlowToSynopsysCaffe"
-input: "data"
-input_dim: 1
-input_dim: 3
-input_dim: 224
-input_dim: 224
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_0__Conv2D"
+  name: "input"
+  type: "Input"
+  top: "input"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 224
+      dim: 224
+    }
+  }
+}
+layer {
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_nchw"
   type: "Convolution"
-  bottom: "data"
-  top: "MobilenetV1__MobilenetV1__Conv2d_0__Conv2D"
+  bottom: "input"
+  top: "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_nchw"
   convolution_param {
     num_output: 24
     bias_term: false
+    group: 1
     kernel_h: 3
     kernel_w: 3
     stride_h: 2
     stride_w: 2
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 1
     pad_t: 0
@@ -23,38 +33,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_0__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_0__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_0__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_0__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_0__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_0__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_0__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_0__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_0__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_0__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 24
     bias_term: false
@@ -63,6 +73,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -70,45 +82,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 48
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -116,38 +131,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_1_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 48
     bias_term: false
@@ -156,6 +171,8 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 1
     pad_t: 0
@@ -163,45 +180,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 96
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -209,38 +229,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_2_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 96
     bias_term: false
@@ -249,6 +269,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -256,45 +278,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 96
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -302,38 +327,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_3_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 96
     bias_term: false
@@ -342,6 +367,8 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 1
     pad_t: 0
@@ -349,45 +376,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 192
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -395,38 +425,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_4_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 192
     bias_term: false
@@ -435,6 +465,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -442,45 +474,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 192
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -488,38 +523,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_5_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 192
     bias_term: false
@@ -528,6 +563,8 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 1
     pad_t: 0
@@ -535,45 +572,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -581,38 +621,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_6_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
@@ -621,6 +661,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -628,45 +670,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -674,38 +719,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_7_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
@@ -714,6 +759,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -721,45 +768,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -767,38 +817,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_8_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
@@ -807,6 +857,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -814,45 +866,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -860,38 +915,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_9_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
@@ -900,6 +955,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -907,45 +964,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -953,38 +1013,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_10_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
@@ -993,6 +1053,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -1000,45 +1062,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -1046,38 +1111,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_11_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 384
     bias_term: false
@@ -1086,6 +1151,8 @@ layer {
     kernel_w: 3
     stride_h: 2
     stride_w: 2
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 1
     pad_t: 0
@@ -1093,45 +1160,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 768
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -1139,38 +1209,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__depthwise"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_12_pointwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__depthwise"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_nchw"
   convolution_param {
     num_output: 768
     bias_term: false
@@ -1179,6 +1249,8 @@ layer {
     kernel_w: 3
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 1
     pad_r: 1
     pad_t: 1
@@ -1186,45 +1258,48 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__depthwise"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__Conv2D"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_depthwise__Relu6"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__Conv2D"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_nchw"
   convolution_param {
     num_output: 768
     bias_term: false
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -1232,38 +1307,38 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__BatchNorm__FusedBatchNorm"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/FusedBatchNorm_nchw"
   type: "BatchNorm"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__Conv2D"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__BatchNorm__FusedBatchNorm"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/FusedBatchNorm_nchw"
   batch_norm_param {
     use_global_stats: true
-    eps: 0.0010000000475
+    eps: 0.0010000000474974513
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__BatchNorm__FusedBatchNorm__scale"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/FusedBatchNorm_scale"
   type: "Scale"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__BatchNorm__FusedBatchNorm"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__BatchNorm__FusedBatchNorm__scale"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/FusedBatchNorm_nchw"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/FusedBatchNorm_scale"
   scale_param {
     bias_term: true
   }
 }
 layer {
-  name: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__Relu6"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"
   type: "ReLU"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__BatchNorm__FusedBatchNorm__scale"
-  top: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__Relu6"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/FusedBatchNorm_scale"
+  top: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"
   relu_param {
     relu6: true
   }
 }
 layer {
-  name: "MobilenetV1__Logits__AvgPool_1a__AvgPool"
+  name: "MobilenetV1/Logits/AvgPool_1a/AvgPool_nchw"
   type: "Pooling"
-  bottom: "MobilenetV1__MobilenetV1__Conv2d_13_pointwise__Relu6"
-  top: "MobilenetV1__Logits__AvgPool_1a__AvgPool"
+  bottom: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"
+  top: "MobilenetV1/Logits/AvgPool_1a/AvgPool_nchw"
   pooling_param {
     pool: AVE_EXC_PAD
     kernel_h: 7
@@ -1278,17 +1353,20 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__Logits__Conv2d_1c_1x1__Conv2D"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/Conv2D_nchw"
   type: "Convolution"
-  bottom: "MobilenetV1__Logits__AvgPool_1a__AvgPool"
-  top: "MobilenetV1__Logits__Conv2d_1c_1x1__Conv2D"
+  bottom: "MobilenetV1/Logits/AvgPool_1a/AvgPool_nchw"
+  top: "MobilenetV1/Logits/Conv2d_1c_1x1/Conv2D_nchw"
   convolution_param {
     num_output: 1001
-    bias_term: false
+    bias_term: true
+    group: 1
     kernel_h: 1
     kernel_w: 1
     stride_h: 1
     stride_w: 1
+    dilation: 1
+    dilation: 1
     pad_l: 0
     pad_r: 0
     pad_t: 0
@@ -1296,32 +1374,32 @@ layer {
   }
 }
 layer {
-  name: "MobilenetV1__Logits__Conv2d_1c_1x1__BiasAdd"
-  type: "Bias"
-  bottom: "MobilenetV1__Logits__Conv2d_1c_1x1__Conv2D"
-  top: "MobilenetV1__Logits__Conv2d_1c_1x1__BiasAdd"
-}
-layer {
-  name: "MobilenetV1__Logits__SpatialSqueeze"
-  type: "Flatten"
-  bottom: "MobilenetV1__Logits__Conv2d_1c_1x1__BiasAdd"
-  top: "MobilenetV1__Logits__SpatialSqueeze"
-}
-layer {
-  name: "softmax__Shape"
-  type: "Python"
-  bottom: "MobilenetV1__Logits__SpatialSqueeze"
-  top: "softmax__Shape"
-  python_param {
-    module: "shape"
-    layer: "TensorShape"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd/MobilenetV1/Logits/SpatialSqueeze_perm"
+  type: "Permute"
+  bottom: "MobilenetV1/Logits/Conv2d_1c_1x1/Conv2D_nchw"
+  top: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd/MobilenetV1/Logits/SpatialSqueeze_perm"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
   }
 }
 layer {
-  name: "softmax__Reshape"
+  name: "MobilenetV1/Logits/SpatialSqueeze"
+  type: "Squeeze"
+  bottom: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd/MobilenetV1/Logits/SpatialSqueeze_perm"
+  top: "MobilenetV1/Logits/SpatialSqueeze"
+  squeeze_param {
+    axis: 1
+    axis: 2
+  }
+}
+layer {
+  name: "softmax/Reshape"
   type: "Reshape"
-  bottom: "MobilenetV1__Logits__SpatialSqueeze"
-  top: "softmax__Reshape"
+  bottom: "MobilenetV1/Logits/SpatialSqueeze"
+  top: "softmax/Reshape"
   reshape_param {
     shape {
       dim: -1
@@ -1330,16 +1408,19 @@ layer {
   }
 }
 layer {
-  name: "softmax__Softmax"
+  name: "softmax/Softmax"
   type: "Softmax"
-  bottom: "softmax__Reshape"
-  top: "softmax__Softmax"
+  bottom: "softmax/Reshape"
+  top: "softmax/Softmax"
+  softmax_param {
+    axis: -1
+  }
 }
 layer {
-  name: "softmax__Reshape_1"
+  name: "softmax/Reshape_1"
   type: "Reshape"
-  bottom: "softmax__Softmax"
-  top: "softmax__Reshape_1"
+  bottom: "softmax/Softmax"
+  top: "softmax/Reshape_1"
   reshape_param {
     shape {
       dim: 1
