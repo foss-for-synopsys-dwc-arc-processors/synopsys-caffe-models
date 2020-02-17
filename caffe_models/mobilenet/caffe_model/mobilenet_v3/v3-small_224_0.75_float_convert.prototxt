@@ -1,0 +1,3268 @@
+name: "Converted by the Synopsys DesignWare tflite2ev converter"
+layer {
+  name: "input"
+  type: "Input"
+  top: "input"
+  input_param {
+    shape {
+      dim: 1
+      dim: 224
+      dim: 224
+      dim: 3
+    }
+  }
+}
+layer {
+  name: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "input"
+  top: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 16
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Conv/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/Conv/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/Conv/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv/depthwise/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/Conv/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv/depthwise/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/depthwise/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv/depthwise/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv/depthwise/Relu/NCHW"
+  convolution_param {
+    num_output: 16
+    group: 16
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/depthwise/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/depthwise/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv/depthwise/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv/depthwise/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 56
+    kernel_w: 56
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 8
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 16
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv/depthwise/Relu"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 16
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/expand/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_1/expand/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/expand/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_1/expand/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_1/expand/Relu/NCHW"
+  convolution_param {
+    num_output: 72
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/expand/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_1/expand/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_1/expand/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_1/expand/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_1/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/depthwise/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_1/expand/Relu"
+  top: "MobilenetV3/expanded_conv_1/depthwise/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/depthwise/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_1/depthwise/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_1/depthwise/Relu/NCHW"
+  convolution_param {
+    num_output: 72
+    group: 72
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/depthwise/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_1/depthwise/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_1/depthwise/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_1/depthwise/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_1/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_1/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 24
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/expand/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_2/expand/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/expand/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_2/expand/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_2/expand/Relu/NCHW"
+  convolution_param {
+    num_output: 88
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/expand/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_2/expand/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_2/expand/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_2/expand/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_2/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/depthwise/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_2/expand/Relu"
+  top: "MobilenetV3/expanded_conv_2/depthwise/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/depthwise/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_2/depthwise/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_2/depthwise/Relu/NCHW"
+  convolution_param {
+    num_output: 88
+    group: 88
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/depthwise/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_2/depthwise/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_2/depthwise/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_2/depthwise/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_2/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_2/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 24
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3"
+  bottom: "MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_2/add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_2/add"
+  top: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 96
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_3/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 96
+    group: 96
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 2
+    pad_t: 1
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_3/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 14
+    kernel_w: 14
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 24
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 96
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_3/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 32
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 192
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_4/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 192
+    group: 192
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 2
+    pad_r: 2
+    pad_t: 2
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_4/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 14
+    kernel_w: 14
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 48
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 192
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_4/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 32
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3"
+  bottom: "MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_4/add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_4/add"
+  top: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 192
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_5/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 192
+    group: 192
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 2
+    pad_r: 2
+    pad_t: 2
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_5/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 14
+    kernel_w: 14
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 48
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 192
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_5/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 32
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3"
+  bottom: "MobilenetV3/expanded_conv_4/add"
+  top: "MobilenetV3/expanded_conv_5/add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_5/add"
+  top: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 96
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_6/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 96
+    group: 96
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 2
+    pad_r: 2
+    pad_t: 2
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_6/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 14
+    kernel_w: 14
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 24
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 96
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_6/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 40
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 120
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_7/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 120
+    group: 120
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 2
+    pad_r: 2
+    pad_t: 2
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_7/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 14
+    kernel_w: 14
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 32
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 120
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_7/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 40
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3"
+  bottom: "MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_7/add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_7/add"
+  top: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 240
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_8/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 240
+    group: 240
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 2
+    pad_t: 1
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_8/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 7
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 64
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 240
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_8/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 72
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 432
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_9/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 432
+    group: 432
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 2
+    pad_r: 2
+    pad_t: 2
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_9/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 7
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 112
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 432
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_9/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 72
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3"
+  bottom: "MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_9/add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_9/add"
+  top: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 432
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/expand/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_10/expand/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/expand/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 432
+    group: 432
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 2
+    pad_r: 2
+    pad_t: 2
+    pad_b: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/depthwise/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/expanded_conv_10/depthwise/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/hard_swish/mul_1"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 7
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool/NCHW"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NCHW"
+  convolution_param {
+    num_output: 112
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NCHW"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NCHW"
+  convolution_param {
+    num_output: 432
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NCHW"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6/NCHW_to_NHWC"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/mul"
+  type: "Power"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/mul"
+  power_param {
+    scale: 0.16666999459266663
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/squeeze_excite/mul"
+  type: "Mul"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/hard_swish/mul_1"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/mul"
+  top: "MobilenetV3/expanded_conv_10/squeeze_excite/mul"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/squeeze_excite/mul"
+  top: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 72
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3"
+  bottom: "MobilenetV3/expanded_conv_9/add"
+  top: "MobilenetV3/expanded_conv_10/add"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/expanded_conv_10/add"
+  top: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3/NHWC_to_NCHW"
+  top: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3/NCHW"
+  convolution_param {
+    num_output: 432
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3"
+  type: "Permute"
+  bottom: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3/NCHW"
+  top: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_1/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3"
+  top: "MobilenetV3/Conv_1/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/AvgPool2D/AvgPool/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/Conv_1/hard_swish/mul_1"
+  top: "MobilenetV3/AvgPool2D/AvgPool/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/AvgPool2D/AvgPool/NCHW"
+  type: "Pooling"
+  bottom: "MobilenetV3/AvgPool2D/AvgPool/NHWC_to_NCHW"
+  top: "MobilenetV3/AvgPool2D/AvgPool/NCHW"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 7
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/AvgPool2D/AvgPool"
+  type: "Permute"
+  bottom: "MobilenetV3/AvgPool2D/AvgPool/NCHW"
+  top: "MobilenetV3/AvgPool2D/AvgPool"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_2/BiasAdd/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/AvgPool2D/AvgPool"
+  top: "MobilenetV3/Conv_2/BiasAdd/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_2/BiasAdd/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/Conv_2/BiasAdd/NHWC_to_NCHW"
+  top: "MobilenetV3/Conv_2/BiasAdd/NCHW"
+  convolution_param {
+    num_output: 1024
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_2/BiasAdd"
+  type: "Permute"
+  bottom: "MobilenetV3/Conv_2/BiasAdd/NCHW"
+  top: "MobilenetV3/Conv_2/BiasAdd"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_2/hard_swish/mul_1"
+  type: "HardSwish"
+  bottom: "MobilenetV3/Conv_2/BiasAdd"
+  top: "MobilenetV3/Conv_2/hard_swish/mul_1"
+}
+layer {
+  name: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/NHWC_to_NCHW"
+  type: "Permute"
+  bottom: "MobilenetV3/Conv_2/hard_swish/mul_1"
+  top: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/NHWC_to_NCHW"
+  permute_param {
+    order: 0
+    order: 3
+    order: 1
+    order: 2
+  }
+}
+layer {
+  name: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/NCHW"
+  type: "Convolution"
+  bottom: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/NHWC_to_NCHW"
+  top: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/NCHW"
+  convolution_param {
+    num_output: 1001
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd"
+  type: "Permute"
+  bottom: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/NCHW"
+  top: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Logits/SpatialSqueeze"
+  type: "Reshape"
+  bottom: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd"
+  top: "MobilenetV3/Logits/SpatialSqueeze"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 1001
+    }
+  }
+}
+layer {
+  name: "MobilenetV3/Predictions/Softmax"
+  type: "Softmax"
+  bottom: "MobilenetV3/Logits/SpatialSqueeze"
+  top: "MobilenetV3/Predictions/Softmax"
+}
