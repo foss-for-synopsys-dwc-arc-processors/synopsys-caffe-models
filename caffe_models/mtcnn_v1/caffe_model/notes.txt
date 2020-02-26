@@ -20,7 +20,7 @@ mtcnn-relu version converted from original versions with convert-mtcnn-relu.py:
 - replaced PReLU with ReLU
 - merged 3 graphs
 
-realtek-mtcnn-relu version converted from original versions with convert-realtek-mtcnn.py -relu:
+mtcnn-relu version converted from original versions with convert-mtcnn.py -relu:
 - replaced PReLU with ReLU
 - merged last sibling layers
 - commented Softmax layer
@@ -37,11 +37,11 @@ realtek-mtcnn-relu version converted from original versions with convert-realtek
 -- rnet
 -- onet
 
-realtek-mtcnn-relu-transp version converted from original versions with convert-realtek-mtcnn.py -relu -transp:
-- realtek-mtcnn-relu version with conv coefficients transposed
+mtcnn-relu-transp version converted from original versions with convert-mtcnn.py -relu -transp:
+- mtcnn-relu version with conv coefficients transposed
 - axis order: NxCxHxW (iso NxCxWxH like for other versions)
 
-realtek-mtcnn-transp version converted from original versions with convert-realtek-mtcnn.py -transp:
+mtcnn-transp version converted from original versions with convert-mtcnn.py -transp:
 - inplace PRelu replaced by non-inplace
 - merged last sibling layers
 - commented Softmax layer
@@ -60,7 +60,7 @@ realtek-mtcnn-transp version converted from original versions with convert-realt
 - conv coefficients transposed
 - axis order: NxCxHxW (iso NxCxWxH like for other versions)
 
-realtek-mtcnn version converted from original versions with convert-realtek-mtcnn.py:
+mtcnn version converted from original versions with convert-mtcnn.py:
 - inplace PRelu replaced by non-inplace
 - merged last sibling layers
 - commented Softmax layer

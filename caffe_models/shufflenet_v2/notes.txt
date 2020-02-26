@@ -1,6 +1,6 @@
 Two different version of shufflenet_v2:
 
-1. paddle_convert.prototxt/caffemodel: converted from paddlepaddle, got from Inuitive 
+1. paddle_convert.prototxt/caffemodel: converted from paddle
 2. shufflenet_v2_x0.5.prototxt/caffemodel: https://github.com/miaow1988/ShuffleNet_V2_pytorch_caffe. BN and scale layer following input data layer are removed. It is used to scale input image from [0,255] to [0,1], which could be done by pre-processing
 
 Pruned Graphs:
