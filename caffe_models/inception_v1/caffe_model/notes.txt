@@ -20,6 +20,8 @@ Inception_v1-no_asym_padding.prototxt patched prototxt that does not require asy
 - can be used for benchmarking or power measurements
 - functionally not correct because of wrong padding of the first layer (pad_left=3,pad_right=3 instead of pad_left=2,pad_right=3)
 
+inception_v1_L2Norm_convert.prototxt: patched prototxt with L2 Normalization instead of Softmax
+
 Compressed graphs:
 1. compressed_51p.prototxt / compressed_51p.caffemodel / compress_config-51p.py
 - 51% of original MACs (factor 1.98)
