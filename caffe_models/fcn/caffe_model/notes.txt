@@ -1,0 +1,8 @@
+Model link: https://github.com/shelhamer/fcn.berkeleyvision.org
+
+FCN-8s PASCAL: three stream, 8 pixel prediction stride net, scoring 65.5 mIU on seg11valid and 67.2 mIU on seg12test
+
+Pruned Graphs
+1. voc-fcn8s-deploy.prototxt / voc-fcn8s-heavy-pascal_random_pruned.caffemodel
+- random pruned (60% conv, 85% fc)
+
