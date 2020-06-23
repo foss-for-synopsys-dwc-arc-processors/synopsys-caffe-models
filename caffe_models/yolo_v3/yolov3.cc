@@ -532,10 +532,10 @@ struct Results {
 	    printf("    draw box %d %d %d %d %d %d (= x1 y1 x2 y2 w h)\n", 
 		x1, y1, x2, y2, x2-x1, y2-y1);
 	    }
+	static const char Q = '"';
 	void json(std::string &S) {
 	    // The python json parser is buggy; it doesn't allow trailing commas.
 	    // So we have to prevent generating them here.
-	    char Q = '"';
 	    char buf[256];
 	    const char *bbox = "\"bbox\"";	// coco bbox: x y and size.
 	    S += "{";
@@ -560,6 +560,40 @@ struct Results {
 	    
 	    S += "}";
 	    }
+	void python(std::string &S) {
+	    char buf[256];
+	    S += "dict (";
+	    sprintf(buf, "label=%d, ",klass); S += buf;
+	    // Our evaccuracy program (save_ssd_coco_detections) expects
+	    // the label field to be in 0..79; it does the translation
+	    // to the coco category.  We redundantly supplpy the coco category
+	    // here.
+	    sprintf(buf, "labelstr='%s', ", this->name); S += buf;
+	    sprintf(buf, "coco_category=%d, ",coco_categories[klass]); S += buf;
+	    sprintf(buf, "score=%f, ", this->prob); S += buf;
+	    // Comment that the pixels are absolute, not relative (0..1),
+	    // as in mobilenet.  These are relative to the *original* image,
+	    // not the resized image.
+	    sprintf(buf, "xmin=%d, ymin=%d, xmax=%d, ymax=%d, abs_pixel=1, label_0_based=1", x1,y1,x2,y2); S += buf;
+	    S += "), # BOX\n";
+	    /*
+	     * Here's how I use evaccuracy to look at the python results.
+    call py %EVA%/evaccuracy detect  ^
+    --prototxt caffe_model/yolov3.prototxt ^
+    --caffemodel caffe_model/yolov3.caffemodel ^
+    --config_file yolo_v3_coco.cfg ^
+    --dataset_root k:/local/coco/2017 ^
+    --eval_type coco --dataset_type val2017 --backup false ^
+    --classes vase ^
+    --fixed_dumpdir fp.12/results ^
+    --eval_list 100_val2017_eva.txt 
+    Also, in the .cfg file, say:
+	type = ssd
+    otherwise all sorts of yolo post-processing (what we do here in fact)
+    gets done; evaccuracy assume it's looking at binary results
+    instead of the final python results here.
+	     */
+	    }
         };
     int next;
     Results() { next = 0; }
@@ -574,6 +608,12 @@ struct Results {
 	    S += "\n";
 	    }
 	S += "]\n";
+	return S;
+        }
+    std::string python() {
+        // Just concatenate the python results.
+        std::string S;
+	for (int i = 0; i < next; i++) results[i].python(S);
 	return S;
         }
     } results;
@@ -673,6 +713,7 @@ void test_yolo(Network *net, Image &im) {
     #if JSON
     // json result is used for post-processing to compute precision.
     printf("<JSON>\n%s</JSON\>\n",results.json().c_str());
+    printf("<PYTHON>\n%s</PYTHON>\n",results.python().c_str());
     #endif
     }
 
