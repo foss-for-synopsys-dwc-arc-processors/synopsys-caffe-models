@@ -6,31 +6,15 @@ layer {
     shape {
       dim: 1
       dim: 3
-      dim: 224
-      dim: 224
+      dim: 299
+      dim: 299
     }
-  }
-}
-layer {
-  name: "resnet_v2_152/Pad"
-  type: "Pad"
-  bottom: "Placeholder"
-  top: "resnet_v2_152/Pad"
-  pad_param {
-    paddings: 0
-    paddings: 0
-    paddings: 0
-    paddings: 0
-    paddings: 3
-    paddings: 3
-    paddings: 3
-    paddings: 3
   }
 }
 layer {
   name: "resnet_v2_152/conv1/Conv2D_nchw"
   type: "Convolution"
-  bottom: "resnet_v2_152/Pad"
+  bottom: "Placeholder"
   top: "resnet_v2_152/conv1/Conv2D_nchw"
   convolution_param {
     num_output: 64
@@ -42,10 +26,10 @@ layer {
     stride_w: 2
     dilation: 1
     dilation: 1
-    pad_l: 0
-    pad_r: 0
-    pad_t: 0
-    pad_b: 0
+    pad_l: 3
+    pad_r: 3
+    pad_t: 3
+    pad_b: 3
   }
 }
 layer {
@@ -459,25 +443,9 @@ layer {
   top: "resnet_v2_152/block1/unit_3/bottleneck_v2/conv1/Relu"
 }
 layer {
-  name: "resnet_v2_152/block1/unit_3/bottleneck_v2/Pad"
-  type: "Pad"
-  bottom: "resnet_v2_152/block1/unit_3/bottleneck_v2/conv1/Relu"
-  top: "resnet_v2_152/block1/unit_3/bottleneck_v2/Pad"
-  pad_param {
-    paddings: 0
-    paddings: 0
-    paddings: 0
-    paddings: 0
-    paddings: 1
-    paddings: 1
-    paddings: 1
-    paddings: 1
-  }
-}
-layer {
   name: "resnet_v2_152/block1/unit_3/bottleneck_v2/conv2/Conv2D_nchw"
   type: "Convolution"
-  bottom: "resnet_v2_152/block1/unit_3/bottleneck_v2/Pad"
+  bottom: "resnet_v2_152/block1/unit_3/bottleneck_v2/conv1/Relu"
   top: "resnet_v2_152/block1/unit_3/bottleneck_v2/conv2/Conv2D_nchw"
   convolution_param {
     num_output: 64
@@ -489,10 +457,10 @@ layer {
     stride_w: 2
     dilation: 1
     dilation: 1
-    pad_l: 0
-    pad_r: 0
-    pad_t: 0
-    pad_b: 0
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -7169,25 +7137,9 @@ layer {
   top: "resnet_v2_152/block3/unit_36/bottleneck_v2/conv1/Relu"
 }
 layer {
-  name: "resnet_v2_152/block3/unit_36/bottleneck_v2/Pad"
-  type: "Pad"
-  bottom: "resnet_v2_152/block3/unit_36/bottleneck_v2/conv1/Relu"
-  top: "resnet_v2_152/block3/unit_36/bottleneck_v2/Pad"
-  pad_param {
-    paddings: 0
-    paddings: 0
-    paddings: 0
-    paddings: 0
-    paddings: 1
-    paddings: 1
-    paddings: 1
-    paddings: 1
-  }
-}
-layer {
   name: "resnet_v2_152/block3/unit_36/bottleneck_v2/conv2/Conv2D_nchw"
   type: "Convolution"
-  bottom: "resnet_v2_152/block3/unit_36/bottleneck_v2/Pad"
+  bottom: "resnet_v2_152/block3/unit_36/bottleneck_v2/conv1/Relu"
   top: "resnet_v2_152/block3/unit_36/bottleneck_v2/conv2/Conv2D_nchw"
   convolution_param {
     num_output: 256
@@ -7199,10 +7151,10 @@ layer {
     stride_w: 2
     dilation: 1
     dilation: 1
-    pad_l: 0
-    pad_r: 0
-    pad_t: 0
-    pad_b: 0
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
   }
 }
 layer {
@@ -7784,8 +7736,8 @@ layer {
   top: "resnet_v2_152/pool5_nchw"
   pooling_param {
     pool: AVE_EXC_PAD
-    kernel_h: 7
-    kernel_w: 7
+    kernel_h: 10
+    kernel_w: 10
     stride_h: 1
     stride_w: 1
     ceil_mode: false
