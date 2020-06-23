@@ -1,4 +1,5 @@
-Model link: https://github.com/shelhamer/fcn.berkeleyvision.org
+FCN model link: https://github.com/shelhamer/fcn.berkeleyvision.org
+FCN-ResNet18 model link: https://github.com/dusty-nv/jetson-inference. Converted from ONNX model by Bo Wu.
 
 FCN-8s PASCAL: three stream, 8 pixel prediction stride net, scoring 65.5 mIU on seg11valid and 67.2 mIU on seg12test
 
