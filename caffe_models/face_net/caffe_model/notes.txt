@@ -1,0 +1,7 @@
+both caffemodels and prototxt was moved from ../../inception_resnet_v1/caffe_model as follows:
+    inception_resnet_v1_20170512_convert.caffemodel                     ->  face_net.caffemodel
+    inception_resnet_v1_20170512_convert_random_pruned.caffemodel       ->  face_net_random_pruned.caffemodel
+    inception_resnet_v1_20170512_new_convert.prototxt face_net.prototxt ->  face_net.prototxt
+
+original models:
+https://github.com/davidsandberg/facenet (model name: 20170512-110547)
