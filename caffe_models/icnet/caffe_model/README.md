@@ -16,4 +16,10 @@ icnet_cityscapes_trainval_90k_bnnomerge.caffemodel: [GoogleDrive](https://drive.
 
 (31M, md5: ba3cf6e24beb07068dacc901a9c7f28b; train on trainvalset for 90k, original)
 
-**Notes**: Model's name that contains phrase 'bnnomerge' is the original trained model, the related one without this phrase is obtained by merging the parameters in batch normlization layers into the closely front convolution layers. When testing the mIoU performance, please choose the related prototxt file. While when testing the inference speed, please choose prototxt without this phrase. That's because the ''Caffe time'' tool runs in training mode while bn layers work in different way as in testing mode (using stored history statistics during testing VS online calculating current batch's statistics during training).
+**Notes**:   
+1. Model's name that contains phrase 'bnnomerge' is the original trained model, the related one without this phrase is obtained by merging the parameters in batch normlization layers into the closely front convolution layers.  
+    a. When testing the mIoU performance, please choose the related prototxt file.   
+    b. When testing the inference speed, please choose prototxt without this phrase. That's because the ''Caffe time'' tool runs in training mode while bn layers work in different way as in testing mode (using stored history statistics during testing VS online calculating current batch's statistics during training).  
+
+2. The icnet_cityscapes_merge_subgraph.prototxt is a variant from the icnet_cityscapes.prototxt. It merges several AVE Pooling and Interp with the Eltwise Sum into a single layer called ICNetSubgraph. This prototxt could produce the same final results as the original one while improving the model efficiency, reducing bandwidth consumption and solve the mismatch issue between host_fixed and unmerged_large implementation.
+

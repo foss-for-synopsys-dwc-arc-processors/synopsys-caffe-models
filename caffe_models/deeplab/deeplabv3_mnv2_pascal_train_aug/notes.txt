@@ -1,3 +1,4 @@
+Converted from Tensorflow model from: https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md
 
 Pruned graphs:
 1. deeplabv3_mnv2_pascal_train_aug.prototxt / deeplabv3_mnv2_pascal_train_aug_random_pruned.caffemodel
