@@ -19,6 +19,8 @@ Resized graph:
 1. inception_resnet_v1_20170512_new_convert_299x299.prototxt / inception_resnet_v1_20170512_convert_299x299-default.caffemodel
 - 299x299x3 input -> 1000 outputs
 - default initialized weights
+2. inception_resnet_v1_20210401_convert_299x299-default.caffemodel 
+- default re-initialized weights from inception_resnet_v1_20170512_new_convert_299x299.prototxt
 
 Pruned graphs:
 1. inception_resnet_v1_20170512_new_convert.prototxt / inception_resnet_v1_20170512_convert_random_pruned.caffemodel
@@ -26,3 +28,9 @@ Pruned graphs:
 2. inception_resnet_v1_20170512_new_convert_299x299.prototxt / inception_resnet_v1_20170512_convert_299x299-default_random_pruned.caffemodel
 - default initialized weights
 - random pruned (60% conv, 85% fc)
+
+2020.08.03:
+caffemodels and prototxt moved:
+    inception_resnet_v1_20170512_convert.caffemodel                     ->  ../../face_net/caffe_model/face_net.caffemodel
+    inception_resnet_v1_20170512_convert_random_pruned.caffemodel       ->  ../../face_net/caffe_model/face_net_random_pruned.caffemodel
+    inception_resnet_v1_20170512_new_convert.prototxt face_net.prototxt ->  ../../face_net/caffe_model/face_net.prototxt
