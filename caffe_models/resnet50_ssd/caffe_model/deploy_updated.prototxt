@@ -5249,198 +5249,6 @@ layer {
   }
 }
 layer {
-  name: "relu_stage1_block3_norm_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "relu_stage1_block3_norm_mbox_loc"
-  top: "relu_stage1_block3_norm_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 3
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "relu_stage1_block3_norm_mbox_loc_perm"
-  type: "Permute"
-  bottom: "relu_stage1_block3_norm_mbox_loc_reshape"
-  top: "relu_stage1_block3_norm_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "relu_stage1_block3_norm_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "relu_stage1_block3_norm_mbox_loc_perm"
-  top: "relu_stage1_block3_norm_mbox_loc_flat"
-}
-layer {
-  name: "relu_stage2_block5_norm_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "relu_stage2_block5_norm_mbox_loc"
-  top: "relu_stage2_block5_norm_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "relu_stage2_block5_norm_mbox_loc_perm"
-  type: "Permute"
-  bottom: "relu_stage2_block5_norm_mbox_loc_reshape"
-  top: "relu_stage2_block5_norm_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "relu_stage2_block5_norm_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "relu_stage2_block5_norm_mbox_loc_perm"
-  top: "relu_stage2_block5_norm_mbox_loc_flat"
-}
-layer {
-  name: "relu_stage3_block2_norm_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "relu_stage3_block2_norm_mbox_loc"
-  top: "relu_stage3_block2_norm_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "relu_stage3_block2_norm_mbox_loc_perm"
-  type: "Permute"
-  bottom: "relu_stage3_block2_norm_mbox_loc_reshape"
-  top: "relu_stage3_block2_norm_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "relu_stage3_block2_norm_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "relu_stage3_block2_norm_mbox_loc_perm"
-  top: "relu_stage3_block2_norm_mbox_loc_flat"
-}
-layer {
-  name: "relu_stage4_block2_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "relu_stage4_block2_mbox_loc"
-  top: "relu_stage4_block2_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "relu_stage4_block2_mbox_loc_perm"
-  type: "Permute"
-  bottom: "relu_stage4_block2_mbox_loc_reshape"
-  top: "relu_stage4_block2_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "relu_stage4_block2_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "relu_stage4_block2_mbox_loc_perm"
-  top: "relu_stage4_block2_mbox_loc_flat"
-}
-layer {
-  name: "relu_stage5_block2_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "relu_stage5_block2_mbox_loc"
-  top: "relu_stage5_block2_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "relu_stage5_block2_mbox_loc_perm"
-  type: "Permute"
-  bottom: "relu_stage5_block2_mbox_loc_reshape"
-  top: "relu_stage5_block2_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "relu_stage5_block2_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "relu_stage5_block2_mbox_loc_perm"
-  top: "relu_stage5_block2_mbox_loc_flat"
-}
-layer {
-  name: "pool_last_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "pool_last_mbox_loc"
-  top: "pool_last_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "pool_last_mbox_loc_perm"
-  type: "Permute"
-  bottom: "pool_last_mbox_loc_reshape"
-  top: "pool_last_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "pool_last_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "pool_last_mbox_loc_perm"
-  top: "pool_last_mbox_loc_flat"
-}
-layer {
   name: "relu_stage1_block3_norm_mbox_conf_reshape"
   type: "Reshape"
   bottom: "relu_stage1_block3_norm_mbox_conf"
@@ -5467,32 +5275,13 @@ layer {
   }
 }
 layer {
-  name: "relu_stage1_block3_norm_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "relu_stage1_block3_norm_mbox_conf_perm"
-  top: "relu_stage1_block3_norm_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "relu_stage1_block3_norm_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "relu_stage1_block3_norm_mbox_conf_flat"
+  bottom: "relu_stage1_block3_norm_mbox_conf_perm"
   top: "relu_stage1_block3_norm_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "relu_stage1_block3_norm_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "relu_stage1_block3_norm_mbox_conf_softmax"
-  top: "relu_stage1_block3_norm_mbox_conf_flatten"
 }
 layer {
   name: "relu_stage2_block5_norm_mbox_conf_reshape"
@@ -5521,32 +5310,13 @@ layer {
   }
 }
 layer {
-  name: "relu_stage2_block5_norm_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "relu_stage2_block5_norm_mbox_conf_perm"
-  top: "relu_stage2_block5_norm_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "relu_stage2_block5_norm_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "relu_stage2_block5_norm_mbox_conf_flat"
+  bottom: "relu_stage2_block5_norm_mbox_conf_perm"
   top: "relu_stage2_block5_norm_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "relu_stage2_block5_norm_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "relu_stage2_block5_norm_mbox_conf_softmax"
-  top: "relu_stage2_block5_norm_mbox_conf_flatten"
 }
 layer {
   name: "relu_stage3_block2_norm_mbox_conf_reshape"
@@ -5575,32 +5345,13 @@ layer {
   }
 }
 layer {
-  name: "relu_stage3_block2_norm_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "relu_stage3_block2_norm_mbox_conf_perm"
-  top: "relu_stage3_block2_norm_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "relu_stage3_block2_norm_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "relu_stage3_block2_norm_mbox_conf_flat"
+  bottom: "relu_stage3_block2_norm_mbox_conf_perm"
   top: "relu_stage3_block2_norm_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "relu_stage3_block2_norm_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "relu_stage3_block2_norm_mbox_conf_softmax"
-  top: "relu_stage3_block2_norm_mbox_conf_flatten"
 }
 layer {
   name: "relu_stage4_block2_mbox_conf_reshape"
@@ -5629,32 +5380,13 @@ layer {
   }
 }
 layer {
-  name: "relu_stage4_block2_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "relu_stage4_block2_mbox_conf_perm"
-  top: "relu_stage4_block2_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "relu_stage4_block2_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "relu_stage4_block2_mbox_conf_flat"
+  bottom: "relu_stage4_block2_mbox_conf_perm"
   top: "relu_stage4_block2_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "relu_stage4_block2_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "relu_stage4_block2_mbox_conf_softmax"
-  top: "relu_stage4_block2_mbox_conf_flatten"
 }
 layer {
   name: "relu_stage5_block2_mbox_conf_reshape"
@@ -5683,32 +5415,13 @@ layer {
   }
 }
 layer {
-  name: "relu_stage5_block2_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "relu_stage5_block2_mbox_conf_perm"
-  top: "relu_stage5_block2_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "relu_stage5_block2_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "relu_stage5_block2_mbox_conf_flat"
+  bottom: "relu_stage5_block2_mbox_conf_perm"
   top: "relu_stage5_block2_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "relu_stage5_block2_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "relu_stage5_block2_mbox_conf_softmax"
-  top: "relu_stage5_block2_mbox_conf_flatten"
 }
 layer {
   name: "pool_last_mbox_conf_reshape"
@@ -5737,48 +5450,29 @@ layer {
   }
 }
 layer {
-  name: "pool_last_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "pool_last_mbox_conf_perm"
-  top: "pool_last_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "pool_last_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "pool_last_mbox_conf_flat"
+  bottom: "pool_last_mbox_conf_perm"
   top: "pool_last_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
 }
 layer {
-  name: "pool_last_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "pool_last_mbox_conf_softmax"
-  top: "pool_last_mbox_conf_flatten"
-}
-layer {
   name: "detection_out"
   type: "DetectionOutput"
-  bottom: "relu_stage1_block3_norm_mbox_conf_flatten"
-  bottom: "relu_stage2_block5_norm_mbox_conf_flatten"
-  bottom: "relu_stage3_block2_norm_mbox_conf_flatten"
-  bottom: "relu_stage4_block2_mbox_conf_flatten"
-  bottom: "relu_stage5_block2_mbox_conf_flatten"
-  bottom: "pool_last_mbox_conf_flatten"
-  bottom: "relu_stage1_block3_norm_mbox_loc_flat"
-  bottom: "relu_stage2_block5_norm_mbox_loc_flat"
-  bottom: "relu_stage3_block2_norm_mbox_loc_flat"
-  bottom: "relu_stage4_block2_mbox_loc_flat"
-  bottom: "relu_stage5_block2_mbox_loc_flat"
-  bottom: "pool_last_mbox_loc_flat"
+  bottom: "relu_stage1_block3_norm_mbox_conf_softmax"
+  bottom: "relu_stage2_block5_norm_mbox_conf_softmax"
+  bottom: "relu_stage3_block2_norm_mbox_conf_softmax"
+  bottom: "relu_stage4_block2_mbox_conf_softmax"
+  bottom: "relu_stage5_block2_mbox_conf_softmax"
+  bottom: "pool_last_mbox_conf_softmax"
+  bottom: "relu_stage1_block3_norm_mbox_loc"
+  bottom: "relu_stage2_block5_norm_mbox_loc"
+  bottom: "relu_stage3_block2_norm_mbox_loc"
+  bottom: "relu_stage4_block2_mbox_loc"
+  bottom: "relu_stage5_block2_mbox_loc"
+  bottom: "pool_last_mbox_loc"
   bottom: "mbox_priorbox"
   top: "detection_out"
   detection_output_param {
@@ -5792,12 +5486,6 @@ layer {
     code_type: CENTER_SIZE
     keep_top_k: 200
     confidence_threshold: 0.009999999776482582
-    ratio_permute: true
-    ratio0: 3
-    ratio1: 6
-    ratio2: 6
-    ratio3: 6
-    ratio4: 6
-    ratio5: 6
+    no_permute: true
   }
 }

@@ -1215,198 +1215,6 @@ layer {
   }
 }
 layer {
-  name: "conv4_3_norm_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "conv4_3_norm_mbox_loc"
-  top: "conv4_3_norm_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 3
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "conv4_3_norm_mbox_loc_perm"
-  type: "Permute"
-  bottom: "conv4_3_norm_mbox_loc_reshape"
-  top: "conv4_3_norm_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "conv4_3_norm_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "conv4_3_norm_mbox_loc_perm"
-  top: "conv4_3_norm_mbox_loc_flat"
-}
-layer {
-  name: "fc7_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "fc7_mbox_loc"
-  top: "fc7_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "fc7_mbox_loc_perm"
-  type: "Permute"
-  bottom: "fc7_mbox_loc_reshape"
-  top: "fc7_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "fc7_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "fc7_mbox_loc_perm"
-  top: "fc7_mbox_loc_flat"
-}
-layer {
-  name: "conv6_2_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "conv6_2_mbox_loc"
-  top: "conv6_2_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "conv6_2_mbox_loc_perm"
-  type: "Permute"
-  bottom: "conv6_2_mbox_loc_reshape"
-  top: "conv6_2_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "conv6_2_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "conv6_2_mbox_loc_perm"
-  top: "conv6_2_mbox_loc_flat"
-}
-layer {
-  name: "conv7_2_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "conv7_2_mbox_loc"
-  top: "conv7_2_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "conv7_2_mbox_loc_perm"
-  type: "Permute"
-  bottom: "conv7_2_mbox_loc_reshape"
-  top: "conv7_2_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "conv7_2_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "conv7_2_mbox_loc_perm"
-  top: "conv7_2_mbox_loc_flat"
-}
-layer {
-  name: "conv8_2_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "conv8_2_mbox_loc"
-  top: "conv8_2_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "conv8_2_mbox_loc_perm"
-  type: "Permute"
-  bottom: "conv8_2_mbox_loc_reshape"
-  top: "conv8_2_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "conv8_2_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "conv8_2_mbox_loc_perm"
-  top: "conv8_2_mbox_loc_flat"
-}
-layer {
-  name: "pool6_mbox_loc_reshape"
-  type: "Reshape"
-  bottom: "pool6_mbox_loc"
-  top: "pool6_mbox_loc_reshape"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 6
-      dim: 4
-      dim: -1
-    }
-  }
-}
-layer {
-  name: "pool6_mbox_loc_perm"
-  type: "Permute"
-  bottom: "pool6_mbox_loc_reshape"
-  top: "pool6_mbox_loc_perm"
-  permute_param {
-    order: 0
-    order: 2
-    order: 1
-    order: 3
-  }
-}
-layer {
-  name: "pool6_mbox_loc_flat"
-  type: "Flatten"
-  bottom: "pool6_mbox_loc_perm"
-  top: "pool6_mbox_loc_flat"
-}
-layer {
   name: "conv4_3_norm_mbox_conf_reshape"
   type: "Reshape"
   bottom: "conv4_3_norm_mbox_conf"
@@ -1433,32 +1241,13 @@ layer {
   }
 }
 layer {
-  name: "conv4_3_norm_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "conv4_3_norm_mbox_conf_perm"
-  top: "conv4_3_norm_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "conv4_3_norm_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "conv4_3_norm_mbox_conf_flat"
+  bottom: "conv4_3_norm_mbox_conf_perm"
   top: "conv4_3_norm_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "conv4_3_norm_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "conv4_3_norm_mbox_conf_softmax"
-  top: "conv4_3_norm_mbox_conf_flatten"
 }
 layer {
   name: "fc7_mbox_conf_reshape"
@@ -1487,32 +1276,13 @@ layer {
   }
 }
 layer {
-  name: "fc7_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "fc7_mbox_conf_perm"
-  top: "fc7_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "fc7_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "fc7_mbox_conf_flat"
+  bottom: "fc7_mbox_conf_perm"
   top: "fc7_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "fc7_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "fc7_mbox_conf_softmax"
-  top: "fc7_mbox_conf_flatten"
 }
 layer {
   name: "conv6_2_mbox_conf_reshape"
@@ -1541,32 +1311,13 @@ layer {
   }
 }
 layer {
-  name: "conv6_2_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "conv6_2_mbox_conf_perm"
-  top: "conv6_2_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "conv6_2_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "conv6_2_mbox_conf_flat"
+  bottom: "conv6_2_mbox_conf_perm"
   top: "conv6_2_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "conv6_2_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "conv6_2_mbox_conf_softmax"
-  top: "conv6_2_mbox_conf_flatten"
 }
 layer {
   name: "conv7_2_mbox_conf_reshape"
@@ -1595,32 +1346,13 @@ layer {
   }
 }
 layer {
-  name: "conv7_2_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "conv7_2_mbox_conf_perm"
-  top: "conv7_2_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "conv7_2_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "conv7_2_mbox_conf_flat"
+  bottom: "conv7_2_mbox_conf_perm"
   top: "conv7_2_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "conv7_2_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "conv7_2_mbox_conf_softmax"
-  top: "conv7_2_mbox_conf_flatten"
 }
 layer {
   name: "conv8_2_mbox_conf_reshape"
@@ -1649,32 +1381,13 @@ layer {
   }
 }
 layer {
-  name: "conv8_2_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "conv8_2_mbox_conf_perm"
-  top: "conv8_2_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "conv8_2_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "conv8_2_mbox_conf_flat"
+  bottom: "conv8_2_mbox_conf_perm"
   top: "conv8_2_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
-}
-layer {
-  name: "conv8_2_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "conv8_2_mbox_conf_softmax"
-  top: "conv8_2_mbox_conf_flatten"
 }
 layer {
   name: "pool6_mbox_conf_reshape"
@@ -1703,48 +1416,29 @@ layer {
   }
 }
 layer {
-  name: "pool6_mbox_conf_flat"
-  type: "Reshape"
-  bottom: "pool6_mbox_conf_perm"
-  top: "pool6_mbox_conf_flat"
-  reshape_param {
-    shape {
-      dim: 0
-      dim: 21
-      dim: -1
-    }
-  }
-}
-layer {
   name: "pool6_mbox_conf_softmax"
   type: "Softmax"
-  bottom: "pool6_mbox_conf_flat"
+  bottom: "pool6_mbox_conf_perm"
   top: "pool6_mbox_conf_softmax"
   softmax_param {
     axis: 1
   }
 }
 layer {
-  name: "pool6_mbox_conf_flatten"
-  type: "Flatten"
-  bottom: "pool6_mbox_conf_softmax"
-  top: "pool6_mbox_conf_flatten"
-}
-layer {
   name: "detection_out"
   type: "DetectionOutput"
-  bottom: "conv4_3_norm_mbox_conf_flatten"
-  bottom: "fc7_mbox_conf_flatten"
-  bottom: "conv6_2_mbox_conf_flatten"
-  bottom: "conv7_2_mbox_conf_flatten"
-  bottom: "conv8_2_mbox_conf_flatten"
-  bottom: "pool6_mbox_conf_flatten"
-  bottom: "conv4_3_norm_mbox_loc_flat"
-  bottom: "fc7_mbox_loc_flat"
-  bottom: "conv6_2_mbox_loc_flat"
-  bottom: "conv7_2_mbox_loc_flat"
-  bottom: "conv8_2_mbox_loc_flat"
-  bottom: "pool6_mbox_loc_flat"
+  bottom: "conv4_3_norm_mbox_conf_softmax"
+  bottom: "fc7_mbox_conf_softmax"
+  bottom: "conv6_2_mbox_conf_softmax"
+  bottom: "conv7_2_mbox_conf_softmax"
+  bottom: "conv8_2_mbox_conf_softmax"
+  bottom: "pool6_mbox_conf_softmax"
+  bottom: "conv4_3_norm_mbox_loc"
+  bottom: "fc7_mbox_loc"
+  bottom: "conv6_2_mbox_loc"
+  bottom: "conv7_2_mbox_loc"
+  bottom: "conv8_2_mbox_loc"
+  bottom: "pool6_mbox_loc"
   bottom: "mbox_priorbox"
   top: "detection_out"
   detection_output_param {
@@ -1758,12 +1452,6 @@ layer {
     code_type: CENTER_SIZE
     keep_top_k: 200
     confidence_threshold: 0.009999999776482582
-    ratio_permute: true
-    ratio0: 3
-    ratio1: 6
-    ratio2: 6
-    ratio3: 6
-    ratio4: 6
-    ratio5: 6
+    no_permute: true
   }
 }
