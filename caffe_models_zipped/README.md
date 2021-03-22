@@ -19,6 +19,10 @@ Instead of manual downloading/unpacking you can use special utility
    number of models. Make copy of `model_list.txt` to
    `model_list_shorten.txt` and remove models you don't want to use now.
    You can download other models lately
+> **Note:**  
+> `imagenet_mean` and `images` are image data-sets that are used many
+> `model_list_shorten.txt` models. Don't remove them from
+> `model_list_shorten.txt`
 
 3. Run the script
 
