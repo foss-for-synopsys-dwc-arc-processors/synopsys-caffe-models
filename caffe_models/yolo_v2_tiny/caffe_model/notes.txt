@@ -1,0 +1,5 @@
+Darknet model from: https://pjreddie.com/darknet/yolov2/
+
+Converted to Caffe with:
+- evgencnn/scripts/evconvert/darknet2ev/create_yolo_prototxt.py
+- evconvert/darknet2ev/create_yolo_caffemodel.py
