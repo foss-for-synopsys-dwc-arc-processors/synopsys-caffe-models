@@ -1,0 +1,59 @@
+
+# List of NN models to donwload from GitHub repository
+# Repository: https://github.com/foss-for-synopsys-dwc-arc-processors/synopsys-caffe-models
+# Zip files location: https://github.com/foss-for-synopsys-dwc-arc-processors/synopsys-caffe-models/tree/master/caffe_models_zipped
+# Ex of using: 
+#   python download_unpack_cnn_models.py --model_list model_list.txt --model_path <absolute_path_to_model_folder>
+# You can edit the list of models below
+
+alexnet
+DAN
+deeplab
+denoiser
+densenet
+face_net
+facedetect_v1
+facedetect_v2
+faster_rcnn_resnet101
+fcn
+googlenet
+icnet
+imagenet_mean
+images
+inception_resnet_v1
+inception_resnet_v2
+inception_v1
+inception_v2
+inception_v3
+inception_v4
+lenet
+mobilenet
+mobilenet_ssd
+mtcnn_v1
+openpose
+pspnet
+pvanet
+resnet50_ssd
+resnet_101
+resnet_152
+resnet_50
+ResNeXt_101
+ResNeXt_152
+ResNeXt_50
+retinanet
+segnet
+shufflenet_v1
+shufflenet_v2
+squeeze
+srcnn
+srgan
+ssd
+unet
+vdsr
+vgg16
+yolo_tiny
+yolo_v1
+yolo_v2_coco
+yolo_v2_tiny
+yolo_v2_voc
+yolo_v3
