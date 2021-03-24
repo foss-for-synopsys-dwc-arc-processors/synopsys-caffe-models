@@ -4,18 +4,29 @@ Zipped NN models
 
 The folder consists of the list of ZIP archivated models. They can be
 directly downloaded, unpacked on local PC.
+Instead of manual downloading/unpacking you can use special utility  
+`donwnoad_unpack_cnn_models.py` and `model_list.txt` from this folder  
+
+
+Prerequisites
+===========================
+The Python utility is designed to work in MetawareEV enviromemt.
+You should download MetawareEV and setup its enviroment
 
 Donwload and unpack utility
 ===========================
 Instead of manual downloading/unpacking you can use special utility  
 `donwnoad_unpack_cnn_models.py`
 
-## Usage Instructions
+Instructions
+===========================
 1. Download `donwnoad_unpack_cnn_models.py` and `model_list.txt`
-   Click `model_list.txt`, press `Raw` button, press Right-Click and choose "Save As .." in contect menu  
+
+   Click `donwnoad_unpack_cnn_models.py`, press `Raw` button, press Right-Click and choose "Save As .." in contect menu  
+   Repeate the same for `model_list.txt`
    
 2. Edit `model_list.txt`
-
+     
    Downloading and unpacking of all models can take formidable time expecially in case of slow Internet. And it requiers about 50Gb of free disc space.  
    Do reduce download time and disc space customers can reduce number of models. 
    Make copy of `model_list.txt` to `model_list_shorten.txt` and remove models you don't want to use now.
