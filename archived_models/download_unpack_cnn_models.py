@@ -38,7 +38,7 @@ def download_unpack_zip(zip_name, output_path, zip_path,
     Download and unpack one zip file
     """
 
-    digit_match = re.search(r'\d.zip$', zip_name)  # if we have multi archive
+    digit_match = re.search(r'fcn\d.zip$', zip_name)  # if we have multi archive
     if digit_match:
         name = zip_name[:-5]  # cut last character with number
     else:
@@ -54,7 +54,7 @@ def download_unpack_zip(zip_name, output_path, zip_path,
         else:
             print("[INFO] Skip downloading {}. Model already exists here {}".
                   format(zip_name, model_out_folder))
-            return False
+            return True
 
     file_name_url = git_hub_repo_url + '/' + zip_name
     file_name_zip = zip_path / zip_name
@@ -65,13 +65,24 @@ def download_unpack_zip(zip_name, output_path, zip_path,
         print("   [ERROR]. Can not access to Zip file by address {}".
               format(file_name_url))
         return False
+    try:
+        with requests.get(file_name_url, stream=True) as r_zip_file:
+            with open(file_name_zip, 'wb') as f_download:
+                shutil.copyfileobj(r_zip_file.raw, f_download)
+    except Exception as error:
+        print("   [ERROR]. Can not download to file by address {}"
+              " Reason: {}".
+              format(file_name_url, error))
+        return False
 
-    with requests.get(file_name_url, stream=True) as r_zip_file:
-        with open(file_name_zip, 'wb') as f_download:
-            shutil.copyfileobj(r_zip_file.raw, f_download)
-
-    with zipfile.ZipFile(file_name_zip, 'r') as zip_ref:
-        zip_ref.extractall(output_path)
+    try:
+        with zipfile.ZipFile(file_name_zip, 'r') as zip_ref:
+            zip_ref.extractall(output_path)
+    except Exception as error:
+        print("   [ERROR]. Can not unpack {}"
+              " Reason: {}".
+              format(file_name_zip, error))
+        return False
 
     print("[INFO] {} is downloaded and unpacked"
           .format(zip_name))
@@ -94,8 +105,7 @@ def arg2bool(bool_arg):
 
 
 def main():
-    git_hub_repo_url = 'https://github.com/foss-for-synopsys-dwc-arc-processors/synopsys-caffe-models/raw/master/caffe_models_zipped'
-
+    git_hub_repo_url = 'https://github.com/foss-for-synopsys-dwc-arc-processors/synopsys-caffe-models/raw/master/archived_models/models'
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -166,10 +176,10 @@ def main():
     zip_path = output_path/"download"  # folder for downloaded zip files
     try:
         zip_path.mkdir(parents=True, exist_ok=True)
-    except:
+    except Exception as error:
         print(
             "[ERROR]. Problem of creating folder to download zipped CNN Models:"
-            " {}".format(zip_path))
+            " Reason {}".format(zip_path, error))
         exit(1)
 
     print("[INFO] NN Models path is {}".format(output_path))
