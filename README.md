@@ -50,3 +50,9 @@ git_sparse_download.sh googlenet mobilenet
 It creates "cnn_models" folder, init git repo in there, dowload common files and models you select.
 
 ```
+
+## Alternative way to download (Beta)
+
+In `caffe_models_zipped` sub-folder we hold all NN models in zip format.  
+You can use the special Python utility that can download and unpack selected models.  
+Please read a description in README.md that sub-folder.  
