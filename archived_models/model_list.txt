@@ -5,7 +5,15 @@
 # Ex of using: 
 #   python download_unpack_cnn_models.py --model_list model_list.txt --model_path <absolute_path_to_model_folder>
 # You can edit the list of models below
-
+    
+# Part 1: Image data sets. Do not remove these, as they are used by many models.
+    
+imagenet_mean.zip
+images.zip
+    
+# Part 2: Models list to download
+# Edit this list to fit your needs
+    
 alexnet.zip
 DAN.zip
 deeplab.zip
@@ -19,8 +27,6 @@ fcn1.zip
 fcn2.zip
 googlenet.zip
 icnet.zip
-imagenet_mean.zip
-images.zip
 inception_resnet_v1.zip
 inception_resnet_v2.zip
 inception_v1.zip
