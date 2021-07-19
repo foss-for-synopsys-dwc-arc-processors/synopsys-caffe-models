@@ -14,3 +14,8 @@ The model converted from TF does not have these layers.
 
 The *_nohardsiwsh.prototxt models are generated manually by changing all HardSwish layers into ReLU layers
 
+3. Large and simplistic models https://github.com/tensorflow/models/tree/master/research/slim/nets/mobilenet
+evconvert tf2ev -m v3-large_224_0.75_float.pb -p input 1 224 224 3
+evconvert tf2ev -m v3-large-minimalistic_224_1.0_float.pb -p input 1 224 224 3
+evconvert tf2ev -m v3-small-minimalistic_224_1.0_float.pb -p input 1 224 224 3
+

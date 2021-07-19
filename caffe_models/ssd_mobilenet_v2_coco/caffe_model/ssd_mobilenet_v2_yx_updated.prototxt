@@ -1,0 +1,2684 @@
+layer {
+  name: "Preprocessor/sub"
+  type: "Input"
+  top: "Preprocessor/sub"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 300
+      dim: 300
+    }
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/Conv/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "Preprocessor/sub"
+  top: "FeatureExtractor/MobilenetV2/Conv/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/Conv/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/Conv/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/Conv/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/Conv/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 32
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 96
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_1/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 96
+    bias_term: true
+    group: 96
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_1/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_1/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_1/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_1/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 144
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_2/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 144
+    bias_term: true
+    group: 144
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_2/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_2/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_2/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_2/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_2/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_1/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_2/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_2/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 144
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_3/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 144
+    bias_term: true
+    group: 144
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_3/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_3/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_3/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_3/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 192
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 192
+    bias_term: true
+    group: 192
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_4/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_4/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_4/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_3/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_4/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 192
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_5/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 192
+    bias_term: true
+    group: 192
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_5/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_5/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_5/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_5/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_5/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_4/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_5/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_5/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 192
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_6/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 192
+    bias_term: true
+    group: 192
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_6/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_6/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_6/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_6/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 384
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_7/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_7/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_7/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_6/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_7/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 384
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_8/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_8/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_8/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_7/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_8/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_9/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 384
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_9/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_9/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_9/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_9/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_9/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_8/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_9/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_9/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_10/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 384
+    bias_term: true
+    group: 384
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_10/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_10/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_10/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 96
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_10/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 576
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 576
+    bias_term: true
+    group: 576
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_11/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_11/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 96
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_11/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_10/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_11/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 576
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_12/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 576
+    bias_term: true
+    group: 576
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_12/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_12/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_12/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 96
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_12/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_12/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_11/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_12/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_12/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 576
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "BoxPredictor_0/ClassPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
+  top: "BoxPredictor_0/ClassPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 273
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+#layer {
+#  name: "BoxPredictor_0/ClassPredictor/BiasAdd/BoxPredictor_0/Reshape_1_perm"
+#  type: "Permute"
+#  bottom: "BoxPredictor_0/ClassPredictor/Conv2D_nchw"
+#  top: "BoxPredictor_0/ClassPredictor/BiasAdd/BoxPredictor_0/Reshape_1_perm"
+#  permute_param {
+#    order: 0
+#    order: 2
+#    order: 3
+#    order: 1
+#  }
+#}
+#layer {
+#  name: "BoxPredictor_0/Reshape_1"
+#  type: "Reshape"
+#  bottom: "BoxPredictor_0/ClassPredictor/BiasAdd/BoxPredictor_0/Reshape_1_perm"
+#  top: "BoxPredictor_0/Reshape_1"
+#  reshape_param {
+#    shape {
+#      dim: 1
+#      dim: 1083
+#      dim: 91
+#    }
+#  }
+#}
+layer {
+  name: "BoxPredictor_0/BoxEncodingPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
+  top: "BoxPredictor_0/BoxEncodingPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 12
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+#layer {
+#  name: "BoxPredictor_0/BoxEncodingPredictor/BiasAdd/BoxPredictor_0/Reshape_perm"
+#  type: "Permute"
+#  bottom: "BoxPredictor_0/BoxEncodingPredictor/Conv2D_nchw"
+#  top: "BoxPredictor_0/BoxEncodingPredictor/BiasAdd/BoxPredictor_0/Reshape_perm"
+#  permute_param {
+#    order: 0
+#    order: 2
+#    order: 3
+#    order: 1
+#  }
+#}
+#layer {
+#  name: "BoxPredictor_0/Reshape"
+#  type: "Reshape"
+#  bottom: "BoxPredictor_0/BoxEncodingPredictor/BiasAdd/BoxPredictor_0/Reshape_perm"
+#  top: "BoxPredictor_0/Reshape"
+#  reshape_param {
+#    shape {
+#      dim: 1
+#      dim: 1083
+#      dim: 1
+#      dim: 4
+#    }
+#  }
+#}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 576
+    bias_term: true
+    group: 576
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_13/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_13/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 160
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 960
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_14/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_14/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 160
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_14/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_14/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_15/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 960
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_15/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_15/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_15/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 160
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_15/add"
+  type: "Eltwise"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_15/project/BatchNorm/batchnorm/mul_1_nchw"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_14/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_15/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_15/add"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_16/expand/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 960
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/expanded_conv_16/project/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_16/depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/expanded_conv_16/project/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 320
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/Conv_1/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_16/project/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/Conv_1/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 1280
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/Conv_1/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "BoxPredictor_1/ClassPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
+  top: "BoxPredictor_1/ClassPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 546
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "BoxPredictor_1/BoxEncodingPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
+  top: "BoxPredictor_1/BoxEncodingPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+#layer {
+#  name: "BoxPredictor_1/BoxEncodingPredictor/BiasAdd/BoxPredictor_1/Reshape_perm"
+#  type: "Permute"
+#  bottom: "BoxPredictor_1/BoxEncodingPredictor/Conv2D_nchw"
+#  top: "BoxPredictor_1/BoxEncodingPredictor/BiasAdd/BoxPredictor_1/Reshape_perm"
+#  permute_param {
+#    order: 0
+#    order: 2
+#    order: 3
+#    order: 1
+#  }
+#}
+#layer {
+#  name: "BoxPredictor_1/Reshape"
+#  type: "Reshape"
+#  bottom: "BoxPredictor_1/BoxEncodingPredictor/BiasAdd/BoxPredictor_1/Reshape_perm"
+#  top: "BoxPredictor_1/Reshape"
+#  reshape_param {
+#    shape {
+#      dim: 1
+#      dim: 600
+#      dim: 1
+#      dim: 4
+#    }
+#  }
+#}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_2_1x1_256/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 256
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512_depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 512
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "BoxPredictor_2/ClassPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
+  top: "BoxPredictor_2/ClassPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 546
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "BoxPredictor_2/BoxEncodingPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
+  top: "BoxPredictor_2/BoxEncodingPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_3_1x1_128/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 128
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256_depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "BoxPredictor_3/ClassPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
+  top: "BoxPredictor_3/ClassPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 546
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "BoxPredictor_3/BoxEncodingPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
+  top: "BoxPredictor_3/BoxEncodingPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_4_1x1_128/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 128
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256_depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "BoxPredictor_4/ClassPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
+  top: "BoxPredictor_4/ClassPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 546
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "BoxPredictor_4/BoxEncodingPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
+  top: "BoxPredictor_4/BoxEncodingPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_1_Conv2d_5_1x1_64/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 64
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/BatchNorm/batchnorm/mul_1_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128_depthwise/Relu6"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/BatchNorm/batchnorm/mul_1_nchw"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
+  type: "ReLU"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/BatchNorm/batchnorm/mul_1_nchw"
+  top: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
+  relu_param {
+    relu6: true
+  }
+}
+layer {
+  name: "BoxPredictor_5/ClassPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
+  top: "BoxPredictor_5/ClassPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 546
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+#layer {
+#  name: "concat_1"
+#  type: "Concat"
+#  bottom: "BoxPredictor_0/Reshape_1"
+#  bottom: "BoxPredictor_1/Reshape_1"
+#  bottom: "BoxPredictor_2/Reshape_1"
+#  bottom: "BoxPredictor_3/Reshape_1"
+#  bottom: "BoxPredictor_4/Reshape_1"
+#  bottom: "BoxPredictor_5/Reshape_1"
+#  top: "concat_1"
+#  concat_param {
+#    axis: 1
+#  }
+#}
+#layer {
+#  name: "mbox_conf_reshape"
+#  type: "Reshape"
+#  bottom: "concat_1"
+#  top: "mbox_conf_reshape"
+#  reshape_param {
+#    shape {
+#      dim: -1
+#      dim: 1917
+#      dim: 91
+#    }
+#  }
+#}
+#layer {
+#  name: "mbox_conf_sigmoid"
+#  type: "Sigmoid"
+#  bottom: "mbox_conf_reshape"
+#  top: "mbox_conf_sigmoid"
+#}
+#layer {
+#  name: "mbox_conf_flatten"
+#  type: "Flatten"
+#  bottom: "mbox_conf_sigmoid"
+#  top: "mbox_conf_flatten"
+#  flatten_param {
+#    axis: 1
+#  }
+#}
+
+
+layer {
+  name: "BoxPredictor_5/BoxEncodingPredictor/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
+  top: "BoxPredictor_5/BoxEncodingPredictor/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+#layer {
+#  name: "concat"
+#  type: "Concat"
+#  bottom: "BoxPredictor_0/Reshape"
+#  bottom: "BoxPredictor_1/Reshape"
+#  bottom: "BoxPredictor_2/Reshape"
+#  bottom: "BoxPredictor_3/Reshape"
+#  bottom: "BoxPredictor_4/Reshape"
+#  bottom: "BoxPredictor_5/Reshape"
+#  top: "concat"
+#  concat_param {
+#    axis: 1
+#  }
+#}
+#layer {
+#  name: "mbox_loc"
+#  type: "Flatten"
+#  top: "mbox_loc"
+#  bottom: "concat"
+#  flatten_param {
+#    axis: 1
+#  }
+#}
+
+layer {
+  name: "conv11_mbox_priorbox"
+  type: "PriorBox"
+  bottom: "FeatureExtractor/MobilenetV2/expanded_conv_13/expand/Relu6"
+  bottom: "Preprocessor/sub"
+  top: "conv11_mbox_priorbox"
+  prior_box_param {
+    tf: true
+    yx_order: true
+    min_size: 60.0
+    aspect_ratio: 2.0
+    flip: true
+    clip: false
+    variance: 0.1
+    variance: 0.1
+    variance: 0.2
+    variance: 0.2
+    offset: 0.5
+  }
+}
+layer {
+  name: "conv13_mbox_priorbox"
+  type: "PriorBox"
+  bottom: "FeatureExtractor/MobilenetV2/Conv_1/Relu6"
+  bottom: "Preprocessor/sub"
+  top: "conv13_mbox_priorbox"
+  prior_box_param {
+    tf: true
+    yx_order: true
+    min_size: 105.0
+    max_size: 150.0
+    aspect_ratio: 2.0
+    aspect_ratio: 3.0
+    flip: true
+    clip: false
+    variance: 0.1
+    variance: 0.1
+    variance: 0.2
+    variance: 0.2
+    offset: 0.5
+  }
+}
+layer {
+  name: "conv14_2_mbox_priorbox"
+  type: "PriorBox"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_2_3x3_s2_512/Relu6"
+  bottom: "Preprocessor/sub"
+  top: "conv14_2_mbox_priorbox"
+  prior_box_param {
+    tf: true
+    yx_order: true
+    min_size: 150.0
+    max_size: 195.0
+    aspect_ratio: 2.0
+    aspect_ratio: 3.0
+    flip: true
+    clip: false
+    variance: 0.1
+    variance: 0.1
+    variance: 0.2
+    variance: 0.2
+    offset: 0.5
+  }
+}
+layer {
+  name: "conv15_2_mbox_priorbox"
+  type: "PriorBox"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_3_3x3_s2_256/Relu6"
+  bottom: "Preprocessor/sub"
+  top: "conv15_2_mbox_priorbox"
+  prior_box_param {
+    tf: true
+    yx_order: true
+    min_size: 195.0
+    max_size: 240.0
+    aspect_ratio: 2.0
+    aspect_ratio: 3.0
+    flip: true
+    clip: false
+    variance: 0.1
+    variance: 0.1
+    variance: 0.2
+    variance: 0.2
+    offset: 0.5
+  }
+}
+layer {
+  name: "conv16_2_mbox_priorbox"
+  type: "PriorBox"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_4_3x3_s2_256/Relu6"
+  bottom: "Preprocessor/sub"
+  top: "conv16_2_mbox_priorbox"
+  prior_box_param {
+    tf: true
+    yx_order: true
+    min_size: 240.0
+    max_size: 285.0
+    aspect_ratio: 2.0
+    aspect_ratio: 3.0
+    flip: true
+    clip: false
+    variance: 0.1
+    variance: 0.1
+    variance: 0.2
+    variance: 0.2
+    offset: 0.5
+  }
+}
+
+layer {
+  name: "conv17_2_mbox_priorbox"
+  type: "PriorBox"
+  bottom: "FeatureExtractor/MobilenetV2/layer_19_2_Conv2d_5_3x3_s2_128/Relu6"
+  bottom: "Preprocessor/sub"
+  top: "conv17_2_mbox_priorbox"
+  prior_box_param {
+    tf: true
+    yx_order: true
+    min_size: 285.0
+    max_size: 300.0
+    aspect_ratio: 2.0
+    aspect_ratio: 3.0
+    flip: true
+    clip: false
+    variance: 0.1
+    variance: 0.1
+    variance: 0.2
+    variance: 0.2
+    offset: 0.5
+  }
+}
+layer {
+  name: "mbox_priorbox"
+  type: "Concat"
+  bottom: "conv11_mbox_priorbox"
+  bottom: "conv13_mbox_priorbox"
+  bottom: "conv14_2_mbox_priorbox"
+  bottom: "conv15_2_mbox_priorbox"
+  bottom: "conv16_2_mbox_priorbox"
+  bottom: "conv17_2_mbox_priorbox"
+  top: "mbox_priorbox"
+  concat_param {
+    axis: 2
+  }
+}
+
+
+
+
+layer {
+  name: "mbox_conf_reshape_0"
+  type: "Reshape"
+  bottom: "BoxPredictor_0/ClassPredictor/Conv2D_nchw"
+  top: "mbox_conf_reshape_0"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 3
+      dim: 91
+      dim: -1
+    }
+  }
+}
+
+layer {
+  name: "mbox_conf_reshape_1"
+  type: "Reshape"
+  bottom: "BoxPredictor_1/ClassPredictor/Conv2D_nchw"
+  top: "mbox_conf_reshape_1"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 6
+      dim: 91
+      dim: -1
+    }
+  }
+}
+
+layer {
+  name: "mbox_conf_reshape_2"
+  type: "Reshape"
+  bottom: "BoxPredictor_2/ClassPredictor/Conv2D_nchw"
+  top: "mbox_conf_reshape_2"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 6
+      dim: 91
+      dim: -1
+    }
+  }
+}
+
+layer {
+  name: "mbox_conf_reshape_3"
+  type: "Reshape"
+  bottom: "BoxPredictor_3/ClassPredictor/Conv2D_nchw"
+  top: "mbox_conf_reshape_3"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 6
+      dim: 91
+      dim: -1
+    }
+  }
+}
+
+layer {
+  name: "mbox_conf_reshape_4"
+  type: "Reshape"
+  bottom: "BoxPredictor_4/ClassPredictor/Conv2D_nchw"
+  top: "mbox_conf_reshape_4"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 6
+      dim: 91
+      dim: -1
+    }
+  }
+}
+
+layer {
+  name: "mbox_conf_reshape_5"
+  type: "Reshape"
+  bottom: "BoxPredictor_5/ClassPredictor/Conv2D_nchw"
+  top: "mbox_conf_reshape_5"
+  reshape_param {
+    shape {
+      dim: 0
+      dim: 6
+      dim: 91
+      dim: -1
+    }
+  }
+}
+
+layer {
+  name: "mbox_conf_permute_0"
+  type: "Permute"
+  bottom: "mbox_conf_reshape_0"
+  top: "mbox_conf_permute_0"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+  }
+}
+layer {
+  name: "mbox_conf_permute_1"
+  type: "Permute"
+  bottom: "mbox_conf_reshape_1"
+  top: "mbox_conf_permute_1"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+  }
+}
+layer {
+  name: "mbox_conf_permute_2"
+  type: "Permute"
+  bottom: "mbox_conf_reshape_2"
+  top: "mbox_conf_permute_2"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+  }
+}
+layer {
+  name: "mbox_conf_permute_3"
+  type: "Permute"
+  bottom: "mbox_conf_reshape_3"
+  top: "mbox_conf_permute_3"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+  }
+}
+layer {
+  name: "mbox_conf_permute_4"
+  type: "Permute"
+  bottom: "mbox_conf_reshape_4"
+  top: "mbox_conf_permute_4"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+  }
+}
+layer {
+  name: "mbox_conf_permute_5"
+  type: "Permute"
+  bottom: "mbox_conf_reshape_5"
+  top: "mbox_conf_permute_5"
+  permute_param {
+    order: 0
+    order: 2
+    order: 1
+    order: 3
+  }
+}
+
+layer {
+  name: "mbox_conf_sigmoid_0"
+  type: "Sigmoid"
+  bottom: "mbox_conf_permute_0"
+  top: "mbox_conf_sigmoid_0"
+}
+layer {
+  name: "mbox_conf_sigmoid_1"
+  type: "Sigmoid"
+  bottom: "mbox_conf_permute_1"
+  top: "mbox_conf_sigmoid_1"
+}
+layer {
+  name: "mbox_conf_sigmoid_2"
+  type: "Sigmoid"
+  bottom: "mbox_conf_permute_2"
+  top: "mbox_conf_sigmoid_2"
+}
+layer {
+  name: "mbox_conf_sigmoid_3"
+  type: "Sigmoid"
+  bottom: "mbox_conf_permute_3"
+  top: "mbox_conf_sigmoid_3"
+}
+layer {
+  name: "mbox_conf_sigmoid_4"
+  type: "Sigmoid"
+  bottom: "mbox_conf_permute_4"
+  top: "mbox_conf_sigmoid_4"
+}
+layer {
+  name: "mbox_conf_sigmoid_5"
+  type: "Sigmoid"
+  bottom: "mbox_conf_permute_5"
+  top: "mbox_conf_sigmoid_5"
+}
+
+
+
+layer {
+  name: "detection_out"
+  type: "DetectionOutput"
+# bottom: "mbox_conf_flatten"
+# direct connect
+  bottom: "mbox_conf_sigmoid_0"
+  bottom: "mbox_conf_sigmoid_1"
+  bottom: "mbox_conf_sigmoid_2"
+  bottom: "mbox_conf_sigmoid_3"
+  bottom: "mbox_conf_sigmoid_4"
+  bottom: "mbox_conf_sigmoid_5"
+# bottom: "mbox_loc"
+# direct connect
+  bottom: "BoxPredictor_0/BoxEncodingPredictor/Conv2D_nchw"
+  bottom: "BoxPredictor_1/BoxEncodingPredictor/Conv2D_nchw"
+  bottom: "BoxPredictor_2/BoxEncodingPredictor/Conv2D_nchw"
+  bottom: "BoxPredictor_3/BoxEncodingPredictor/Conv2D_nchw"
+  bottom: "BoxPredictor_4/BoxEncodingPredictor/Conv2D_nchw"
+  bottom: "BoxPredictor_5/BoxEncodingPredictor/Conv2D_nchw"
+  bottom: "mbox_priorbox"
+  top: "detection_out"
+  detection_output_param {
+    num_classes: 91
+    share_location: true
+    background_label_id: 0
+    nms_param {
+      nms_threshold: 0.6
+      top_k: 100
+    }
+    code_type: CENTER_SIZE
+    keep_top_k: 100
+    confidence_threshold: 0.3
+    no_permute: true
+  }
+}
+

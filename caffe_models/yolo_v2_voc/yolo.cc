@@ -423,31 +423,65 @@ void test_yolo(float *fresult,  int num_results, int h, int w, int img_h, int im
 
 // data_y, data_x is the original dimension of the image, prior
 // to network-size conversion.
-#define OUT_IN_SIZE int result_ch, int result_y, int result_x, int data_ch, int data_y, int data_x
+#define IN_SIZE_formal int noutputs, int data_ch, int data_y, int data_x
+#define IN_SIZE_actual noutputs, data_ch, data_y, data_x
 
 // For yolo, the result dimensions are 1470 x 1 x 1 (1470 "channels").
+//
+template <typename data_type>
+     struct Blob_and_size {
+        const char *name;       // blob name
+        const char *layer_name; // layer generating this blob
+        const char *layer_type; // type of layer
+        unsigned size;          // total size in bytes
+        unsigned element_size;  // element size in bytes (contains the pixel)
+        unsigned pixel_size;    // blob pixel size in bits
+        unsigned Z,Y,X;         // dimensions.
+        data_type *blob;        // ptr to blob
+        double scale;		// scale of blob
+	bool is_signed;
+	short int zero_point;
+        int num_pixels() { return size/element_size; }
+        };
 
-extern "C" void yolo_fixed(short *result, double scale, OUT_IN_SIZE) {
-    int total = result_ch*result_y*result_x;
+
+template <typename T>
+void yolo_fixed_T(void *outputs,  IN_SIZE_formal) {
+    Blob_and_size<T> &output = *((Blob_and_size<T> **)outputs)[0];
+    int total = output.Z*output.Y*output.X;
     Result *fresult = new Result[total];
     for (int i = 0; i < total; i++) {
-        fresult[i] = float(result[i])/scale;
+        fresult[i] = float(output.blob[i]-output.zero_point)/output.scale;
         0 && printf("fr[%d]=%f\n",i,fresult[i]);
         }
-    test_yolo(fresult,result_ch,result_y,result_x,data_y,data_x);
+    test_yolo(fresult,output.Z,output.Y,output.X,data_y,data_x);
     delete fresult;
     }
-
-extern "C" void yolo_float(float *result, double scale, OUT_IN_SIZE) {
-    test_yolo(result,result_ch,result_y,result_x,data_y,data_x);
+void yolo_fixed(void *outputs, IN_SIZE_formal) {
+    // temp is just to get the size and type of the blob.
+    Blob_and_size<short> &temp = *((Blob_and_size<short> **)outputs)[0];
+    0 && printf("temp size:%d signed:%d\n",temp.pixel_size,temp.is_signed);
+    if (temp.pixel_size == 8)
+        if (temp.is_signed) yolo_fixed_T<signed char>(outputs,IN_SIZE_actual);
+	else yolo_fixed_T<unsigned char>(outputs,IN_SIZE_actual);
+    else
+        // Only other possibility is short.
+	yolo_fixed_T<short>(outputs,IN_SIZE_actual);
     }
 
-extern "C" void yolo_double(double *result, double scale, OUT_IN_SIZE) {
-    Result *fresult = new Result[result_ch];
-    for (int i = 0; i < result_ch; i++) {
-        fresult[i] = result[i];	// From double to float.
+extern void yolo_float(void *outputs, IN_SIZE_formal) {
+    Blob_and_size<float> &output = *((Blob_and_size<float> **)outputs)[0];
+    test_yolo(output.blob,output.Z,output.Y,output.X,data_y,data_x);
+    }
+
+extern void yolo_double(void *outputs, IN_SIZE_formal) {
+    Blob_and_size<double> &output = *((Blob_and_size<double> **)outputs)[0];
+    int total = output.Z*output.Y*output.X;
+    Result *fresult = new Result[total];
+    for (int i = 0; i < total; i++) {
+        fresult[i] = output.blob[i];	// From double to float.
         }
-    test_yolo(fresult,result_ch,result_y,result_x,data_y,data_x);
+    test_yolo(fresult,output.Z,output.Y,output.X,data_y,data_x);
     delete fresult;
     }
 

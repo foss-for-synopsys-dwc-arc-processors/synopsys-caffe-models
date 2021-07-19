@@ -717,8 +717,6 @@ void test_yolo(Network *net, Image &im) {
     #endif
     }
 
-#define IN_SIZE int noutputs, int data_ch, int data_y, int data_x
-
 template <typename data_type>
      struct Blob_and_size {
         const char *name;       // blob name
@@ -730,6 +728,8 @@ template <typename data_type>
         unsigned Z,Y,X;         // dimensions.
         data_type *blob;        // ptr to blob
         double scale;		// scale of blob
+	bool is_signed;
+	short int zero_point;
         int num_pixels() { return size/element_size; }
         };
 
@@ -742,7 +742,7 @@ void run_yolo_layer_with_input(
         Network &net, int lnum, Blob_and_size<data_type>&B, bool convert) {
     if (convert) {
         for (int i = 0; i < B.num_pixels(); i++) 
-            net.input[i] = B.blob[i]/B.scale;
+            net.input[i] = (B.blob[i]-B.zero_point)/B.scale;
         }
     else 
         net.input = (float*)B.blob; 
@@ -758,9 +758,16 @@ Layer make_yolo_layer(Blob_and_size<data_type> &B, int mask[]) {
     return L;
     }
 
+// data_y, data_x is the original dimension of the image, prior
+// to network-size conversion.
+#define IN_SIZE_formal int noutputs, int data_ch, int data_y, int data_x
+#define IN_SIZE_actual noutputs, data_ch, data_y, data_x
+
 template <typename data_type>
 void run_tiny_yolo(
-        Blob_and_size<data_type> **outputs, IN_SIZE, bool fixed = false) {
+	void *_outputs, IN_SIZE_formal, bool fixed = false) {
+    // Explicit instantiation of this function tells us the blob data type.
+    Blob_and_size<data_type> **outputs = (Blob_and_size<data_type> **)_outputs;
     typedef Blob_and_size<data_type> BS;
     // Create a yolo layer for the two outputs.
     // From examples/detector.c
@@ -840,20 +847,24 @@ void run_tiny_yolo(
     if (convert_to_float) delete [] net.input;
     }
 
-extern void yolo_float(void *_outputs,  IN_SIZE) {
-    Blob_and_size<float>**outputs = (Blob_and_size<float>**)_outputs;
-    run_tiny_yolo<float>(outputs,noutputs,data_ch,data_y,data_x);
+extern void yolo_float(void *outputs,  IN_SIZE_formal) {
+    run_tiny_yolo<float>(outputs,IN_SIZE_actual);
     }
 
-extern void yolo_double(void*_outputs, IN_SIZE) {
-    Blob_and_size<double>**outputs = (Blob_and_size<double>**)_outputs;
-    run_tiny_yolo<double>(outputs,noutputs,data_ch,data_y,data_x);
+extern void yolo_double(void*outputs, IN_SIZE_formal) {
+    run_tiny_yolo<double>(outputs,IN_SIZE_actual);
     }
 
-extern void yolo_fixed(void *_outputs, IN_SIZE) {
-    Blob_and_size<short> **outputs = (Blob_and_size<short> **)_outputs;
-    0 && printf("ch %d y %d x %d\n",data_ch,data_y,data_x);
-    run_tiny_yolo<short>(outputs,noutputs,data_ch,data_y,data_x,true);
+extern void yolo_fixed(void *outputs, IN_SIZE_formal) {
+    // temp is just to get the size and type of the blob.
+    Blob_and_size<short> &temp = *((Blob_and_size<short> **)outputs)[0];
+    0 && printf("temp size:%d signed:%d\n",temp.pixel_size,temp.is_signed);
+    if (temp.pixel_size == 8)
+        if (temp.is_signed) run_tiny_yolo<signed char>(outputs,IN_SIZE_actual,true);
+	else run_tiny_yolo<unsigned char>(outputs,IN_SIZE_actual,true);
+    else
+        // Only other possibility is short.
+	run_tiny_yolo<short>(outputs,IN_SIZE_actual,true);
     }
 
 #if TEST

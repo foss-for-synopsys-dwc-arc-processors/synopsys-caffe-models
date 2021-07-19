@@ -226,7 +226,7 @@ def main():
           "   Total models: {}\n"
           "   Successful:   {}\n"
           "   Failed :      {}\n"
-          "   Time:         {:0>2}:{:0>2}:{:05.2f}".
+          "   Time:         {:0>2}:{:0>2}:{:0>2}".
           format(int(model_list_num), int(download_cnt),
                  int(issue_cnt), int(hours), int(minutes), int(seconds)))
 

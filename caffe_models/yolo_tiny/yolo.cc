@@ -255,31 +255,51 @@ void test_yolo(float *fresult,  int num_results, int img_y, int img_x) {
     }
 
 
-#define OUT_IN_SIZE int result_ch, int result_y, int result_x, int data_ch, int data_y, int data_x
+#define IN_SIZE int noutputs, int data_ch, int data_y, int data_x
 
 // For yolo, the result dimensions are 1470 x 1 x 1 (1470 "channels").
 
-extern "C" void yolo_fixed(short *result, double scale, OUT_IN_SIZE) {
-    Result *fresult = new Result[result_ch];
-    for (int i = 0; i < result_ch; i++) {
-        fresult[i] = float(result[i])/scale;
-        1 && printf("[%d] = %d = %f\n",i,result[i],fresult[i]);
-        }
-    test_yolo(fresult,result_ch,data_y,data_x);
-    delete fresult;
+template <typename data_type>
+     struct Blob_and_size {
+        const char *name;       // blob name
+        const char *layer_name; // layer generating this blob
+        const char *layer_type; // type of layer
+        unsigned size;          // total size in bytes
+        unsigned element_size;  // element size in bytes (contains the pixel)
+        unsigned pixel_size;    // blob pixel size in bits
+        unsigned Z,Y,X;         // dimensions.
+        data_type *blob;        // ptr to blob
+        double scale;		// scale of blob
+	bool is_signed;
+	short int zero_point;	
+        int num_pixels() { return size/element_size; }
+        };
+
+// This uses --post_verify_func v2:yolo so we can get the zero point.
+
+extern void yolo_float(void *_outputs,  IN_SIZE) {
+    typedef Blob_and_size<float> BS;
+    BS *output = ((BS **)_outputs)[0];
+    test_yolo(output->blob,noutputs,data_y,data_x);
     }
 
-extern "C" void yolo_float(float *result, double scale, OUT_IN_SIZE) {
-    test_yolo(result,result_ch,data_y,data_x);
+template <typename T> void yolo_convert(void *_outputs, IN_SIZE) {
+    typedef Blob_and_size<T> BS;
+    BS *output = ((BS **)_outputs)[0];
+    int pixels = output->num_pixels();
+    Result *fresult = new Result[pixels];
+    int ZP = output->zero_point;
+    printf("scale is %f zp %d\n",output->scale,ZP);
+    for (int i = 0; i < pixels; i++) fresult[i] = (output->blob[i]-ZP)/output->scale;
+    test_yolo(fresult,noutputs,data_y,data_x);
     }
 
-extern "C" void yolo_double(double *result, double scale, OUT_IN_SIZE) {
-    Result *fresult = new Result[result_ch];
-    for (int i = 0; i < result_ch; i++) {
-        fresult[i] = result[i];	// From double to float.
-        }
-    test_yolo(fresult,result_ch,data_y,data_x);
-    delete fresult;
+extern void yolo_double(void *_outputs,  IN_SIZE) {
+    yolo_convert<double>(_outputs,noutputs,data_ch,data_y,data_x);
+    }
+
+extern void yolo_fixed(void *_outputs, IN_SIZE) {
+    yolo_convert<short>(_outputs,noutputs,data_ch,data_y,data_x);
     }
 
 #if TEST

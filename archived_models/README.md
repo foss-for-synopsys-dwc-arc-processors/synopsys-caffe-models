@@ -20,7 +20,7 @@ Instead of manual downloading/unpacking you can use special utility
 
 Instructions
 ===========================
-1. Download `donwnoad_unpack_cnn_models.py` and `model_list.txt`
+1. Download `donwload_unpack_cnn_models.py` and `model_list.txt`
 
    Click `donwnoad_unpack_cnn_models.py`, press `Raw` button, press Right-Click and choose "Save As .." in contect menu  
    Repeate the same for `model_list.txt`

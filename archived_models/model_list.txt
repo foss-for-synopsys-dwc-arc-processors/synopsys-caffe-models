@@ -2,7 +2,7 @@
 # List of NN models to donwload from GitHub repository
 # Repository: https://github.com/foss-for-synopsys-dwc-arc-processors/synopsys-caffe-models
 # Zip files location: https://github.com/foss-for-synopsys-dwc-arc-processors/synopsys-caffe-models/tree/master/caffe_models_zipped
-# Ex of using: 
+# Ex of using:
 #   python download_unpack_cnn_models.py --model_list model_list.txt --model_path <absolute_path_to_model_folder>
 # You can edit the list of models below
     
@@ -10,7 +10,7 @@
     
 imagenet_mean.zip
 images.zip
-    
+
 # Part 2: Models list to download
 # Edit this list to fit your needs
     
@@ -55,6 +55,7 @@ squeeze.zip
 srcnn.zip
 srgan.zip
 ssd.zip
+ssd_mobilenet_v2_coco.zip
 unet.zip
 vdsr.zip
 vgg16.zip

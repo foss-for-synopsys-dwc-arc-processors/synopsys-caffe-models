@@ -1,0 +1,1402 @@
+layer {
+  name: "input"
+  type: "Input"
+  top: "input"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 224
+      dim: 224
+    }
+  }
+}
+layer {
+  name: "MobilenetV3/Conv/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "input"
+  top: "MobilenetV3/Conv/Conv2D_nchw"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Conv/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/Conv/Conv2D_nchw"
+  top: "MobilenetV3/Conv/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/Conv/Relu"
+  top: "MobilenetV3/expanded_conv/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 16
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv/project/Conv2D_nchw"
+  bottom: "MobilenetV3/Conv/Relu"
+  top: "MobilenetV3/expanded_conv/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv/add"
+  top: "MobilenetV3/expanded_conv_1/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_1/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_1/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_1/expand/Relu"
+  top: "MobilenetV3/expanded_conv_1/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 64
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_1/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_1/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_1/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_1/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_1/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_1/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_2/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 72
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_2/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_2/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_2/expand/Relu"
+  top: "MobilenetV3/expanded_conv_2/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 72
+    bias_term: true
+    group: 72
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_2/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_2/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_2/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_2/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_2/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_2/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_1/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_2/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_2/add"
+  top: "MobilenetV3/expanded_conv_3/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 72
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_3/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_3/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/expand/Relu"
+  top: "MobilenetV3/expanded_conv_3/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 72
+    bias_term: true
+    group: 72
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_3/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_3/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_3/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 40
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_3/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_4/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 120
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_4/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_4/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/expand/Relu"
+  top: "MobilenetV3/expanded_conv_4/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 120
+    bias_term: true
+    group: 120
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_4/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_4/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 40
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_4/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_4/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_3/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_4/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_4/add"
+  top: "MobilenetV3/expanded_conv_5/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 120
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_5/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_5/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/expand/Relu"
+  top: "MobilenetV3/expanded_conv_5/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 120
+    bias_term: true
+    group: 120
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_5/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_5/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 40
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_5/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_5/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_4/add"
+  top: "MobilenetV3/expanded_conv_5/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_5/add"
+  top: "MobilenetV3/expanded_conv_6/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 240
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_6/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_6/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/expand/Relu"
+  top: "MobilenetV3/expanded_conv_6/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 240
+    bias_term: true
+    group: 240
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_6/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_6/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_6/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 80
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_6/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_7/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 200
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_7/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_7/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/expand/Relu"
+  top: "MobilenetV3/expanded_conv_7/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 200
+    bias_term: true
+    group: 200
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_7/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_7/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 80
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_7/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_7/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_6/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_7/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_7/add"
+  top: "MobilenetV3/expanded_conv_8/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 184
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_8/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_8/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/expand/Relu"
+  top: "MobilenetV3/expanded_conv_8/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 184
+    bias_term: true
+    group: 184
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_8/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_8/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 80
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_8/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_8/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_7/add"
+  top: "MobilenetV3/expanded_conv_8/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_8/add"
+  top: "MobilenetV3/expanded_conv_9/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 184
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_9/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_9/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/expand/Relu"
+  top: "MobilenetV3/expanded_conv_9/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 184
+    bias_term: true
+    group: 184
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_9/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_9/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 80
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_9/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_9/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_8/add"
+  top: "MobilenetV3/expanded_conv_9/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_9/add"
+  top: "MobilenetV3/expanded_conv_10/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 480
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_10/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_10/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/expand/Relu"
+  top: "MobilenetV3/expanded_conv_10/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 480
+    bias_term: true
+    group: 480
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_10/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_10/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_10/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 112
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_11/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_10/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_11/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 672
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_11/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_11/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_11/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_11/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_11/expand/Relu"
+  top: "MobilenetV3/expanded_conv_11/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 672
+    bias_term: true
+    group: 672
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_11/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_11/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_11/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_11/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_11/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_11/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 112
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_11/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_11/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_10/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_11/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_12/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_11/add"
+  top: "MobilenetV3/expanded_conv_12/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 672
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_12/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_12/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_12/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_12/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_12/expand/Relu"
+  top: "MobilenetV3/expanded_conv_12/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 672
+    bias_term: true
+    group: 672
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 1
+    pad_t: 0
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_12/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_12/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_12/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_12/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_12/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_12/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 160
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_13/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_12/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_13/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_13/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_13/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_13/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_13/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_13/expand/Relu"
+  top: "MobilenetV3/expanded_conv_13/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 960
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_13/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_13/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_13/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_13/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_13/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_13/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 160
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_13/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_13/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_12/project/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_13/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_14/expand/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_13/add"
+  top: "MobilenetV3/expanded_conv_14/expand/Conv2D_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_14/expand/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_14/expand/Conv2D_nchw"
+  top: "MobilenetV3/expanded_conv_14/expand/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_14/depthwise/depthwise_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_14/expand/Relu"
+  top: "MobilenetV3/expanded_conv_14/depthwise/depthwise_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 960
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 1
+    pad_r: 1
+    pad_t: 1
+    pad_b: 1
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_14/depthwise/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/expanded_conv_14/depthwise/depthwise_nchw"
+  top: "MobilenetV3/expanded_conv_14/depthwise/Relu"
+}
+layer {
+  name: "MobilenetV3/expanded_conv_14/project/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_14/depthwise/Relu"
+  top: "MobilenetV3/expanded_conv_14/project/Conv2D_nchw"
+  convolution_param {
+    num_output: 160
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/expanded_conv_14/add"
+  type: "Eltwise"
+  bottom: "MobilenetV3/expanded_conv_14/project/Conv2D_nchw"
+  bottom: "MobilenetV3/expanded_conv_13/add"
+  top: "MobilenetV3/expanded_conv_14/add"
+  eltwise_param {
+    operation: SUM
+    coeff: 1.0
+    coeff: 1.0
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_1/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/expanded_conv_14/add"
+  top: "MobilenetV3/Conv_1/Conv2D_nchw"
+  convolution_param {
+    num_output: 960
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_1/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/Conv_1/Conv2D_nchw"
+  top: "MobilenetV3/Conv_1/Relu"
+}
+layer {
+  name: "MobilenetV3/AvgPool2D/AvgPool_nchw"
+  type: "Pooling"
+  bottom: "MobilenetV3/Conv_1/Relu"
+  top: "MobilenetV3/AvgPool2D/AvgPool_nchw"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 7
+    kernel_w: 7
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_2/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/AvgPool2D/AvgPool_nchw"
+  top: "MobilenetV3/Conv_2/Conv2D_nchw"
+  convolution_param {
+    num_output: 1280
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Conv_2/Relu"
+  type: "ReLU"
+  bottom: "MobilenetV3/Conv_2/Conv2D_nchw"
+  top: "MobilenetV3/Conv_2/Relu"
+}
+layer {
+  name: "MobilenetV3/Logits/AvgPool_nchw"
+  type: "Pooling"
+  bottom: "MobilenetV3/Conv_2/Relu"
+  top: "MobilenetV3/Logits/AvgPool_nchw"
+  pooling_param {
+    pool: AVE_EXC_PAD
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    ceil_mode: false
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Logits/Conv2d_1c_1x1/Conv2D_nchw"
+  type: "Convolution"
+  bottom: "MobilenetV3/Logits/AvgPool_nchw"
+  top: "MobilenetV3/Logits/Conv2d_1c_1x1/Conv2D_nchw"
+  convolution_param {
+    num_output: 1001
+    bias_term: true
+    group: 1
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+    dilation: 1
+    pad_l: 0
+    pad_r: 0
+    pad_t: 0
+    pad_b: 0
+  }
+}
+layer {
+  name: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/MobilenetV3/Predictions/Reshape_perm"
+  type: "Permute"
+  bottom: "MobilenetV3/Logits/Conv2d_1c_1x1/Conv2D_nchw"
+  top: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/MobilenetV3/Predictions/Reshape_perm"
+  permute_param {
+    order: 0
+    order: 2
+    order: 3
+    order: 1
+  }
+}
+layer {
+  name: "MobilenetV3/Predictions/Reshape"
+  type: "Reshape"
+  bottom: "MobilenetV3/Logits/Conv2d_1c_1x1/BiasAdd/MobilenetV3/Predictions/Reshape_perm"
+  top: "MobilenetV3/Predictions/Reshape"
+  reshape_param {
+    shape {
+      dim: -1
+      dim: 1001
+    }
+  }
+}
+layer {
+  name: "MobilenetV3/Predictions/Softmax"
+  type: "Softmax"
+  bottom: "MobilenetV3/Predictions/Reshape"
+  top: "MobilenetV3/Predictions/Softmax"
+  softmax_param {
+    axis: -1
+  }
+}
