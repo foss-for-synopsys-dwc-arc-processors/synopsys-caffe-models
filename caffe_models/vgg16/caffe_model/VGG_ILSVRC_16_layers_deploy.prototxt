@@ -1,6 +1,8 @@
 name: "VGG_ILSVRC_16_layers"
 input: "data"
-input_dim: 10
+# input_dim: 10
+# No need to have 10.  That just makes caffe works 10x harder for no gain.
+input_dim: 1
 input_dim: 3
 input_dim: 224
 input_dim: 224
