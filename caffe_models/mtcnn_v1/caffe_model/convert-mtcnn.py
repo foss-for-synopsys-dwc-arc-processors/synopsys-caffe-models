@@ -10,6 +10,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Conversion options')
 parser.add_argument('-relu', action='store_true', help='Use ReLU instead of PReLU')
 parser.add_argument('-transp', action='store_true', help='Transpose convolution coefficients')
+parser.add_argument('-pnet_optimized', action='store_true', help='Keep one instance of PNet')
 args = parser.parse_args()
 
 baseName = "mtcnn"
@@ -19,12 +20,17 @@ if args.relu:
 if args.transp:
     baseName += "-transp"
 
+if args.pnet_optimized:
+    baseName += "-pnet_optimized"
+
 netPatched = caffe.Net("{}.prototxt".format(baseName), caffe.TEST)
 
 def convertDet1():
   net = caffe.Net('det1.prototxt', 'det1.caffemodel', caffe.TEST)
-  
-  for pnet in ['pnet1', 'pnet2', 'pnet3', 'pnet4', 'pnet5', 'pnet6', 'pnet7', 'pnet8', 'pnet9']: 
+
+  pnet_list = ['pnet1', ] if args.pnet_optimized else ['pnet1', 'pnet2', 'pnet3', 'pnet4', 'pnet5', 'pnet6', 'pnet7', 'pnet8', 'pnet9']
+
+  for pnet in pnet_list:
     for layer in ['conv1', 'conv2', 'conv3']:
       if args.transp:
         netPatched.params[pnet+'-'+layer][0].data[...] = np.transpose(net.params[layer][0].data, (0,1,3,2))

@@ -1,0 +1,796 @@
+name: "MTCNN"
+
+#
+# PNet1: 320x240
+#
+
+input: "pnet1-data"
+input_dim: 1
+input_dim: 3   # C
+input_dim: 240 # H
+input_dim: 320 # W
+
+layer {
+  name: "pnet1-conv1"
+  type: "Convolution"
+  bottom: "pnet1-data"
+  top: "pnet1-conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 10
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+      }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "pnet1-PReLU1"
+  type: "PReLU"
+  bottom: "pnet1-conv1"
+  top: "pnet1-PReLU1"
+  }
+layer {
+  name: "pnet1-pool1"
+  type: "Pooling"
+  bottom: "pnet1-PReLU1"
+  top: "pnet1-pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+    }
+  }
+
+layer {
+  name: "pnet1-conv2"
+  type: "Convolution"
+  bottom: "pnet1-pool1"
+  top: "pnet1-conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 16
+    kernel_size: 3
+    stride: 1
+     weight_filler {
+      type: "xavier"
+      }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "pnet1-PReLU2"
+  type: "PReLU"
+  bottom: "pnet1-conv2"
+  top: "pnet1-PReLU2"
+  }
+
+layer {
+  name: "pnet1-conv3"
+  type: "Convolution"
+  bottom: "pnet1-PReLU2"
+  top: "pnet1-conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 32
+    kernel_size: 3
+    stride: 1
+     weight_filler {
+      type: "xavier"
+      }
+    bias_filler {
+	  type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "pnet1-PReLU3"
+  type: "PReLU"
+  bottom: "pnet1-conv3"
+  top: "pnet1-PReLU3"
+  }
+
+
+#layer {
+#  name: "pnet1-conv4-1"
+#  type: "Convolution"
+#  bottom: "pnet1-conv3"
+#  top: "pnet1-conv4-1"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#    }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 0
+#    }
+#  convolution_param {
+#    num_output: 2
+#    kernel_size: 1
+#    stride: 1
+#     weight_filler {
+#      type: "xavier"
+#      }
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#      }
+#    }
+#  }
+#
+#layer {
+#  name: "pnet1-conv4-2"
+#  type: "Convolution"
+#  bottom: "pnet1-conv3"
+#  top: "pnet1-conv4-2"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#    }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 0
+#    }
+#  convolution_param {
+#    num_output: 4
+#    kernel_size: 1
+#    stride: 1
+#     weight_filler {
+#      type: "xavier"
+#	  }
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#      }
+#    }
+#  }
+
+layer {
+  name: "pnet1-conv4"
+  type: "Convolution"
+  bottom: "pnet1-PReLU3"
+  top: "pnet1-conv4"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 6
+    kernel_size: 1
+    stride: 1
+     weight_filler {
+      type: "xavier"
+	  }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+
+#layer {
+#  name: "pnet1-prob1"
+#  type: "Softmax"
+#  bottom: "pnet1-conv4-1"
+#  top: "pnet1-prob1"
+#  }
+
+#
+# RNet
+#
+
+input: "rnet-data"
+input_dim: 1
+input_dim: 3
+input_dim: 24
+input_dim: 24
+
+
+##########################
+######################
+layer {
+  name: "rnet-conv1"
+  type: "Convolution"
+  bottom: "rnet-data"
+  top: "rnet-conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 28
+    kernel_size: 3
+    stride: 1
+     weight_filler {
+      type: "xavier"
+	  }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "rnet-prelu1"
+  type: "PReLU"
+  bottom: "rnet-conv1"
+  top: "rnet-prelu1"
+  propagate_down: true
+  }
+layer {
+  name: "rnet-pool1"
+  type: "Pooling"
+  bottom: "rnet-prelu1"
+  top: "rnet-pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+    }
+  }
+
+layer {
+  name: "rnet-conv2"
+  type: "Convolution"
+  bottom: "rnet-pool1"
+  top: "rnet-conv2"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 48
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+	  }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "rnet-prelu2"
+  type: "PReLU"
+  bottom: "rnet-conv2"
+  top: "rnet-prelu2"
+  propagate_down: true
+  }
+layer {
+  name: "rnet-pool2"
+  type: "Pooling"
+  bottom: "rnet-prelu2"
+  top: "rnet-pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+    }
+  }
+####################################
+
+##################################
+layer {
+  name: "rnet-conv3"
+  type: "Convolution"
+  bottom: "rnet-pool2"
+  top: "rnet-conv3"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  convolution_param {
+    num_output: 64
+    kernel_size: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+	  }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "rnet-prelu3"
+  type: "PReLU"
+  bottom: "rnet-conv3"
+  top: "rnet-prelu3"
+  propagate_down: true
+  }
+###############################
+
+###############################
+
+layer {
+  name: "rnet-conv4"
+  type: "InnerProduct"
+  bottom: "rnet-prelu3"
+  top: "rnet-conv4"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+    }
+  inner_product_param {
+    num_output: 128
+    weight_filler {
+      type: "xavier"
+	  }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+layer {
+  name: "rnet-prelu4"
+  type: "PReLU"
+  bottom: "rnet-conv4"
+  top: "rnet-prelu4"
+  }
+
+#layer {
+#  name: "rnet-conv5-1"
+#  type: "InnerProduct"
+#  bottom: "rnet-conv4"
+#  top: "rnet-conv5-1"
+#  param {
+#    lr_mult: 0
+#    decay_mult: 0
+#    }
+#  param {
+#    lr_mult: 0
+#    decay_mult: 0
+#    }
+#  inner_product_param {
+#    num_output: 2
+#    #kernel_size: 1
+#    #stride: 1
+#    weight_filler {
+#      type: "xavier"
+#	  }
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#      }
+#    }
+#  }
+#layer {
+#  name: "rnet-conv5-2"
+#  type: "InnerProduct"
+#  bottom: "rnet-conv4"
+#  top: "rnet-conv5-2"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#    }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 1
+#    }
+#  inner_product_param {
+#    num_output: 4
+#    #kernel_size: 1
+#    #stride: 1
+#     weight_filler {
+#      type: "xavier"
+#	  }
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#      }
+#    }
+#  }
+
+layer {
+  name: "rnet-conv5"
+  type: "InnerProduct"
+  bottom: "rnet-prelu4"
+  top: "rnet-conv5"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+    }
+  inner_product_param {
+    num_output: 6
+    #kernel_size: 1
+    #stride: 1
+     weight_filler {
+      type: "xavier"
+	  }
+    bias_filler {
+      type: "constant"
+      value: 0
+      }
+    }
+  }
+
+#layer {
+#  name: "rnet-prob1"
+#  type: "Softmax"
+#  bottom: "rnet-conv5-1"
+#  top: "rnet-prob1"
+#  }
+
+#
+# ONet
+#
+
+input: "onet-data"
+input_dim: 1
+input_dim: 3
+input_dim: 48
+input_dim: 48
+##################################
+layer {
+  name: "onet-conv1"
+  type: "Convolution"
+  bottom: "onet-data"
+  top: "onet-conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 32
+    kernel_size: 3
+    stride: 1
+     weight_filler {
+      type: "xavier"
+	}
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "onet-prelu1"
+  type: "PReLU"
+  bottom: "onet-conv1"
+  top: "onet-prelu1"
+}
+layer {
+  name: "onet-pool1"
+  type: "Pooling"
+  bottom: "onet-prelu1"
+  top: "onet-pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "onet-conv2"
+  type: "Convolution"
+  bottom: "onet-pool1"
+  top: "onet-conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+     weight_filler {
+      type: "xavier"
+	}
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+layer {
+  name: "onet-prelu2"
+  type: "PReLU"
+  bottom: "onet-conv2"
+  top: "onet-prelu2"
+}
+layer {
+  name: "onet-pool2"
+  type: "Pooling"
+  bottom: "onet-prelu2"
+  top: "onet-pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+layer {
+  name: "onet-conv3"
+  type: "Convolution"
+  bottom: "onet-pool2"
+  top: "onet-conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+  }
+  convolution_param {
+	num_output: 64
+	kernel_size: 3
+    weight_filler {
+      type: "xavier"
+	}
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "onet-prelu3"
+  type: "PReLU"
+  bottom: "onet-conv3"
+  top: "onet-prelu3"
+}
+layer {
+  name: "onet-pool3"
+  type: "Pooling"
+  bottom: "onet-prelu3"
+  top: "onet-pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "onet-conv4"
+  type: "Convolution"
+  bottom: "onet-pool3"
+  top: "onet-conv4"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+  }
+  convolution_param {
+	num_output: 128
+	kernel_size: 2
+    weight_filler {
+      type: "xavier"
+	}
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "onet-prelu4"
+  type: "PReLU"
+  bottom: "onet-conv4"
+  top: "onet-prelu4"
+}
+
+
+layer {
+  name: "onet-conv5"
+  type: "InnerProduct"
+  bottom: "onet-prelu4"
+  top: "onet-conv5"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+  }
+  inner_product_param {
+	#kernel_size: 3
+	num_output: 256
+    weight_filler {
+      type: "xavier"
+	}
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+layer {
+  name: "onet-drop5"
+  type: "Dropout"
+  bottom: "onet-conv5"
+  top: "onet-conv5"
+  dropout_param {
+    dropout_ratio: 0.25
+  }
+}
+layer {
+  name: "onet-prelu5"
+  type: "PReLU"
+  bottom: "onet-conv5"
+  top: "onet-prelu5"
+}
+
+
+#layer {
+#  name: "onet-conv6-1"
+#  type: "InnerProduct"
+#  bottom: "onet-conv5"
+#  top: "onet-conv6-1"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#  }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 1
+#  }
+#  inner_product_param {
+#    #kernel_size: 1
+#	num_output: 2
+#    weight_filler {
+#      type: "xavier"
+#	}
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#    }
+#  }
+#}
+#layer {
+#  name: "onet-conv6-2"
+#  type: "InnerProduct"
+#  bottom: "onet-conv5"
+#  top: "onet-conv6-2"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#  }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 1
+#  }
+#  inner_product_param {
+#  	#kernel_size: 1
+#	num_output: 4
+#    weight_filler {
+#      type: "xavier"
+#	}
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#    }
+#  }
+#}
+#layer {
+#  name: "onet-conv6-3"
+#  type: "InnerProduct"
+#  bottom: "onet-conv5"
+#  top: "onet-conv6-3"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#  }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 1
+#  }
+#  inner_product_param {
+#  	#kernel_size: 1
+#	num_output: 10
+#    weight_filler {
+#      type: "xavier"
+#	}
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#    }
+#  }
+#}
+
+layer {
+  name: "onet-conv6"
+  type: "InnerProduct"
+  bottom: "onet-prelu5"
+  top: "onet-conv6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 1
+  }
+  inner_product_param {
+    #kernel_size: 1
+    num_output: 16
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+#layer {
+#  name: "onet-prob1"
+#  type: "Softmax"
+#  bottom: "onet-conv6-1"
+#  top: "onet-prob1"
+#}
+
